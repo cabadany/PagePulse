@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Pulse - Sign Up</title>
+    <link rel="stylesheet" href="signup.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Page Pulse</h1>
+    </header>
+    <main>
+        <section class="signup-form">
+            <h2>Create Your Account</h2>
+            <form action="#" method="POST"> <!-- Change the action to your signup URL -->
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required><br><br>
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required><br><br>
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required><br><br>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+
+                <div>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                </div><br>
+
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Log in</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Page Pulse. All rights reserved.</p>
+    </footer>
+</body>
+</html>

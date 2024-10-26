@@ -1,8 +1,8 @@
-from django.contrib import admin
-from django.urls import path, include
-from . import views
+from django.urls import path
+from .views import index, login_view, signup_view  # Ensure signup_view is imported
 
 urlpatterns = [
-    path('', views.index, name='index'),  # Make sure to include the namespace if you're using it
-    path('login/', views.login_view, name='login'),
+    path('', index, name='index'),
+    path('login/', login_view, name='login'),
+    path('signup/', signup_view, name='signup'),  # This line defines the signup route
 ]

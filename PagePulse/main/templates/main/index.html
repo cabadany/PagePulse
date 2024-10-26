@@ -4,7 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Pulse</title>
-    <link rel="stylesheet" href="index.css">
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAF9F6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: 0 50px;
+            background-color: #FAF9F6;
+        }
+
+        .logo img {
+            height: 70px;
+        }
+
+        nav a {
+            text-decoration: underline;
+            color: #ff6b6b;
+            margin-left: 20px;
+        }
+
+        nav a:first-child {
+            color: #4F4F4F;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px;
+        }
+
+        .intro {
+            max-width: 600px;
+            margin-top: 40px; /* Add margin to move the intro section down */
+            margin-left: 20px;
+        }
+
+        .intro h1 {
+            color: #ff6b6b;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        .intro p:first-of-type {
+            font-weight: bold;
+        }
+
+        .intro p {
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            margin-top: 37px;
+        }
+
+        .buttons button {
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        .buttons button:nth-child(2) {
+            background-color: transparent;
+            border: 2px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .image-section img {
+            max-width: 770px;
+            margin-right: 80px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,35 +96,23 @@
             <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
         </div>
         <nav>
-            <a href="#">Log In</a>
-            <a href="#">Sign Up</a>
+            <a href="{% url 'login' %}">Log In</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
         </nav>
     </header>
-    <main class="container">
-        <div class="form-container">
-            <h1>WELCOME BACK</h1>
-            <p>Dive back into your favorite stories or explore new worlds waiting for you.</p>
-            <form action="/login/" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
-                </div>
-                <div class="forgot-password">
-                    <a href="#">Forgot Password?</a>
-                </div>
-                <button type="submit">Log In</button>
-                <p>Or login with</p>
-                <div class="social-login">
-                    <a href="#">Google</a>
-                    <a href="#">Facebook</a>
-                </div>
-                <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
-            </form>
+
+    <main>
+        <section class="intro">
+            <h1>Hi, we're Page Pulse.</h1>
+            <p>Where stories come alive. Write, read, and connect with a community that sparks creativity!</p>
+            <p>Page Pulse is a vibrant digital storytelling platform designed for readers and writers to connect through the power of words. It offers a dynamic space where authors can share their original stories across diverse genres, gaining real-time feedback from an engaged community of readers.</p>
+            <div class="buttons">
+                <button>Start Reading</button>
+                <button>Start Writing</button>
+            </div>
+        </section>
+        <div class="image-section">
+            <img src="{% static 'main/images/Image for Page Pulse.png' %}" alt="Page Pulse Image">
         </div>
     </main>
 </body>
