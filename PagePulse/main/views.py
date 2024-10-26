@@ -25,18 +25,18 @@ def signup_view(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
+        dob = request.POST.get('dob')
         username = request.POST.get('username')
         password = request.POST.get('password')
-        dob = request.POST.get('dob')  # Optional field, adjust as needed
-        
+
         if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exists.')
-            return redirect('signup')  # Redirect to the signup page if username exists
+            messages.error(request, "Username already exists. Please choose another one.")
+            return render(request, 'main/signup.html')
 
         user = User.objects.create_user(username=username, password=password, first_name=first_name, last_name=last_name)
-        user.save()
         
-        messages.success(request, 'Account created successfully! Please log in.')
-        return redirect('login')  # Redirect to the login page after successful signup
+        user.save()
+        messages.success(request, "Account created successfully! You can now log in.")
+        return redirect('login')
 
-    return render(request, 'main/signup.html')  # Render the signup page
+    return render(request, 'main/signup.html')

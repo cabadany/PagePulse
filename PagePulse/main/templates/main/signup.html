@@ -4,43 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Pulse - Sign Up</title>
-    <link rel="stylesheet" href="signup.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="signup.css">
+    {% load static %}
 </head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #FAF9F6;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        margin: 0 50px;
+        background-color: #FAF9F6;
+    }
+
+    .logo img {
+        height: 70px;
+    }
+
+    .signup-form {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+</style>
 <body>
     <header>
-        <h1>Page Pulse</h1>
+        <div class="logo">
+            <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+        </div>
     </header>
     <main>
         <section class="signup-form">
-            <h2>Create Your Account</h2>
-            <form action="#" method="POST"> <!-- Change the action to your signup URL -->
+            <h2>Sign Up</h2>
+            <form action="{% url 'signup' %}" method="POST"> 
+                {% csrf_token %}
                 <label for="first_name">First Name:</label>
                 <input type="text" id="first_name" name="first_name" required><br><br>
-
+                
                 <label for="last_name">Last Name:</label>
                 <input type="text" id="last_name" name="last_name" required><br><br>
-
+                
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" required><br><br>
-
+                
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required><br><br>
-
+                
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required><br><br>
 
-                <div>
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
-                </div><br>
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the Terms & Conditions</label><br><br>
 
                 <button type="submit">Sign Up</button>
             </form>
-            <p>Already have an account? <a href="login.html">Log in</a></p>
+            <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 Page Pulse. All rights reserved.</p>
+        <p>&copy; 2023 Page Pulse. All rights reserved.</p>
     </footer>
 </body>
 </html>
