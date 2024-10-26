@@ -4,52 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Pulse - Login</title>
-    <link rel="stylesheet" href="login.css">
     {% load static %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAF9F6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 20px 50px;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #FAF9F6;
+        }
+
+        .logo img {
+            height: 70px;
+        }
+
+        h1 {
+            font-size: 65px;
+            color: #FF6F61;
+            letter-spacing: 10%;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 18px;
+            color: #4F4F4F;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-form input {
+            width: 20%;
+            padding: 15px;
+            border: 2px solid #4F4F4F;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #4F4F4F;
+            background-color: transparent;
+        }
+
+        .login-form input::placeholder {
+            color: #4F4F4F;
+        }
+
+        .login-form .forgot-password {
+            color: #4F4F4F;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+            margin-left: 15%;
+        }
+
+        .login-form .login-button {
+            width: 15%;
+            padding: 15px;
+            border: 2px solid #FF6F61;
+            background: none;
+            color: #FF6F61;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .social-login {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .social-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 1px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            border: 2px solid #4F4F4F;
+            color: #4F4F4F;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: #4F4F4F;
+            color: #FAF9F6;
+        }
+
+        .social-link img {
+            height: 25px;
+            margin-right: 8px;
+        }
+
+        .signup-link {
+            margin-top: 1px;
+        }
+
+        .signup-link a {
+            color: #FF6F61;
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #FAF9F6;
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-        margin: 0 50px;
-        background-color: #FAF9F6;
-    }
-
-    .logo img {
-        height: 70px;
-    }
-</style>
 <body>
     <header>
         <div class="logo">
             <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
         </div>
     </header>
-    <main>
-        <section class="login-form">
-            <h2>Welcome Back</h2>
-            <p>Dive back into your favorite stories or explore new worlds waiting for you.</p>
-            <form action="#">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username"><br><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password"><br><br>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <a href="#">Sign up</a></p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Page Pulse. All rights reserved.</p>
-    </footer>
+
+    <h1>WELCOME BACK</h1>
+    <p>Dive back into your favorite stories or explore new worlds waiting for you.</p>
+    
+    <form class="login-form" action="#" method="POST">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="Username" required>
+
+        <input type="password" id="password" name="password" placeholder="Password" required>
+
+        <a href="#" class="forgot-password">Forgot Password?</a>
+
+        <button type="submit" class="login-button">Log In</button>
+    </form>
+
+    <div class="social-login">
+        <p>Or login with:</p>
+        <div class="social-box">
+            <a href="#" class="social-link">
+                <img src="{% static 'main/images/google-logo.png' %}" alt="Google Logo">
+                <span>Google</span>
+            </a>
+            <a href="#" class="social-link">
+                <img src="{% static 'main/images/facebook-logo.png' %}" alt="Facebook Logo">
+                <span>Facebook</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="signup-link">
+        <p>Don't have an account? <a href="{% url 'signup' %}" class="signup">Sign Up</a></p>
+    </div>
 </body>
 </html>
