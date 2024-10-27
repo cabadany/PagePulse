@@ -19,6 +19,7 @@ def login_view(request):
                 return redirect('index')
     else:
         form = AuthenticationForm()
+    
     return render(request, 'main/login.html', {'form': form})
 
 def signup_view(request):
