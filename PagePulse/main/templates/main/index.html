@@ -56,21 +56,22 @@
 
         .intro p:first-of-type {
             font-weight: bold;
+            color: #4F4F4F;
         }
 
         .intro p {
-            color: #333;
+            color: #4F4F4F;
             line-height: 1.5;
         }
 
         .buttons {
+            display: flex;
+            justify-content: center;
             margin-top: 37px;
+            margin-left: -310px;
         }
 
         .buttons button {
-            background-color: #ff6b6b;
-            color: #fff;
-            border: none;
             padding: 10px 20px;
             margin-right: 10px;
             cursor: pointer;
@@ -78,7 +79,13 @@
             border-radius: 5px;
         }
 
-        .buttons button:nth-child(2) {
+        .start-reading {
+            background-color: #ff6b6b;
+            color: #FAF9F6;
+            border: none;
+        }
+
+        .start-writing {
             background-color: transparent;
             border: 2px solid #ff6b6b;
             color: #ff6b6b;
@@ -107,8 +114,13 @@
             <p>Where stories come alive. Write, read, and connect with a community that sparks creativity!</p>
             <p>Page Pulse is a vibrant digital storytelling platform designed for readers and writers to connect through the power of words. It offers a dynamic space where authors can share their original stories across diverse genres, gaining real-time feedback from an engaged community of readers.</p>
             <div class="buttons">
-                <button>Start Reading</button>
-                <button>Start Writing</button>
+                <form action="{% url 'login' %}" method="GET">
+                    <button type="submit" class="start-reading">Start Reading</button>
+                </form>
+                
+                <form action="{% url 'login' %}" method="GET">
+                    <button type="submit" class="start-writing">Start Writing</button>
+                </form>
             </div>
         </section>
         <div class="image-section">
