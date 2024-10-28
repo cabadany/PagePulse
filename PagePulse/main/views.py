@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import BookForm
 
 def index(request):
     return render(request, 'main/index.html')
@@ -41,3 +42,13 @@ def signup_view(request):
         return redirect('login')
 
     return render(request, 'main/signup.html')
+
+def new_story(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('story_list')  # Update with the URL of your stories list or desired page
+    else:
+        form = BookForm()
+    return render(request, 'main/new_story.html', {'form': form})
