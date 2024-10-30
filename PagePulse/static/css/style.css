@@ -1,0 +1,334 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px;
+}
+
+.site-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300; /* Light weight */
+    font-size: 30px;   /* Font size */
+    color: #FF6F61;       /* Adjust color as needed */
+    margin-left: 10px; /* Space between logo and text */
+    display: flex;
+    align-items: center; /* Vertically center the text */
+}
+
+.search-container {
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2 {
+    margin-left: 20px;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-field {
+    padding: 10px 10px 10px 40px; /* Add left padding to make room for the icon */
+    font-size: 20px;
+    border: 2px solid #FAF9F6;
+    border-radius: 10px;
+    width: 300px;
+    background-color: #FAF9F6;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px; /* Position the icon inside the input field */
+    color: #666;
+    font-size: 20px;
+    pointer-events: none; /* Prevent interaction with the icon */
+}
+
+/* Header Right Navigation */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between links */
+    margin-left: auto;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #FF6F61; /* Change color on hover */
+}
+
+.nav-link.active {
+    color: #FF6F61; /* Change color when active */
+}
+
+.nav-link:hover, .nav-link.active:hover {
+    color: #FF6F61; /* Keep color on hover if active */
+}
+
+/* Dropdown for "Write" */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 5px;
+    top: 30px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #666;
+}
+
+.dropdown-content a:hover {
+    background-color: #F5F5F5;
+    color: #FF6F61;
+}
+
+/* User Icon */
+.user-icon {
+    font-size: 45px;
+    color: #666;
+    text-decoration: none;
+}
+
+.user-icon:hover {
+    color: #FF6F61;
+}
+
+/* Book Grid */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.book-item {
+    text-align: center;
+}
+
+.book-item img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.book-item h3 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.book-item p {
+    color: #F05A7E;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FAF9F6;
+}
+
+.logo {
+    max-width: 120px;
+    height: 87.96px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center; /* Center the categories horizontally */
+}
+
+.categories ul {
+    display: flex;
+    padding: 0;
+    list-style: none;
+    gap: 20px;
+}
+
+.categories li {
+    text-align: center;
+}
+
+.categories li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    gap: 8px;
+}
+
+.categories li a i {
+    font-size: 24px;
+}
+
+.categories li a span {
+    font-size: 14px;
+}
+
+.categories li a:hover {
+    color: #FF6F61;
+}
+
+.categories li a img {
+    width: 87.98px; /* Adjust as necessary */
+    height: 88.57px; /* Maintain aspect ratio */
+    margin-bottom: 5px; /* Space between icon and text */
+}
+
+/* For You section - increase book size */
+.for-you .book-grid {
+    display: flex;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    gap: 15px; /* Slightly increase the gap between book items */
+    padding-bottom: 10px;
+    scroll-behavior: smooth; /* Optional for smooth scrolling */
+}
+
+.for-you .book-item {
+    flex: 0 0 auto; /* Prevents flex items from shrinking, ensures they stay at their set width */
+    min-width: 120px; /* Increase the width */
+    text-align: center;
+}
+
+.for-you .book-item img {
+    max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
+    border-radius: 6px; /* Slightly increase border radius */
+    height: auto;
+    max-height: 250px; /* Increase the height for larger book cover size */
+}
+
+/* Popular section (similar styling for increased book sizes) */
+.popular .book-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px; /* Increase the gap between book items */
+    margin-bottom: 20px;
+}
+
+.popular .book-item {
+    text-align: center;
+}
+
+.popular .book-item img {
+    max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
+    border-radius: 10px; /* Slightly increase border radius */
+    height: auto;
+    max-height: 200px; /* Increase the height for larger book cover size */
+}
+
+/* Custom scrollbar */
+.for-you .book-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.for-you .book-grid::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.for-you .book-grid::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    width: 821px;
+    height: 540px;
+    text-align: center;
+}
+
+.modal-left {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.modal-left img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.modal-right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-right h2 {
+    margin-top: 0;
+}
+
+.modal-right p {
+    margin: 10px 0;
+}
+
+.close-btn {
+    background-color: #FF6F61;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.start-reading-btn {
+    background-color: #F05A7E;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.start-reading-btn:hover {
+    background-color: #EBE76C;
+}
+
+.modal-content .book-info {
+    margin-top: 20px;
+}
