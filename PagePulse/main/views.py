@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.contrib import messages
 from .forms import BookForm
 
@@ -17,7 +18,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return redirect('homepage')
     else:
         form = AuthenticationForm()
     
@@ -48,7 +49,13 @@ def new_story(request):
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('story_list')  # Update with the URL of your stories list or desired page
+            return redirect('story_list')
     else:
         form = BookForm()
     return render(request, 'main/new_story.html', {'form': form})
+
+def homepage_view(request):
+    return render(request, 'main/homepage.html')
+
+def home(request):
+    return HttpResponse("Welcome to the home page!")
