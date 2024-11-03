@@ -200,14 +200,15 @@
         <div class="social-login">
             <p>Or sign up with:</p>
             <div class="social-box">
-                <a href="#" class="social-link">
+                <a href="{% url 'socialaccount_login' 'google' %}" class="social-link">
                     <img src="{% static 'main/images/google-logo.png' %}" alt="Google Logo">
                     <span>Google</span>
                 </a>
-                <a href="#" class="social-link">
+                <a href="{% url 'socialaccount_login' 'facebook' %}" class="social-link">
                     <img src="{% static 'main/images/facebook-logo.png' %}" alt="Facebook Logo">
                     <span>Facebook</span>
                 </a>
+                
             </div>
         </div>
         <div class="signup-link">
