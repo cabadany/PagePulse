@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('', views.home, name='home'),
+    path('accounts/', include('allauth.urls')),
+    path('signup/<str:provider>/', views.signup_view, name='signup_view'),
+    path('signup/<str:provider>/', views.signup_view, name='socialaccount_login')
 ]
