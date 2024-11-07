@@ -25,4 +25,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('signup/<str:provider>/', views.signup_view, name='signup_view'),
     path('signup/<str:provider>/', views.signup_view, name='socialaccount_login')
+    
 ]
