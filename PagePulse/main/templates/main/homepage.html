@@ -1,3 +1,4 @@
+homepage.html
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Pulse</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,41 +19,111 @@
             margin-bottom: 10px;
             color: #4F4F4F;
         }
-        header {
+ 
+        .header-container {
             display: flex;
             align-items: center;
+            gap: 20px;
+            margin: 20px;
         }
+
         .logo img {
             height: 70px;
         }
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
-        }
-        .search-icon {
-            height: 30px;
-            width: auto;
-            margin-right: 20px;
-            margin-left: 20px;
-            font-weight: 400;
-        }
+        header {
+    display: flex;
+    justify-content: space-between; /* Space out the left and right sections */
+    align-items: center;
+    width: 100%; /* Ensure the header takes up the full width */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align items to the far right */
+    margin-left: auto; /* This will push the header-right section to the far right */
+}
+
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+}
+
+.nav-item {
+    cursor: pointer;
+    color: #4F4F4F;
+    font-size: 25px;
+}
+.nav-item a {
+    text-decoration: none; /* Remove underline */
+    color: #4F4F4F; /* Maintain the text color */
+    font-size: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #FF6F61; /* Change color on hover */
+}
+
+.nav-link.active {
+    color: #FF6F61; /* Change color when active */
+}
+
+
+.profile-icon {
+    height: 40px;
+    width: auto;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.search-container {
+    display: flex;
+ 
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-icon {
+    height: 30px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.search-field {
+    padding: 10px 10px 10px 10px;
+    font-size: 16px;
+    border: 2px solid #FAF9F6;
+    border-radius: 10px;
+    width: 300px;
+    background-color: #FAF9F6;
+}
         .search-text {
-            font-size: 16px;
+            font-size: 20px;
             color: #4F4F4F;
             font-weight: 400;
         }
-        .nav-container {
-            display: flex;
-            align-items: center;
-            margin-left: 1220px;
-        }
-        .nav-item {
-            margin-left: 20px;
-            cursor: pointer;
-            color: #4F4F4F;
-            font-size: medium;
-        }
+
+
+
         .dropdown {
             display: none;
             position: absolute;
@@ -69,18 +141,14 @@
         .dropdown a:hover {
             background-color: #666;
         }
-        .dropdown-toggle {
-            position: relative;
-        }
+        .dropdown-toggle,
+.profile-toggle {
+    position: relative;
+}
         .dropdown-toggle:hover .dropdown {
             display: block;
         }
-        .profile-icon {
-            height: 30px;
-            width: auto;
-            margin-left: 20px;
-            cursor: pointer;
-        }
+
         .profile-dropdown {
             display: none;
             position: absolute;
@@ -133,82 +201,169 @@
         }
         .book-grid {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around; 
+    overflow-x: auto; /* Enables horizontal scrolling */
+    gap: 15px; /* Slightly increase the gap between book items */
+    padding-bottom: 10px;
+    scroll-behavior: smooth; /* Optional for smooth scrolling */
         }
         .book-item {
-            margin: 10px;
-            width: 150px;
-            text-align: center;
-            background-color: #444;
-            border-radius: 10px;
-            padding: 10px;
-            transition: transform 0.2s;
+            flex: 0 0 auto; /* Prevents flex items from shrinking, ensures they stay at their set width */
+    min-width: 120px; /* Increase the width */
+    text-align: center;
         }
+        .book-item img {
+    max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
+    border-radius: 6px; /* Slightly increase border radius */
+    height: auto;
+    max-height: 250px; 
+}
         .book-item:hover {
             transform: scale(1.05);
         }
+        .book-item p {
+    color: #F05A7E;
+}
+.book-item h3 {
+    color: black; /* Set the book title color to black */
+}
+
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.7);
+            display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
         }
         .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            display: flex;
+            background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 821px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
         }
-        .modal-left {
-            flex: 1;
-            padding-right: 20px;
-        }
-        .modal-right {
-            flex: 2;
-        }
-        .close-btn {
-            cursor: pointer;
-            color: #FF0000;
-            font-weight: bold;
-        }
+        .modal-body {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.modal-left {
+    flex: 1;
+}
+
+.modal-left img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.modal-right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-right h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.modal-right p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.close {
+    background-color: #F05A7E;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+}
+
+.start-reading-btn {
+    background-color: #FFFF;
+    color: #FF6F61;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    align-self: start;
+    border: 2px solid #FF6F61;
+    width: 267px;
+}
+
+.start-reading-btn:hover {
+    background-color: #FF6F61;
+    border: 2px solid #FF6F61;
+    color: #fff;
+}
+
+ 
+/* Custom scrollbar */
+.book-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.book-grid::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.book-grid::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+}
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
-        </div>
-        <div class="search-container">
-            <img src="{% static 'main/images/search.png' %}" alt="Search" class="search-icon">
-            <span class="search-text">Search</span>
-        </div>
-        <div class="nav-container">
-            <div class="nav-item">Home</div>
-            <div class="nav-item">My Library</div>
-            <div class="nav-item dropdown-toggle">
-                Write
-                <div class="dropdown">
-                    <a href="#">Create a new story</a>
-                    <a href="#">My Stories</a>
-                </div>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
             </div>
-            <div class="profile-toggle">
-                <img src="{% static 'main/images/profile.png' %}" alt="Profile" class="profile-icon">
-                <div class="profile-dropdown">
-                    <a href="#">Settings</a>
-                    <a href="#">Logout</a>
+            <div class="search-container">
+                <div class="search-bar">
+                    <img src="{% static 'main/images/search.png' %}" alt="Search" class="search-icon">
+                    <input type="search" class="search-field" placeholder="Search">
+                </div>
+                
+                
+            </div>
+            
+            <div class="nav-container">
+                <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></div>
+                <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
+
+                <div class="nav-item dropdown-toggle">
+                    Write
+                    <div class="dropdown">
+                        <a href="#">Create a new story</a>
+                        <a href="#">My Stories</a>
+                    </div>
+                </div>
+                <div class="profile-toggle">
+                    <img src="{% static 'main/images/profile.png' %}" alt="Profile" class="profile-icon">
+                    <div class="profile-dropdown">
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
+
 
     <div class="categories">
         <ul>
@@ -225,64 +380,74 @@
         </ul>
     </div>
 
-    <div id="bookModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">Close</span>
-            <div class="modal-left">
-                <img id="modal-book-img" src="" alt="Book Cover">
-            </div>
-            <div class="modal-right">
-                <h2 id="modal-book-title">Book Title</h2>
-                <p id="modal-book-author">Author</p>
-                <div class="modal-content .book-info">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <section class="for-you">
         <h2>For You</h2>
         <div class="book-grid">
             {% for book in books %}
-            <div class="book-item" onclick="openModal('{{ book.cover_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.genre.name }}', 'A brief description of the book.')">
-                {% if book.cover_image %}
-                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
+            <div class="book-item" onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}')">
+                {% if book.book_image %}
+                <img src="{{ book.book_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
                 {% else %}
                 <img src="#" alt="No cover available" style="width: 100%; border-radius: 5px;">
                 {% endif %}
                 <h3>{{ book.title }}</h3>
                 <p>{{ book.author }}</p>
-                <p>{{ book.genre.name }}</p>
+                <p>{{ book.category }}</p>
             </div>
             {% endfor %}
         </div>
     </section>
-
-    <script>
-        function openModal(imgSrc, title, author, genre, description) {
-            document.getElementById('modal-book-img').src = imgSrc;
-            document.getElementById('modal-book-title').innerText = title;
-            document.getElementById('modal-book-author').innerText = 'Author: ' + author;
-
-            document.getElementById('bookModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('bookModal').style.display = 'none';
-        }
-    </script>
-
-    <section class="popular">
-        <h2>Popular</h2>
-        <div class="book-grid">
-            {% for book in popular_books %}
-            <div class="book-item">
-                <img src="{{ book.cover_image_url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
-                <h3>{{ book.title }}</h3>
-                <p>{{ book.author }}</p>
+   
+    
+    
+<!-- Modal structure -->
+<div id="bookModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">
+            <i class="fas fa-xmark"></i>
+        </span>
+        <div class="modal-body">
+            <div class="modal-left">
+                <img id="modal-book-img" src="" alt="Book Cover">
             </div>
-            {% endfor %}
+            <div class="modal-right">
+                <h2 id="modal-book-title">Book Title</h2>
+                <p id="modal-book-author">Author: <span id="author-name"></span></p>
+                <p id="modal-book-genre">Genre: <span id="genre-name"></span></p>
+                <p id="modal-book-description">Description: <span id="description-text"></span></p>
+                <button class="start-reading-btn">Start Reading</button>
+            </div>
+            
         </div>
-    </section>
+    </div>
+</div>
+
+
+
+
+<!-- JavaScript to handle modal functionality -->
+<script>
+    // Function to open the modal and populate it with book data
+    function openModal(imgSrc, title, author, genre, description) {
+    console.log("Opening modal with", imgSrc, title, author, genre, description); // Debugging line
+    document.getElementById('modal-book-img').src = imgSrc;
+    document.getElementById('modal-book-title').innerText = title;
+    document.getElementById('modal-book-author').innerText = 'Author: ' + author;
+    document.getElementById('modal-book-genre').innerText = 'Genre: ' + genre;
+    document.getElementById('modal-book-description').innerText = 'Description: ' + description;
+    
+    document.getElementById('bookModal').style.display = 'flex';
+}
+
+
+    // Function to close the modal
+    function closeModal() {
+    console.log("Closing modal"); // Debugging line
+    document.getElementById('bookModal').style.display = 'none';
+}
+
+</script>
+
+
 </body>
 </html>

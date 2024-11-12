@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import BookForm
+from .models import Book
 import re  # Import regular expressions for password complexity check
 
 def index(request):
@@ -28,12 +29,11 @@ def login_view(request):
     
     return render(request, 'main/login.html', {'form': form})
 
-
 def signup_view(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        dob = request.POST.get('dob')
+        dob = request.POST.get('dob')  # This field should be processed if added in the model
         username = request.POST.get('username')
         password = request.POST.get('password')
         terms = request.POST.get('terms')
@@ -41,42 +41,31 @@ def signup_view(request):
         # Check if username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists. Please choose another one.")
-            return render(request, 'main/signup.html', {'first_name': first_name, 'last_name': last_name, 'dob': dob, 'username': username})
+            return render(request, 'main/signup.html')
 
         # Check if terms and conditions are accepted
         if not terms:
             messages.error(request, "You must agree to the Terms and Conditions.")
-            return render(request, 'main/signup.html', {'first_name': first_name, 'last_name': last_name, 'dob': dob, 'username': username})
+            return render(request, 'main/signup.html')
 
         # Password complexity check
         if len(password) < 8 or not re.search(r"[A-Za-z]", password) or not re.search(r"\d", password) or not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
             messages.error(request, "Password must be at least 8 characters long, contain a letter, a number, and a special character.")
-            return render(request, 'main/signup.html', {'first_name': first_name, 'last_name': last_name, 'dob': dob, 'username': username})
+            return render(request, 'main/signup.html')
 
-        # Debug: Check form data
-        print(f"First name: {first_name}, Last name: {last_name}, Username: {username}, Password: {password}")
-
-        try:
-            # Create and save the user
-            user = User.objects.create_user(
-                username=username, 
-                password=password, 
-                first_name=first_name, 
-                last_name=last_name
-            )
-            user.save()
-
-            # Success message
-            messages.success(request, "Account created successfully! You can now log in.")
-            return redirect('login')
-
-        except Exception as e:
-            messages.error(request, f"Error creating user: {str(e)}")
-            return render(request, 'main/signup.html', {'first_name': first_name, 'last_name': last_name, 'dob': dob, 'username': username})
+        # Create and save the user
+        user = User.objects.create_user(
+            username=username, 
+            password=password, 
+            first_name=first_name, 
+            last_name=last_name
+        )
+        
+        user.save()
+        messages.success(request, "Account created successfully! You can now log in.")
+        return redirect('login')
 
     return render(request, 'main/signup.html')
-
-
 
 def new_story(request):
     if request.method == 'POST':
@@ -89,8 +78,18 @@ def new_story(request):
         form = BookForm()
     return render(request, 'main/new_story.html', {'form': form})
 
-def homepage_view(request):
-    return render(request, 'main/homepage.html')
 
 def home(request):
     return HttpResponse("Welcome to the home page!")
+
+def homepage(request):
+    # Query all books to display in "For You" section
+    books = Book.objects.all()
+
+    # Query popular books for the "Popular" section (you may define what constitutes 'popular' based on rating or views)
+    popular_books = Book.objects.filter(rating_mature=False)  # For example, filter out mature-rated books
+
+    return render(request, 'main/homepage.html', {
+        'books': books,
+        'popular_books': popular_books,
+    })
