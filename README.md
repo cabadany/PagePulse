@@ -1,6 +1,3 @@
-Here's the updated `README.md` with the section on how to run the application added:
-
-```markdown
 <p align="center">  
   📚 <strong>PagePulse</strong> 📚  
 </p>  
@@ -41,42 +38,7 @@ PagePulse is a simple and user-friendly online eBook platform where users can ma
   - Follow other users to keep up with their latest updates and books.  
   - Unfollow users as needed.  
 
----  
-
-## How to Run the Application  
-
-1. **Clone the Repository**  
-   ```bash  
-   git clone https://github.com/yourusername/pagepulse.git  
-   cd pagepulse  
-   ```  
-
-2. **Set Up a Virtual Environment**  
-   ```bash  
-   python -m venv venv  
-   source venv/bin/activate   # On Windows: venv\Scripts\activate  
-   ```  
-
-3. **Install Dependencies**  
-   ```bash  
-   pip install -r requirements.txt  
-   ```  
-
-4. **Run Migrations**  
-   ```bash  
-   python manage.py makemigrations  
-   python manage.py migrate  
-   ```  
-
-5. **Start Development Server**  
-   ```bash  
-   python manage.py runserver  
-   ```  
-
-6. **Access PagePulse**  
-   Open your browser and go to [http://127.0.0.1:8000](http://127.0.0.1:8000) to access the application.  
-
----  
+---
 
 ## Members  
 
