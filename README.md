@@ -1,4 +1,6 @@
-# PagePulse  
+<p align="center">  
+  📚 <strong>PagePulse</strong> 📚  
+</p>  
 
 PagePulse is a simple and user-friendly online eBook platform where users can manage their libraries and keep track of their favorite books.  
 
