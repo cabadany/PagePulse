@@ -93,3 +93,6 @@ def homepage(request):
         'books': books,
         'popular_books': popular_books,
     })
+
+def forgot_password(request):
+    return render(request, 'main/forgotpassword.html')
