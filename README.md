@@ -42,6 +42,6 @@ PagePulse is a simple and user-friendly online eBook platform where users can ma
 
 ## Members  
 
-- **Member 1**: [Cabana, Danisse D.]  
-- **Member 2**: [Garcia, Gianne Andrea]  
-- **Member 3**: [Francisco, Ezzel Jan]  
+- **Member 1**: Cabana, Danisse D.
+- **Member 2**: Garcia, Gianne Andrea  
+- **Member 3**: Francisco, Ezzel Jan  
