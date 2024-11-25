@@ -2,7 +2,7 @@
   📚 <strong>PagePulse</strong> 📚  
 </p>  
 
-PagePulse is a simple and user-friendly online eBook platform where users can manage their libraries and keep track of their favorite books.  
+PagePulse is a simple and user-friendly online eBook platform where users can manage their libraries, create and share books, and engage with a vibrant community of readers and writers.  
 
 ---  
 
@@ -25,10 +25,20 @@ PagePulse is a simple and user-friendly online eBook platform where users can ma
   - Add books to your personal library.  
   - Delete books from your library with ease.  
 
+- **Book Creation**  
+  - Users can create their own books and publish them for others to read.  
+
+- **Commenting**  
+  - Leave comments on specific parts of a book to engage in discussions.  
+
 - **Bookmarking**  
   - Bookmark books or chapters to save your reading progress.  
 
----  
+- **Follow/Unfollow**  
+  - Follow other users to keep up with their latest updates and books.  
+  - Unfollow users as needed.  
+
+---
 
 ## Members  
 
