@@ -142,7 +142,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+            <img src="{% static 'PagePulse/Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
         </div>
     </header>
 
@@ -156,7 +156,7 @@
         
         <input type="hidden" name="next" value="{% url 'homepage' %}">
     
-        <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot Password?</a>
+        <a href="{% url 'forgotpassword' %}" class="forgot-password">Forgot Password?</a>
         <button type="submit" class="login-button">Log In</button>
     </form>
 
@@ -164,11 +164,11 @@
         <p>Or login with</p>
         <div class="social-box">
             <a href="#" class="social-link">
-                <img src="{% static 'main/images/google-logo.png' %}" alt="Google Logo">
+                <img src="{% static 'PagePulse/Images/google-logo.png' %}" alt="Google Logo">
                 <span>Google</span>
             </a>
             <a href="#" class="social-link">
-                <img src="{% static 'main/images/facebook-logo.png' %}" alt="Facebook Logo">
+                <img src="{% static 'PagePulse/Images/facebook-logo.png' %}" alt="Facebook Logo">
                 <span>Facebook</span>
             </a>
         </div>
