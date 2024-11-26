@@ -26,6 +26,9 @@ urlpatterns = [
     path('', include('login_registration.urls')),
     path('forgot_password/', include('forgot_password.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('new_story/', include('book.urls')),
+    path('my_stories/', include('book.urls')),
+    
 ]
 
 if settings.DEBUG:

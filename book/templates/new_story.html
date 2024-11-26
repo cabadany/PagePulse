@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FAF9F6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            width: 800px;
+            padding: 40px;
+            background-color: #FAF9F6;
+            border-radius: 8px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 29%;
+            margin-right: 5%;
+            width: 30%;
+        }
+
+        .cover-box {
+            width: 180px;
+            height: 240px;
+            border: 2px solid #CCC;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #AAA;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cover-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container {
+            width: 70%;
+        }
+
+        h1 {
+            color: #FF6F61;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: 15px;
+            display: inline-block;
+            color: #666;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            border-radius: 8px;
+            background-color: #FAF9F6;
+            box-sizing: border-box;
+            border: 2px solid #CCC;
+        }
+
+        textarea {
+            height: 60px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .button {
+            font-size: 14px;
+            background: none;
+            border: 1px solid #FF6F61;
+            color: #FF6F61;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .button:hover {
+            background-color: #FF6F61;
+            color: #FFFFFF;
+        }
+
+        .dynamic-list {
+            margin-top: 20px;
+        }
+
+        .dynamic-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .remove-button {
+            font-size: 14px;
+            background: none;
+            border: 1px solid #FF6F61;
+            color: #FF6F61;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .remove-button:hover {
+            background-color: #FF6F61;
+            color: #FFFFFF;
+        }
+
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .toggle {
+            width: 50px;
+            height: 25px;
+            background-color: #ccc;
+            border-radius: 50px;
+            position: relative;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .toggle::before {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: left 0.3s;
+        }
+
+        .toggle.on {
+            background-color: #4CAF50;
+        }
+
+        .toggle.on::before {
+            left: 25px;
+        }
+
+        /* Add styles for the links */
+        .continue-link, .back-link {
+            position: absolute;
+            top: 20px;
+            font-size: 18px;
+            color: #FF6F61;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .continue-link {
+            right: 20px;
+        }
+
+        .back-link {
+            left: 20px;
+        }
+
+        .back-link:hover, .continue-link:hover {
+            text-decoration: underline;
+        }
+
+        .back-link::before {
+            content: "←";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="back-link">Back</a>
+    <a href="#" class="continue-link" id="continue-link">Continue</a>
+
+    <div class="container">
+        <div class="cover-container">
+            <div class="cover-box" id="cover-box">
+                <p>Add a cover</p>
+                <input type="file" id="cover-input" accept="image/*" style="display:none">
+                <img id="cover-image" style="display:none">
+                <button class="delete-button" id="delete-button" style="display:none">X</button>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <h1>Story Details</h1>
+
+            <form method="post" enctype="multipart/form-data" id="story-form">
+                {% csrf_token %}
+
+                <label for="id_title">Title</label>
+                <input type="text" id="id_title" name="title" placeholder="Untitled Story">
+
+                <label for="id_description">Description</label>
+                <textarea id="id_description" name="description"></textarea>
+
+                <label for="id_characters">Main Characters</label>
+                <div class="form-row">
+                    <input type="text" id="character-input" placeholder="Name">
+                    <button class="button add-button" type="button">+</button>
+                </div>
+
+                <div class="dynamic-list" id="dynamic-list"></div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="id_category">Category</label>
+                        <select name="category" id="id_category">
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="New Adult">New Adult</option>
+                            <option value="Short Story">Short Story</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="LGBTQ+">LGBTQ+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="id_target_audience">Target Audience</label>
+                        <select name="target_audience" id="id_target_audience">
+                            <option value="" disabled selected>Who is your primary audience?</option>
+                            <option value="Young Adult (13 -18 years of age)">Young Adult (13 - 18 years of age)</option>
+                            <option value="New Adult (18 - 25 years of age)">New Adult (18 - 25 years of age)</option>
+                            <option value="Adult (25+ years of age)">Adult (25+ years of age)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="id_language">Language</label>
+                <select name="language" id="id_language">
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="French">French</option>
+                    <option value="Italian">Italian</option>
+                    <option value="German">German</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="id_tags">Tags</label>
+                <input type="text" name="tags" id="id_tags" placeholder="Add tags">
+
+                <div class="toggle-wrapper">
+                    <label for="matureContentToggle" class="toggle-label">Mature Content</label>
+                    <div class="toggle" id="matureContentToggle"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const coverInput = document.getElementById('cover-input');
+        const coverImage = document.getElementById('cover-image');
+        const coverBox = document.getElementById('cover-box');
+        const deleteButton = document.getElementById('delete-button');
+
+        coverBox.addEventListener('click', () => coverInput.click());
+
+        coverInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    coverImage.src = reader.result;
+                    coverImage.style.display = 'block';
+                    deleteButton.style.display = 'block';
+                    coverBox.querySelector('p').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        deleteButton.addEventListener('click', function () {
+            coverImage.style.display = 'none';
+            deleteButton.style.display = 'none';
+            coverBox.querySelector('p').style.display = 'block';
+            coverInput.value = '';
+        });
+
+        const toggle = document.getElementById('matureContentToggle');
+        toggle.addEventListener('click', function () {
+            toggle.classList.toggle('on');
+        });
+
+        const addButton = document.querySelector('.add-button');
+        const characterInput = document.getElementById('character-input');
+        const dynamicList = document.getElementById('dynamic-list');
+
+        addButton.addEventListener('click', function () {
+            const characterName = characterInput.value.trim();
+            if (characterName) {
+                const item = document.createElement('div');
+                item.classList.add('dynamic-item');
+                item.innerHTML = `
+                    <span>${characterName}</span>
+                    <button type="button" class="remove-button">Remove</button>
+                `;
+                dynamicList.appendChild(item);
+                characterInput.value = '';
+
+                const removeButton = item.querySelector('.remove-button');
+                removeButton.addEventListener('click', function () {
+                    item.remove();
+                });
+            }
+        });
+
+        document.getElementById('continue-link').addEventListener('click', function () {
+            document.getElementById('story-form').submit();
+        });
+    </script>
+</body>
+</html>
