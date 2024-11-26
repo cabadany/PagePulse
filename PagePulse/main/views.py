@@ -96,3 +96,6 @@ def homepage(request):
 
 def forgot_password(request):
     return render(request, 'main/forgotpassword.html')
+
+def digit_code(request):
+    return render(request, 'main/digitcode.html')

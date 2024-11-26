@@ -11,6 +11,7 @@ urlpatterns = [
     path('new_story/', new_story, name='new_story'),
     path('home/', views.homepage, name='homepage'),
     path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('digit-code/', views.digit_code, name='digitcode'),
 
 ]
 if settings.DEBUG:
