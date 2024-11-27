@@ -15,7 +15,6 @@ class BookAdmin(admin.ModelAdmin):
         }),
     )
     
-    # To display the image as a thumbnail in the admin
     def book_image_thumbnail(self, obj):
         if obj.book_image:
             return '<img src="{}" width="100" height="100" />'.format(obj.book_image.url)
