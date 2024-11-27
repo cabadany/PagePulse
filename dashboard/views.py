@@ -1,13 +1,11 @@
 from django.shortcuts import render
+from book.models import Book
 
 def homepage(request):
     books = Book.objects.all()
 
-    popular_books = Book.objects.filter(rating_mature=False)
-
     return render(request, 'homepage.html', {
         'books': books,
-        'popular_books': popular_books,
     })
 
 def read_book(request, book_id, chapter_id=None):
