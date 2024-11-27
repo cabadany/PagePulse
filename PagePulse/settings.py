@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'login_registration',
     'dashboard',
     'forgot_password',
+    'book',
 ]
 
 MIDDLEWARE = [
