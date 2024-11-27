@@ -18,6 +18,9 @@
             margin-bottom: 10px;
             color: #4F4F4F;
         }
+        h1 {
+            color: #4F4F4F;
+        }
         .header-container {
             display: flex;
             align-items: center;
@@ -29,26 +32,30 @@
         }
         header {
             display: flex;
-            justify-content: space-between; 
+            justify-content: space-between; /* Space out the left and right sections */
             align-items: center;
-            width: 100%;
+            width: 100%; /* Ensure the header takes up the full width */
         }
+
         .header-left {
             display: flex;
             align-items: center;
         }
+
         .header-right {
             display: flex;
             align-items: center;
-            justify-content: flex-end; 
-            margin-left: auto;
+            justify-content: flex-end; /* Align items to the far right */
+            margin-left: auto; /* This will push the header-right section to the far right */
         }
+
         .nav-container {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-left: 93%;
+            
         }
+
         .nav-item {
             cursor: pointer;
             color: #4F4F4F;
@@ -58,40 +65,50 @@
         .nav-item a {
             white-space: nowrap;
             font-weight: 50;
-            text-decoration: none;
-            color: #4F4F4F;
+            text-decoration: none; /* Remove underline */
+            color: #4F4F4F; /* Maintain the text color */
             font-size: 20px;
         }
+
         .nav-link {
             text-decoration: none;
             color: #666;
             font-weight: 500;
         }
+
         .nav-link:hover {
-            color: #FF6F61;
+            color: #FF6F61; /* Change color on hover */
         }
+
         .nav-link.active {
-            color: #FF6F61; 
+            color: #FF6F61; /* Change color when active */
         }
+
+
         .profile-icon {
             height: 40px;
             width: auto;
             cursor: pointer;
             margin-left: 20px;
         }
+
         .search-container {
             display: flex;
+
         }
+
         .search-bar {
             display: flex;
             align-items: center;
             position: relative;
         }
+
         .search-icon {
             height: 30px;
             width: auto;
             margin-right: 10px;
         }
+
         .search-field {
             padding: 10px 10px 10px 10px;
             font-size: 16px;
@@ -105,6 +122,7 @@
             color: #4F4F4F;
             font-weight: 400;
         }
+
         .dropdown {
             display: none;
             position: absolute;
@@ -139,6 +157,7 @@
         .dropdown-toggle:hover .dropdown {
             display: block;
         }
+
         .profile-dropdown {
             display: none;
             position: absolute;
@@ -198,84 +217,128 @@
         .categories a {
             text-decoration: none;
         }
+        /* Section Styling */
+        .for-you {
+            padding: 20px;
+        } 
+
+        /* Book Grid Styling */
         .book-grid {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Six columns in a row */
+            gap: 15px; /* Space between items */
             padding-bottom: 10px;
-            scroll-behavior: smooth;
         }
+
+
+        .book-grid::-webkit-scrollbar {
+            height: 8px; /* Customize the scrollbar height */
+        }
+
+        .book-grid::-webkit-scrollbar-thumb {
+            background: #888; /* Scrollbar color */
+            border-radius: 4px;
+        }
+
+        .book-grid::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Scrollbar hover color */
+        }
+
+
+        /* Individual Book Item Styling */
         .book-item {
-            flex: 0 0 auto;
-            min-width: 120px;
+            padding: 10px;
+            border-radius: 5px;
             text-align: center;
+            
+            transition: transform 0.3s ease-in-out; /* Adds animation when hovering */
         }
-        .book-item img {
-            max-width: 100%;
-            border-radius: 6px; 
-            height: auto;
-            max-height: 250px; 
-        }
+
+        /* Hover Effect for Book Item */
         .book-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Slightly enlarges the item on hover */
         }
+
+        /* Image Styling */
+        .book-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        /* Link Styling */
+        .book-item a {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Text Styling for Author and Category */
         .book-item p {
+            margin: 5px 0;
             color: #F05A7E;
         }
-        .book-item h3 {
-            color: black;
-        }
+
         .modal {
-            display: none;
+            display: none; /* Hidden by default */
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
             justify-content: center;
             align-items: center;
         }
         .modal-content {
             background-color: #fff;
+            color: #444;
             padding: 20px;
             border-radius: 10px;
-            width: 821px;
+            width: 650px;
             display: flex;
             flex-direction: column;
             position: relative;
+    
         }
         .modal-body {
             display: flex;
             gap: 20px;
             align-items: flex-start;
         }
+
         .modal-left {
             flex: 1;
         }
+
         .modal-left img {
             max-width: 100%;
             max-height: 100%;
             object-fit: cover;
             border-radius: 8px;
         }
+
         .modal-right {
             flex: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
+
         .modal-right h2 {
             margin-top: 0;
             font-size: 24px;
         }
+
         .modal-right p {
             margin: 10px 0;
-            font-size: 18px;
+            font-size: 15px;
         }
-        .close {
-            background-color: #F05A7E;
+
+
+        .close {  
             padding: 10px 20px;
             cursor: pointer;
             position: absolute;
@@ -283,40 +346,90 @@
             right: 10px;
             font-size: 16px;
         }
-        .start-reading-btn {
-            background-color: #FFFF;
-            color: #FF6F61;
-            font-size: 18px;
+
+        /* From Uiverse.io by alexmaracinaru */ 
+        .start-reading-button{
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
             padding: 10px 20px;
             border-radius: 10px;
+            background: white;
+            border: 2px solid #FF6F61;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #FF6F61;
+            }
+        .add-to-lib {
             cursor: pointer;
-            margin-top: 20px;
-            align-self: start;
-            border: 2px solid #FF6F61;
-            width: 267px;
-        }
-        .start-reading-btn:hover {
-            background-color: #FF6F61;
-            border: 2px solid #FF6F61;
-            color: #fff;
-        }
-        .book-grid::-webkit-scrollbar {
-            height: 8px;
-        }
-        .book-grid::-webkit-scrollbar-thumb {
-            background-color: #ccc;
+            font-weight: 700;
+            transition: all 0.2s;
+            padding: 10px 20px;
             border-radius: 10px;
+            background: white;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            }
+        .add-to-lib:hover {
+            background: black;
+            color: #FAF9F6;
+            }
+
+        .start-reading-button:hover{
+            background: #FF6F61;
+            color: #FAF9F6;
+            }
+
+        .start-reading-button > svg {
+            width: 30px;
+            margin-left: 10px;
+            transition: transform 0.3s ease-in-out;
+            }
+
+        .start-reading-button:hover svg {
+            transform: translateX(5px);
+            }
+
+        .start-reading-button:active {
+            transform: scale(0.95);
+            }
+        .start-reading-button:hover svg circle {
+            stroke: #FAF9F6; /* Change stroke color on hover */
+            }
+        .start-reading-button:hover svg path {
+            fill: #FAF9F6; /* Change path fill color on hover */
+            }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
         }
-        .book-grid::-webkit-scrollbar-track {
-            background-color: #f4f4f4;
+        form label, form select, form input, form button {
+            color: black;
         }
+        #modalBookDescription {
+            font-weight: 300; /* Light font weight for extra light text */
+            font-family: 'Arial', sans-serif; /* Optional: can change to a lighter font if needed */
+            color: #666; /* Optional: change text color to be softer */
+            font-size: 12px;
+        }
+        #modalBookAuthor {
+            font-weight: 300; /* Light font weight for extra light text */
+            font-family: 'Arial', sans-serif; /* Optional: can change to a lighter font if needed */
+            color: #666; /* Optional: change text color to be softer */
+            
+        }
+
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="/PagePulse/Images/IM2 Logo.png" alt="Page Pulse Logo">
+                <img src="/PagePulse/Images//IM2 Logo.png" alt="Page Pulse Logo">
             </div>
             <div class="search-container">
                 <div class="search-bar">
@@ -329,20 +442,20 @@
             
             <div class="nav-container">
                 <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></div>
-                <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
+                <div class="nav-item"><a href="#" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
 
                 <div class="nav-item dropdown-toggle">
                     Write
                     <div class="dropdown">
                         <a href="{% url 'new_story' %}">Create a new story</a>
-                        <a href="{% url 'my_stories' %}">My Stories</a>
+                        <a href="#">My Stories</a>
                     </div>
                 </div>
                 <div class="profile-toggle">
                     <img src="/PagePulse/Images/profile.png" alt="Profile" class="profile-icon">
                     <div class="profile-dropdown">
-                        <a href="#">Profile</a>
-                        <a href="#">Logout</a>
+                        <a href="#">Settings</a>
+                        <a href="/" onclick="event.preventDefault(); window.location.href='/';">Log Out</a>
                     </div>
                 </div>
             </div>
@@ -363,61 +476,158 @@
             <li><a href="#"><img src="/PagePulse/Images/adventure.png" alt="Adventure"><span>Adventure</span></a></li>
             <li><a href="#"><img src="/PagePulse/Images/lgbtq+.png" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
         </ul>
-    </div>    
+    </div>  
+<!--
+<h1>Browse Books</h1>
+s
 
-    <section class="for-you">
-        <h2>For You</h2>
-        <div class="book-grid">
-            {% for book in books %}
-            <div class="book-item" onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}')">
+<form method="GET">
+    <label for="genre">Filter by Genre:</label>
+    <select name="genre" id="genre">
+        <option value="">All</option>
+        {% for genre in genres %}
+        <option value="{{ genre.id }}">{{ genre.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="author">Search by Author:</label>
+    <input type="text" name="author" id="author" placeholder="Author name">
+
+    <label for="order_by">Sort by:</label>
+    <select name="order_by" id="order_by">
+        <option value="created_at">Newest</option>
+        <option value="popularity">Popularity</option>
+    </select>
+
+    <button type="submit">Search</button>
+</form>-->
+
+<section class="for-you">
+    <h2>For You</h2>
+    <div class="book-grid">
+        {% for book in books %}
+        <li>
+            <div class="book-item" onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}', '{{ book.id }}')">
                 {% if book.book_image %}
                 <img src="{{ book.book_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
                 {% else %}
                 <img src="#" alt="No cover available" style="width: 100%; border-radius: 5px;">
                 {% endif %}
-                <h3>{{ book.title }}</h3>
+                <a href="{% url 'read_book' book.id %}">{{ book.title }}</a> by {{ book.author.username }}
                 <p>{{ book.author }}</p>
+                <p>{{ book.category }}</p>
             </div>
-            {% endfor %}
+        </li>   
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Modal structure -->
+<div id="bookModal" class="modal">
+<div class="modal-content">
+    <span class="close" onclick="closeModal()">&#10005;</span>
+    <div class="modal-body">
+        <div class="modal-left">
+            <img id="modalBookImage" src="" alt="Book Cover">
         </div>
-    </section>
-   
-    <div id="bookModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">
-            <i class="fas fa-xmark"></i>
-        </span>
-        <div class="modal-body">
-            <div class="modal-left">
-                <img id="modal-book-img" src="" alt="Book Cover">
-            </div>
-            <div class="modal-right">
-                <h2 id="modal-book-title">Book Title</h2>
-                <p id="modal-book-author">Author: <span id="author-name"></span></p>
-                <p id="modal-book-genre">Genre: <span id="genre-name"></span></p>
-                <p id="modal-book-description">Description: <span id="description-text"></span></p>
-                <button class="start-reading-btn">Start Reading</button>
-            </div>
+        <div class="modal-right">
+            <h2 id="modalBookTitle"></h2>
+            <p id="modalBookAuthor"></p>
+            <p id="modalBookCategory"></p>
+            <p id="modalBookDescription"></p>
+            <div class="btn-container">
+                <button class="start-reading-button">
+                    <span>Start reading</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 74 74"
+                        height="34"
+                        width="34"
+                    >
+                        <circle stroke-width="3" stroke="#FF6F61" r="35.5" cy="37" cx="37"></circle>
+                        <path
+                            fill="#FF6F61"
+                            d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                        ></path>
+                    </svg>
+                </button>
+
             
+                <button class="add-to-lib">+</button>
+            </div>
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    function openModal(imgSrc, title, author, genre, description) {
-    console.log("Opening modal with", imgSrc, title, author, genre, description);
-    document.getElementById('modal-book-img').src = imgSrc;
-    document.getElementById('modal-book-title').innerText = title;
-    document.getElementById('modal-book-author').innerText = 'Author: ' + author;
-    document.getElementById('modal-book-genre').innerText = 'Genre: ' + genre;
-    document.getElementById('modal-book-description').innerText = 'Description: ' + description;
-    document.getElementById('bookModal').style.display = 'flex';
-    }
 
-    function closeModal() {
-    console.log("Closing modal");
-    document.getElementById('bookModal').style.display = 'none';
+<!-- JavaScript to handle modal functionality -->
+<script>
+// Function to open the modal and populate it with book data
+function openModal(imageUrl, title, author, category, description, bookId) {
+    document.getElementById("modalBookImage").src = imageUrl;
+    document.getElementById("modalBookTitle").textContent = title;
+    document.getElementById("modalBookAuthor").textContent = `${author}`;
+    
+    // Make the category bold using innerHTML
+    document.getElementById("modalBookCategory").innerHTML = `Genres <strong>${category}</strong>`;
+    
+    document.getElementById("modalBookDescription").textContent = description;
+
+    // Update the Add to Library button with the correct book ID
+    document.querySelector(".add-to-lib").setAttribute("onclick", `addToLibrary(${bookId})`);
+
+    // Display the modal
+    document.getElementById("bookModal").style.display = "flex";
+}
+
+
+function closeModal() {
+    document.getElementById("bookModal").style.display = "none";
+}
+
+const csrftoken = "{{ csrf_token }}"; 
+
+function addToLibrary(bookId) {
+fetch('/add-to-library/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+    },
+
+    body: JSON.stringify({ book_id: bookId })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        alert(data.message);
+    } else {
+        alert(data.message);
     }
-    </script>
-</body>
-</html>
+})
+.catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again.');
+});
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+</script>
