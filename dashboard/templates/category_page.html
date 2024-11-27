@@ -86,7 +86,7 @@
     <div class="book-grid">
         {% for book in books %}
         <div class="book-item" onclick="openModal(
-            '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
+            '{% if book.book_image %}{{ book.cover_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
             '{{ book.title }}',
             '{{ book.author }}',
             '{{ book.category }}',

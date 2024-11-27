@@ -499,9 +499,9 @@ s
     <div class="book-grid">
         {% for book in books %}
         <li>
-            <div class="book-item" onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}', '{{ book.id }}')">
+            <div class="book-item" onclick="openModal('{{ book.cover_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}', '{{ book.id }}')">
                 {% if book.book_image %}
-                <img src="{{ book.book_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
+                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
                 {% else %}
                 <img src="#" alt="No cover available" style="width: 100%; border-radius: 5px;">
                 {% endif %}
