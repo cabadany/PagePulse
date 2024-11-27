@@ -1,37 +1,36 @@
 from django.contrib import admin
-from .models import Book, Chapter
+# from .models import Book, Chapter
 
-class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'published_date', 'category', 'rating_mature')
-    search_fields = ('title', 'author')
-    list_filter = ('category', 'rating_mature')
+# The BookAdmin and ChapterAdmin classes are commented out to avoid errors since Book is no longer used
 
-    fieldsets = (
-        (None, {
-            'fields': ('title', 'author', 'published_date', 'book_image')  # Make sure 'book_image' is included here
-        }),
-        ('Details', {
-            'fields': ('description', 'characters', 'category', 'target_audience', 'language', 'tags', 'rating_mature')
-        }),
-    )
-    
-    def book_image_thumbnail(self, obj):
-        if obj.book_image:
-            return '<img src="{}" width="100" height="100" />'.format(obj.book_image.url)
-        return ''
-    
-    book_image_thumbnail.allow_tags = True  # This allows HTML rendering for the image
+# class BookAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'author', 'published_date', 'genre', 'book_image_thumbnail')  # Use genre instead of category
+#     search_fields = ('title', 'author')
+#     list_filter = ('genre',)
 
-    # Add the image thumbnail to list display
-    list_display = ('title', 'author', 'published_date', 'category', 'rating_mature', 'book_image_thumbnail')
+#     fieldsets = (
+#         (None, {
+#             'fields': ('title', 'author', 'published_date', 'cover_image')
+#         }),
+#         ('Details', {
+#             'fields': ('description', 'genre')
+#         }),
+#     )
 
-admin.site.register(Book, BookAdmin)
+#     def book_image_thumbnail(self, obj):
+#         if obj.cover_image:
+#             return '<img src="{}" width="100" height="100" />'.format(obj.cover_image.url)
+#         return ''
 
-class ChapterAdmin(admin.ModelAdmin):
-    list_display = ('title', 'book', 'created_at')  # Columns to display in the admin list view
-    search_fields = ('title', 'book__title')  # Add search functionality
-    list_filter = ('book',)  # Add filter options by book
-    fields = ('book', 'title', 'content', 'created_at')  # Fields visible in the form
-    readonly_fields = ('created_at',)  # Make 'created_at' non-editable
+# book_image_thumbnail.allow_tags = True
 
-admin.site.register(Chapter,ChapterAdmin)
+# admin.site.register(Book, BookAdmin)
+
+# class ChapterAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'book', 'created_at')
+#     search_fields = ('title', 'book__title')
+#     list_filter = ('book',) 
+#     fields = ('book', 'title', 'content', 'created_at') 
+#     readonly_fields = ('created_at',)
+
+# admin.site.register(Chapter, ChapterAdmin)

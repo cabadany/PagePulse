@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, ReadingProgress
+# from .models import ReadingProgress
 
 def homepage(request):
     # Query all books to display in "For You" section
