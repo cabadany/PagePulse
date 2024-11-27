@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import Book
 
 def homepage(request):
-    return render(request, 'homepage.html')
+    books = Book.objects.all()
+    return render(request, 'homepage.html', {'books': books})
