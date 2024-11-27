@@ -179,16 +179,24 @@
         <h1>CREATE AN ACCOUNT</h1>
         <h2>Create an account to unlock endless stories and start writing your own today.</h2>
 
-        <form class="signup-form" action="{% url 'signup' %}" method="POST"> 
+        <form class="signup-form" action="{% url 'signup' %}" method="POST" enctype="multipart/form-data"> 
             {% csrf_token %}
             <div class="name-inputs">
                 <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
                 <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
             </div>
-            <input type="date" id="dob" name="dob" placeholder="Date of Birth" required>
+            
+            <!-- Add email input field -->
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+
+            <!-- Remove the date of birth input field -->
+
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
-            
+
+            <!-- Add profile picture input -->
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+
             <div class="terms">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">I agree to the Terms & Conditions</label>
