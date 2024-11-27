@@ -32,9 +32,9 @@
         }
         header {
             display: flex;
-            justify-content: space-between; /* Space out the left and right sections */
+            justify-content: space-between;
             align-items: center;
-            width: 100%; /* Ensure the header takes up the full width */
+            width: 100%;
         }
 
         .header-left {
@@ -45,8 +45,8 @@
         .header-right {
             display: flex;
             align-items: center;
-            justify-content: flex-end; /* Align items to the far right */
-            margin-left: auto; /* This will push the header-right section to the far right */
+            justify-content: flex-end;
+            margin-left: auto;
         }
 
         .nav-container {
@@ -65,8 +65,8 @@
         .nav-item a {
             white-space: nowrap;
             font-weight: 50;
-            text-decoration: none; /* Remove underline */
-            color: #4F4F4F; /* Maintain the text color */
+            text-decoration: none; 
+            color: #4F4F4F;
             font-size: 20px;
         }
 
@@ -77,11 +77,11 @@
         }
 
         .nav-link:hover {
-            color: #FF6F61; /* Change color on hover */
+            color: #FF6F61;
         }
 
         .nav-link.active {
-            color: #FF6F61; /* Change color when active */
+            color: #FF6F61;
         }
 
 
@@ -217,55 +217,48 @@
         .categories a {
             text-decoration: none;
         }
-        /* Section Styling */
         .for-you {
             padding: 20px;
         } 
-
-        /* Book Grid Styling */
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* Six columns in a row */
-            gap: 15px; /* Space between items */
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px; 
             padding-bottom: 10px;
         }
 
 
         .book-grid::-webkit-scrollbar {
-            height: 8px; /* Customize the scrollbar height */
+            height: 8px;
         }
 
         .book-grid::-webkit-scrollbar-thumb {
-            background: #888; /* Scrollbar color */
+            background: #888;
             border-radius: 4px;
         }
 
         .book-grid::-webkit-scrollbar-thumb:hover {
-            background: #555; /* Scrollbar hover color */
+            background: #555;
         }
 
 
-        /* Individual Book Item Styling */
         .book-item {
             padding: 10px;
             border-radius: 5px;
             text-align: center;
             
-            transition: transform 0.3s ease-in-out; /* Adds animation when hovering */
+            transition: transform 0.3s ease-in-out;
         }
 
-        /* Hover Effect for Book Item */
         .book-item:hover {
-            transform: scale(1.05); /* Slightly enlarges the item on hover */
+            transform: scale(1.05);
         }
 
-        /* Image Styling */
         .book-item img {
             width: 100%;
             border-radius: 5px;
         }
 
-        /* Link Styling */
         .book-item a {
             display: block;
             margin-top: 10px;
@@ -274,21 +267,20 @@
             color: #333;
         }
 
-        /* Text Styling for Author and Category */
         .book-item p {
             margin: 5px 0;
             color: #F05A7E;
         }
 
         .modal {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
         }
@@ -347,7 +339,6 @@
             font-size: 16px;
         }
 
-        /* From Uiverse.io by alexmaracinaru */ 
         .start-reading-button{
             cursor: pointer;
             font-weight: 700;
@@ -397,10 +388,10 @@
             transform: scale(0.95);
             }
         .start-reading-button:hover svg circle {
-            stroke: #FAF9F6; /* Change stroke color on hover */
+            stroke: #FAF9F6;
             }
         .start-reading-button:hover svg path {
-            fill: #FAF9F6; /* Change path fill color on hover */
+            fill: #FAF9F6;
             }
         .btn-container {
             margin-top: 20px;
@@ -411,15 +402,15 @@
             color: black;
         }
         #modalBookDescription {
-            font-weight: 300; /* Light font weight for extra light text */
-            font-family: 'Arial', sans-serif; /* Optional: can change to a lighter font if needed */
-            color: #666; /* Optional: change text color to be softer */
+            font-weight: 300;
+            font-family: 'Arial', sans-serif; 
+            color: #666;
             font-size: 12px;
         }
         #modalBookAuthor {
-            font-weight: 300; /* Light font weight for extra light text */
-            font-family: 'Arial', sans-serif; /* Optional: can change to a lighter font if needed */
-            color: #666; /* Optional: change text color to be softer */
+            font-weight: 300; 
+            font-family: 'Arial', sans-serif;
+            color: #666;
             
         }
 
@@ -465,18 +456,19 @@
 
     <div class="categories">
         <ul>
-            <li><a href="#"><img src="/PagePulse/Images/all.png" alt="All"><span>All</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/fiction.png" alt="Fiction"><span>Fiction</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/mystery.png" alt="Mystery"><span>Mystery</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/romance.png" alt="Romance"><span>Romance</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/fantasy.png" alt="Fantasy"><span>Fantasy</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/new_adult.png" alt="New Adult"><span>New Adult</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/short_story.png" alt="Short Story"><span>Short Story</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/thriller.png" alt="Thriller"><span>Thriller</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/adventure.png" alt="Adventure"><span>Adventure</span></a></li>
-            <li><a href="#"><img src="/PagePulse/Images/lgbtq+.png" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
+            <li><a href="{% url 'category_view' category='All' %}"><img src="/PagePulse/Images/all.png" alt="All"><span>All</span></a></li>
+            <li><a href="{% url 'category_view' category='Fiction' %}"><img src="/PagePulse/Images/fiction.png" alt="Fiction"><span>Fiction</span></a></li>
+            <li><a href="{% url 'category_view' category='Mystery' %}"><img src="/PagePulse/Images/mystery.png" alt="Mystery"><span>Mystery</span></a></li>
+            <li><a href="{% url 'category_view' category='Romance' %}"><img src="/PagePulse/Images/romance.png" alt="Romance"><span>Romance</span></a></li>
+            <li><a href="{% url 'category_view' category='Fantasy' %}"><img src="/PagePulse/Images/fantasy.png" alt="Fantasy"><span>Fantasy</span></a></li>
+            <li><a href="{% url 'category_view' category='New Adult' %}"><img src="/PagePulse/Images/new_adult.png" alt="New Adult"><span>New Adult</span></a></li>
+            <li><a href="{% url 'category_view' category='Short Story' %}"><img src="/PagePulse/Images/short_story.png" alt="Short Story"><span>Short Story</span></a></li>
+            <li><a href="{% url 'category_view' category='Thriller' %}"><img src="/PagePulse/Images/thriller.png" alt="Thriller"><span>Thriller</span></a></li>
+            <li><a href="{% url 'category_view' category='Adventure' %}"><img src="/PagePulse/Images/adventure.png" alt="Adventure"><span>Adventure</span></a></li>
+            <li><a href="{% url 'category_view' category='LGBTQ+' %}"><img src="/PagePulse/Images/lgbtq+.png" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
         </ul>
-    </div>  
+    </div>
+      
 <!--
 <h1>Browse Books</h1>
 s
@@ -561,24 +553,18 @@ s
     </div>
 </div>
 
-
-<!-- JavaScript to handle modal functionality -->
-<script>
-// Function to open the modal and populate it with book data
+<script> 
 function openModal(imageUrl, title, author, category, description, bookId) {
     document.getElementById("modalBookImage").src = imageUrl;
     document.getElementById("modalBookTitle").textContent = title;
     document.getElementById("modalBookAuthor").textContent = `${author}`;
     
-    // Make the category bold using innerHTML
     document.getElementById("modalBookCategory").innerHTML = `Genres <strong>${category}</strong>`;
     
     document.getElementById("modalBookDescription").textContent = description;
 
-    // Update the Add to Library button with the correct book ID
     document.querySelector(".add-to-lib").setAttribute("onclick", `addToLibrary(${bookId})`);
 
-    // Display the modal
     document.getElementById("bookModal").style.display = "flex";
 }
 
@@ -628,6 +614,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
-
 </script>
+
+</body>
+</html>
