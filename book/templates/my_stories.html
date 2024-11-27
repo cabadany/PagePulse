@@ -194,11 +194,11 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="{% static 'main/images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+                <img src="/PagePulse/Images/IM2 Logo.png" alt="Page Pulse Logo">
             </div>
             <div class="search-container">
                 <div class="search-bar">
-                    <img src="{% static 'main/images/search.png' %}" alt="Search" class="search-icon">
+                    <img src="/PagePulse/Images/search.png" alt="Search" class="search-icon">
                     <input type="search" class="search-field" placeholder="Search">
                 </div>
             </div>
@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <div class="profile-toggle">
-                    <img src="{% static 'main/images/profile.png' %}" alt="Profile" class="profile-icon">
+                    <img src="/PagePulse/Images/profile.png" alt="Profile" class="profile-icon">
                     <div class="profile-dropdown">
                         <a href="#">Profile</a>
                         <a href="#">Logout</a>
@@ -232,7 +232,7 @@
     <div class="main-content">
         <h1>My Stories</h1>
         <div class="container">
-            <img src="{% static 'main/images/book_icon.png' %}" alt="Book Logo">
+            <img src="/PagePulse/Images/book_icon.png" alt="Book Logo">
             <h2>Hi, {{ user.username }}! You haven’t written any stories yet.</h2>
             <button class="create-story-btn" onclick=location.href="{% url 'new_story' %}">+ Create a Story</button>
         </div>

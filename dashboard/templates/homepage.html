@@ -52,17 +52,19 @@
         .nav-item {
             cursor: pointer;
             color: #4F4F4F;
-            font-size: 25px;
+            font-size: 20px;
+            margin-right: 10px;
         }
         .nav-item a {
+            white-space: nowrap;
+            font-weight: 50;
             text-decoration: none;
             color: #4F4F4F;
-            font-size: 25px;
+            font-size: 20px;
         }
         .nav-link {
             text-decoration: none;
             color: #666;
-            font-size: 25px;
             font-weight: 500;
         }
         .nav-link:hover {
@@ -106,19 +108,29 @@
         .dropdown {
             display: none;
             position: absolute;
-            background-color: #444;
+            background-color: #fff; 
+            border-radius: 10px; 
+            border: 1px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
             min-width: 160px;
-            border-radius: 5px;
             z-index: 1;
+            padding: 10px 0;
+            left: auto; 
+            right: 0;
+            overflow: hidden;
         }
-        .dropdown a {
-            color: #FAF9F6;
-            padding: 10px;
+        .dropdown a, 
+        .profile-dropdown a {
+            color: #4F4F4F;
+            padding: 10px 20px;
             text-decoration: none;
             display: block;
+            border-radius: 5px;
+            font-size: 16px;
         }
         .dropdown a:hover {
-            background-color: #666;
+            background-color: #FF6F61;
+            color: #fff;
         }
         .dropdown-toggle,
         .profile-toggle {
@@ -130,19 +142,28 @@
         .profile-dropdown {
             display: none;
             position: absolute;
-            background-color: #444;
+            background-color: #fff; 
+            border-radius: 10px;
+            border: 1px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             min-width: 160px;
-            border-radius: 5px;
             z-index: 1;
+            padding: 10px 0;
+            right: 0; 
+            top: 50px; 
+            overflow: hidden; 
         }
+
         .profile-dropdown a {
-            color: #FAF9F6;
-            padding: 10px;
+            color: #4F4F4F;
+            padding: 10px 20px; 
             text-decoration: none;
             display: block;
+            border-radius: 5px; 
         }
         .profile-dropdown a:hover {
-            background-color: #666;
+            background-color: #FF6F61;
+            color: #fff;
         }
         .profile-toggle:hover .profile-dropdown {
             display: block;
