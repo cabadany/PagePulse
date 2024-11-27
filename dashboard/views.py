@@ -22,13 +22,8 @@ def read_book(request, book_id, chapter_id=None):
 
     chapter = chapters.first() if not chapter_id else chapters.get(id=chapter_id)
 
-    progress, created = ReadingProgress.objects.get_or_create(user=request.user, book=book)
-    progress.current_chapter = chapter
-    progress.save()
-
     return render(request, 'readbook.html', {
         'book': book,
         'chapter': chapter,
         'chapters': chapters,
-        'progress': progress
     })
