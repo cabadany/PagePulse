@@ -43,13 +43,15 @@
             margin-bottom: 10px;
             margin-top: 70px;
             font-weight: 300; 
+            letter-spacing: 10px;
         }
 
         h2 {
             font-size: 18px;
             color: #4F4F4F;
-            margin-bottom: 10px;
+            margin-bottom: 10px; 
             font-weight: 300;
+            line-height: 1.5;
         }
 
         .signup-form {
@@ -65,7 +67,7 @@
         .name-inputs {
             display: flex;
             justify-content: space-between;
-            width: 100%;
+            width: 108%;
             margin-bottom: 1px;
         }
 
@@ -112,18 +114,47 @@
             margin-bottom: -15px;
         }
 
+       /* Cute Checkbox Styling */
         .terms {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
-            margin-left: 0;
             width: 100%;
         }
 
-        .terms input {
-            margin-right: 10px;
-            width: auto;
-            margin-top: 5px;
+        .terms input[type="checkbox"] {
+            width: 30px; 
+            height: 30px; 
+            border-radius: 15px; 
+            border: 2px solid #FFB6C1; 
+            background-color: #FFF0F5; 
+            margin-right: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;  /* Hide the default checkbox */
+            -moz-appearance: none;  /* Hide the default checkbox */
+        }
+
+        .terms input[type="checkbox"]:checked {
+            background-color: #FFB6C1; 
+            border-color: #FFB6C1; 
+        }
+
+        .terms input[type="checkbox"]:checked::after {
+            content: '❤️'; 
+            color: white;
+            font-size: 18px; 
+            position: absolute;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+        }
+
+        .terms label {
+            font-size: 16px;
+            color: #4F4F4F;
+            font-weight: 300;
         }
 
         .social-login {
@@ -191,8 +222,11 @@
             
             <div class="terms">
                 <input type="checkbox" id="terms" name="terms" required>
-                <label for="terms">I agree to the Terms & Conditions</label>
+                <label for="terms">
+                    I agree to the <a href="{% url 'terms_conditions' %}" target="_blank">Terms & Conditions</a>
+                </label>
             </div>
+            
 
             <button type="submit">Sign Up</button>
         </form>
