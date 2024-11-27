@@ -18,13 +18,6 @@ class Book(models.Model):
         ('Short Story', 'Short Story'),
     ])
     cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    characters = models.TextField(blank=True, null=True)
-    category = models.CharField(max_length=100, blank=True, null=True)
-    target_audience = models.CharField(max_length=100, blank=True, null=True)
-    language = models.CharField(max_length=50, blank=True, null=True)
-    tags = models.CharField(max_length=200, blank=True, null=True)
-    rating_mature = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
@@ -48,12 +41,6 @@ class ReadingProgress(models.Model):
         return f"{self.user.username} - {self.book.title}"
 
 class Genre(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-class Tag(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):

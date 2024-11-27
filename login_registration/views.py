@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 import re
+from .models import Profile
 
 def index(request):
     return render(request, 'index.html')
@@ -30,30 +31,35 @@ def signup_view(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        dob = request.POST.get('dob')
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
+        profile_picture = request.FILES.get('profile_picture')
         terms = request.POST.get('terms')
 
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already exists. Please choose another one.")
-            return render(request, 'main/signup.html')
+        if User.objects.filter(username=email).exists():
+            messages.error(request, "Email already exists. Please choose another one.")
+            return render(request, 'signup.html')
 
         if not terms:
             messages.error(request, "You must agree to the Terms and Conditions.")
-            return render(request, 'main/signup.html')
+            return render(request, 'signup.html')
 
         if len(password) < 8 or not re.search(r"[A-Za-z]", password) or not re.search(r"\d", password) or not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
             messages.error(request, "Password must be at least 8 characters long, contain a letter, a number, and a special character.")
             return render(request, 'signup.html')
 
         user = User.objects.create_user(
-            username=username, 
+            username=email, 
             password=password, 
             first_name=first_name, 
-            last_name=last_name
+            last_name=last_name,
+            email=email,
         )
-        
+
+        if profile_picture:
+            user.profile.profile_picture = profile_picture
+            user.profile.save()
+
         user.save()
         messages.success(request, "Account created successfully! You can now log in.")
         return redirect('login')
