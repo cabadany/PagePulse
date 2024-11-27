@@ -65,3 +65,6 @@ def signup_view(request):
         return redirect('login')
 
     return render(request, 'signup.html')
+
+def terms_conditions(request):
+    return render(request, 'terms_conditions.html')

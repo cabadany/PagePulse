@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Pulse - Terms & Conditions</title>
+    {% load static %}
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Logo Header */
+        .logo {
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 60px; /* Optimized logo size */
+            width: auto;
+        }
+
+        /* Main Content */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 120px; /* Space for fixed header */
+            padding-bottom: 80px;
+        }
+
+        .terms-content {
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            font-size: 16px;
+            color: #444;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #FF6F61;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 10px;
+        }
+
+        .terms-content h2 {
+            font-size: 24px;
+            color: #FF6F61;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .terms-content p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .terms-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .terms-content ul li {
+            margin-bottom: 12px;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: #FF6F61;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 220px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-button:hover {
+            background-color: #FF3D2D;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #FF6F61;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .logo img {
+                height: 50px;
+            }
+
+            .terms-content {
+                width: 90%;
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .terms-content h2 {
+                font-size: 20px;
+            }
+
+            .back-button {
+                width: 100%;
+                padding: 14px 0;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo Header -->
+    <div class="logo">
+        <img src="/PagePulse/Images/IM2 Logo.png" alt="Page Pulse Logo">
+    </div>
+
+    <!-- Main Content for Terms & Conditions -->
+    <div class="main-container">
+        <div class="terms-content">
+            <h1>TERMS & CONDITIONS</h1>
+
+            <h2>1. Introduction</h2>
+            <p>Welcome to PagePulse! These Terms and Conditions govern your use of the PagePulse platform. By accessing or using our services, you agree to comply with these terms.</p>
+
+            <h2>2. Eligibility</h2>
+            <p>You must be at least 13 years of age to use our services. If you're under 18, you must have parental or guardian consent to use our platform.</p>
+
+            <h2>3. Account Registration</h2>
+            <p>To access the services, you must create an account. You agree to provide accurate, current, and complete information during registration. You are responsible for maintaining the security of your account.</p>
+
+            <h2>4. User Content</h2>
+            <p>By uploading or posting content, you grant PagePulse a non-exclusive, worldwide, royalty-free license to use, distribute, and display your content on the platform.</p>
+
+            <h2>5. Code of Conduct</h2>
+            <ul>
+                <li>Do not upload harmful or illegal content.</li>
+                <li>Respect the privacy of other users and avoid harassment.</li>
+                <li>Refrain from infringing on intellectual property rights.</li>
+                <li>Do not engage in fraudulent activities.</li>
+            </ul>
+
+            <h2>6. Privacy Policy</h2>
+            <p>We value your privacy. Our Privacy Policy outlines the collection and use of your data. By using the platform, you consent to the data practices described in the Privacy Policy.</p>
+
+            <h2>7. Termination</h2>
+            <p>We reserve the right to suspend or terminate your account if you violate these Terms and Conditions. If your account is terminated, you may lose access to all your data on PagePulse.</p>
+
+            <h2>8. Modifications</h2>
+            <p>We may update or modify these Terms and Conditions. The updated terms will be posted here, and the "Last Updated" date will reflect the changes. Continued use of the platform means you accept the updated terms.</p>
+
+            <h2>9. Liability</h2>
+            <p>PagePulse is not liable for any damages arising from your use of the platform, including loss of data or interruptions in service.</p>
+
+            <h2>10. Governing Law</h2>
+            <p>These Terms and Conditions shall be governed by the laws of the country in which PagePulse operates.</p>
+
+            <h2>11. Contact Us</h2>
+            <p>If you have any questions about these Terms and Conditions, please contact us at <a href="mailto:support@pagepulse.com">support@pagepulse.com</a>.</p>
+
+            <p>Thank you for being part of PagePulse!</p>
+
+            <!-- Back to Sign Up or Home -->
+            <a href="{% url 'signup' %}" class="back-button">Back to Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <p>© 2024 PagePulse. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>

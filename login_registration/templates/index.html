@@ -14,28 +14,38 @@
         }
 
         header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background-color: #FAF9F6;
+        }
+
+        .logo {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            margin: 0 50px;
-            background-color: #FAF9F6;
         }
 
         .logo img {
             height: 70px;
         }
 
+        nav {
+            margin-left: auto; /* Push the nav links to the right */
+            display: flex;
+            gap: 20px; /* Add space between links */
+        }
+
         nav a {
             text-decoration: underline;
             color: #ff6b6b;
-            margin-left: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
         nav a:first-child {
             color: #4F4F4F;
         }
-
         main {
             display: flex;
             justify-content: space-between;
@@ -68,7 +78,7 @@
             display: flex;
             justify-content: center;
             margin-top: 37px;
-            margin-left: -310px;
+            margin-left: -240px;
         }
 
         .buttons button {
@@ -94,6 +104,7 @@
         .image-section img {
             max-width: 770px;
             margin-right: 80px;
+            
         }
     </style>
 </head>
