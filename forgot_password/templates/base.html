@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Page Pulse{% endblock %}</title>
+    {% load static %}
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #FAF9F6; /* Updated background color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .logo img {
+            height: 70px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 65px; /* Updated font size */
+            color: #FF6F61; /* Brand color */
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif; /* Updated font-family */
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            text-align: center;
+            margin: 0; /* Remove default margins */
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #4F4F4F; /* Darker gray for better contrast */
+            margin-bottom: 40px; /* Increased spacing for breathing room */
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 400px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-container {
+            width: 100%;
+            margin-bottom: 20px; /* Space between input and button */
+        }
+
+        input {
+            width: 90%;
+            padding: 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input::placeholder {
+            color: #B0B0B0;
+            font-style: italic;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #FF6F61;
+            border-radius: 10px;
+            background-color: transparent;
+            color: #FF6F61;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF6F61;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .logo img {
+                height: 50px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            form {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Page Pulse Logo">
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
