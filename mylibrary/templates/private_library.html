@@ -1,36 +1,254 @@
-{% extends "base.html" %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Page Pulse - Where stories come alive.">
-    <title>{% block title %}Page Pulse{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/userlib.css' %}">
+    <title>User Library</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #F05A7E; /* Change to preferred color */
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.book-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #fafafa;
+    transition: transform 0.2s;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #F05A7E;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.categories {
+    margin: 20px;
+}
+.categories ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: 50px;
+            margin-top: -20px;
+            margin-bottom: 30px;
+        }
+        .categories li {
+            margin: 10px;
+            text-align: center;
+            flex: 1 1 100px;
+            max-width: 150px;
+        }
+        .categories img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: -25px;
+        }
+        .categories span {
+            color: #4F4F4F;
+        }
+        .categories a {
+            text-decoration: none;
+        }
+
+        /* General styling for the private library section */
+.private-library {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.private-library h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Book grid layout */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Individual book item */
+.book-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Book image styling */
+.book-item img {
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Book title */
+.book-item h3 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+    color: #333;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Book author */
+.book-item p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 5px 0;
+}
+
+/* Progress bar container */
+.progress-container {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.progress-container label {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Progress bar styling */
+progress {
+    width: 100%;
+    height: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Webkit-specific progress bar styles */
+progress::-webkit-progress-bar {
+    background-color: #e6e6e6;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #FF6F61;
+    border-radius: 5px;
+}
+
+/* General fallback for other browsers */
+progress::-moz-progress-bar {
+    background-color: #FF6F61;
+}
+
+/* Empty state styling */
+.private-library p {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 20px;
+}
+
+
+    </style>
 </head>
 <body>
-
-    {% block content %}
-    <main>
-        <div class="library-container">
-            {% for user_library in user_library %}
-                <div class="book-card">
-                    <img src="{{ user_library.book.cover_image.url }}" alt="{{ user_library.book.title }} cover" class="book-cover">
-                    <h3>{{ user_library.book.title }}</h3>
-                    <p><strong>Author:</strong> {{ user_library.book.author }}</p>
-                    <p><strong>Genre:</strong> {{ user_library.book.genre.name }}</p>
-                    <p><strong>Added on:</strong> {{ user_library.added_date }}</p>
-                    {% with user_library.readingprogress_set.first as progress %}
-                        <p><strong>Progress:</strong> {{ progress.progress }}%</p>
-                    {% endwith %}
-                </div>
-            {% empty %}
-                <p>Your library is empty. Start adding books!</p>
-            {% endfor %}
+    <div class="categories">
+        <ul>
+            <li><a href="{% url 'category_view' category='All' %}"><img src="{% static 'Images/all.png' %}" alt="All"><span>All</span></a></li>
+            <li><a href="{% url 'category_view' category='Fiction' %}"><img src="{% static 'Images/fiction.png' %}" alt="Fiction"><span>Fiction</span></a></li>
+            <li><a href="{% url 'category_view' category='Mystery' %}"><img src="{% static 'Images/mystery.png' %}" alt="Mystery"><span>Mystery</span></a></li>
+            <li><a href="{% url 'category_view' category='Romance' %}"><img src="{% static 'Images/romance.png' %}" alt="Romance"><span>Romance</span></a></li>
+            <li><a href="{% url 'category_view' category='Fantasy' %}"><img src="{% static 'Images/fantasy.png' %}" alt="Fantasy"><span>Fantasy</span></a></li>
+            <li><a href="{% url 'category_view' category='New Adult' %}"><img src="{% static 'Images/new_adult.png' %}" alt="New Adult"><span>New Adult</span></a></li>
+            <li><a href="{% url 'category_view' category='Short Story' %}"><img src="{% static 'Images/short_story.png' %}" alt="Short Story"><span>Short Story</span></a></li>
+            <li><a href="{% url 'category_view' category='Thriller' %}"><img src="{% static 'Images/thriller.png' %}" alt="Thriller"><span>Thriller</span></a></li>
+            <li><a href="{% url 'category_view' category='Adventure' %}"><img src="{% static 'Images/adventure.png' %}" alt="Adventure"><span>Adventure</span></a></li>
+            <li><a href="{% url 'category_view' category='LGBTQ+' %}"><img src="{% static 'Images/lgbtq+.png' %}" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
+        </ul>
+    </div>
+    <section class="private-library">
+        <h2>My Library</h2>
+        <div class="book-grid">
+            {% if library_books %}   
+                {% for book in library_books %}
+                    <div class="book-item">
+                        {% if book.cover_image %}
+                            <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
+                        {% else %}
+                            <img src="#" alt="No cover available" style="width: 100%; border-radius: 5px;">
+                        {% endif %}
+                        <h3>{{ book.title }}</h3>
+                        <p>{{ book.author }}</p>
+                        <div class="progress-container">
+                            <label>Progress:</label>
+                            <progress value="{{ book.progress }}" max="100"></progress>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Your library is currently empty. Start adding books to see them here!</p>
+            {% endif %}
         </div>
-        
-    </main>
-    {% endblock %}
+    </section>
+    
+    
 </body>
 </html>
