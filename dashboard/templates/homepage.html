@@ -420,11 +420,11 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="/PagePulse/Images//IM2 Logo.png" alt="Page Pulse Logo">
+                <img src="{% static 'Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
             </div>
             <div class="search-container">
                 <div class="search-bar">
-                    <img src="/PagePulse/Images/search.png" alt="Search" class="search-icon">
+                    <img src="{% static 'Images/search.png' %}" alt="Search" class="search-icon">
                     <input type="search" class="search-field" placeholder="Search">
                 </div>
                 
@@ -443,7 +443,7 @@
                     </div>
                 </div>
                 <div class="profile-toggle">
-                    <img src="/PagePulse/Images/profile.png" alt="Profile" class="profile-icon">
+                    <img src="{% static 'Images/profile.png' %}" alt="Profile" class="profile-icon">
                     <div class="profile-dropdown">
                         <a href="#">Settings</a>
                         <a href="/" onclick="event.preventDefault(); window.location.href='/';">Log Out</a>
@@ -456,43 +456,20 @@
 
     <div class="categories">
         <ul>
-            <li><a href="{% url 'category_view' category='All' %}"><img src="/PagePulse/Images/all.png" alt="All"><span>All</span></a></li>
-            <li><a href="{% url 'category_view' category='Fiction' %}"><img src="/PagePulse/Images/fiction.png" alt="Fiction"><span>Fiction</span></a></li>
-            <li><a href="{% url 'category_view' category='Mystery' %}"><img src="/PagePulse/Images/mystery.png" alt="Mystery"><span>Mystery</span></a></li>
-            <li><a href="{% url 'category_view' category='Romance' %}"><img src="/PagePulse/Images/romance.png" alt="Romance"><span>Romance</span></a></li>
-            <li><a href="{% url 'category_view' category='Fantasy' %}"><img src="/PagePulse/Images/fantasy.png" alt="Fantasy"><span>Fantasy</span></a></li>
-            <li><a href="{% url 'category_view' category='New Adult' %}"><img src="/PagePulse/Images/new_adult.png" alt="New Adult"><span>New Adult</span></a></li>
-            <li><a href="{% url 'category_view' category='Short Story' %}"><img src="/PagePulse/Images/short_story.png" alt="Short Story"><span>Short Story</span></a></li>
-            <li><a href="{% url 'category_view' category='Thriller' %}"><img src="/PagePulse/Images/thriller.png" alt="Thriller"><span>Thriller</span></a></li>
-            <li><a href="{% url 'category_view' category='Adventure' %}"><img src="/PagePulse/Images/adventure.png" alt="Adventure"><span>Adventure</span></a></li>
-            <li><a href="{% url 'category_view' category='LGBTQ+' %}"><img src="/PagePulse/Images/lgbtq+.png" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
+            <li><a href="{% url 'category_view' category='All' %}"><img src="{% static 'Images/all.png' %}" alt="All"><span>All</span></a></li>
+            <li><a href="{% url 'category_view' category='Fiction' %}"><img src="{% static 'Images/fiction.png' %}" alt="Fiction"><span>Fiction</span></a></li>
+            <li><a href="{% url 'category_view' category='Mystery' %}"><img src="{% static 'Images/mystery.png' %}" alt="Mystery"><span>Mystery</span></a></li>
+            <li><a href="{% url 'category_view' category='Romance' %}"><img src="{% static 'Images/romance.png' %}" alt="Romance"><span>Romance</span></a></li>
+            <li><a href="{% url 'category_view' category='Fantasy' %}"><img src="{% static 'Images/fantasy.png' %}" alt="Fantasy"><span>Fantasy</span></a></li>
+            <li><a href="{% url 'category_view' category='New Adult' %}"><img src="{% static 'Images/new_adult.png' %}" alt="New Adult"><span>New Adult</span></a></li>
+            <li><a href="{% url 'category_view' category='Short Story' %}"><img src="{% static 'Images/short_story.png' %}" alt="Short Story"><span>Short Story</span></a></li>
+            <li><a href="{% url 'category_view' category='Thriller' %}"><img src="{% static 'Images/thriller.png' %}" alt="Thriller"><span>Thriller</span></a></li>
+            <li><a href="{% url 'category_view' category='Adventure' %}"><img src="{% static 'Images/adventure.png' %}" alt="Adventure"><span>Adventure</span></a></li>
+            <li><a href="{% url 'category_view' category='LGBTQ+' %}"><img src="{% static 'Images/lgbtq+.png' %}" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
         </ul>
     </div>
       
-<!--
-<h1>Browse Books</h1>
-s
 
-<form method="GET">
-    <label for="genre">Filter by Genre:</label>
-    <select name="genre" id="genre">
-        <option value="">All</option>
-        {% for genre in genres %}
-        <option value="{{ genre.id }}">{{ genre.name }}</option>
-        {% endfor %}
-    </select>
-
-    <label for="author">Search by Author:</label>
-    <input type="text" name="author" id="author" placeholder="Author name">
-
-    <label for="order_by">Sort by:</label>
-    <select name="order_by" id="order_by">
-        <option value="created_at">Newest</option>
-        <option value="popularity">Popularity</option>
-    </select>
-
-    <button type="submit">Search</button>
-</form>-->
 
 <section class="for-you">
     <h2>For You</h2>
@@ -500,7 +477,7 @@ s
         {% for book in books %}
         <li>
             <div class="book-item" onclick="openModal('{{ book.cover_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}', '{{ book.id }}')">
-                {% if book.book_image %}
+                {% if book.cover_image %}
                 <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
                 {% else %}
                 <img src="#" alt="No cover available" style="width: 100%; border-radius: 5px;">

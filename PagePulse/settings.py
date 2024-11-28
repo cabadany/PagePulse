@@ -13,11 +13,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 
-# For static files (CSS, JS, etc.)
-STATIC_URL = '/static/'
-
-# For media files (uploads like images)
-MEDIA_URL = '/media/'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -144,3 +139,11 @@ EMAIL_HOST_USER = 'pagepulse.pulse@gmail.com'  # Your Gmail address
 EMAIL_HOST_PASSWORD = 'ddzfpfqsnwhjyltu'  # Your App Password (16-character code)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Set the "From" email to your Gmail address
 
+
+# For static files (CSS, JS, etc.)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'PagePulse']
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
