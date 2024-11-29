@@ -289,11 +289,13 @@
             color: #444;
             padding: 20px;
             border-radius: 10px;
-            width: 650px;
+            width: 600px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             position: relative;
-    
+            justify-content: center;  /* Center content vertically */
+            align-items: center;  /* Center content horizontally */
         }
         .modal-body {
             display: flex;
@@ -413,6 +415,9 @@
             color: #666;
             
         }
+        .read {
+            text-decoration: none; /* Remove underline */
+        }
 
     </style>
 </head>
@@ -477,9 +482,9 @@
             <li>
                 <div class="book-item" 
                      {% if book.book_image %}
-                     onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}', '{{ book.id }}')"
+                     onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.genre }}', '{{ book.description }}', '{{ book.id }}')"
                      {% else %}
-                     onclick="openModal('#', '{{ book.title }}', '{{ book.author }}', '{{ book.category }}', '{{ book.description }}', '{{ book.id }}')"
+                     onclick="openModal('#', '{{ book.title }}', '{{ book.author }}', '{{ book.genre }}', '{{ book.description }}', '{{ book.id }}')"
                      {% endif %}>
                     
                     {% if book.book_image %}
@@ -510,9 +515,10 @@
         <div class="modal-right">
             <h2 id="modalBookTitle"></h2>
             <p id="modalBookAuthor"></p>
-            <p id="modalBookCategory"></p>
+            <p id="modalBookGenre"></p>
             <p id="modalBookDescription"></p>
             <div class="btn-container">
+                <a class="read" {% if book.id %} href="{% url 'read_book' book.id %}" {% else %} href="#" {% endif %}>
                 <button class="start-reading-button">
                     <span>Start reading</span>
                     <svg
@@ -529,7 +535,7 @@
                         ></path>
                     </svg>
                 </button>
-
+            </a>
             
                 <button class="add-to-lib">+</button>
             </div>
@@ -539,18 +545,22 @@
 </div>
 
 <script> 
-function openModal(imageUrl, title, author, category, description, bookId) {
+function openModal(imageUrl, title, author, genre, description, bookId) {
     document.getElementById("modalBookImage").src = imageUrl;
     document.getElementById("modalBookTitle").textContent = title;
     document.getElementById("modalBookAuthor").textContent = `${author}`;
     
-    document.getElementById("modalBookCategory").innerHTML = `Genres <strong>${category}</strong>`;
+    document.getElementById("modalBookGenre").innerHTML = `Genre <strong>${genre}</strong>`;
     
     document.getElementById("modalBookDescription").textContent = description;
 
     document.querySelector(".add-to-lib").setAttribute("onclick", `addToLibrary(${bookId})`);
 
     document.getElementById("bookModal").style.display = "flex";
+
+    const startReadingLink = document.querySelector(".start-reading-button").parentElement;
+    startReadingLink.href = `/dashboard/read/${bookId}/`;  // Ensure this matches your URL pattern
+
 }
 
 
