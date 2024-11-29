@@ -113,7 +113,6 @@
             margin-bottom: -15px;
         }
 
-       /* Cute Checkbox Styling */
         .terms {
             display: flex;
             align-items: center;
@@ -151,20 +150,20 @@
         }
 
         .terms label {
-        font-size: 16px;
-        color: #4F4F4F; 
-        font-weight: 300;
-    }
+            font-size: 16px;
+            color: #4F4F4F; 
+            font-weight: 300;
+        }
 
-    .terms a {
-        color: #FF6F61; 
-        text-decoration: none; 
-    }
+        .terms a {
+            color: #FF6F61; 
+            text-decoration: none; 
+        }
 
-    .terms a:hover {
-        color: #D84B42; 
-        text-decoration: underline; 
-    }
+        .terms a:hover {
+            color: #D84B42; 
+            text-decoration: underline; 
+        }
 
         .social-login {
             margin-top: 20px;
@@ -209,19 +208,45 @@
         }
 
         .error {
-            color: #FF6F61;  /* Red color for error message */
+            color: #FF6F61;
             font-size: 16px;
             margin-top: 10px;
             margin-bottom: 15px;
             padding: 10px;
-            border: 2px solid #FF6F61;  /* Matching border color */
-            background-color: #FFF0F5;  /* Light pink background for visibility */
+            border: 2px solid #FF6F61;
+            background-color: #FFF0F5;
             border-radius: 5px;
             text-align: center;
-            font-weight: 500;;
+            font-weight: 500;
             display: none;
         }
 
+        /* Custom file upload styling */
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: transparent;
+            color: #4F4F4F;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid #4F4F4F;
+            text-align: center;
+            margin-bottom: 10px;
+            width: 95%;
+            margin-bottom: 10px;
+        }
+
+        .file-name {
+            display: block;
+            margin-top: 10px;
+            color: #4F4F4F;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -243,8 +268,11 @@
             <input type="email" id="email" name="email" placeholder="Email Address" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
             <p id="password-error" class="error"></p>
-            <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
-            
+
+            <!-- Custom file upload button -->
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*" onchange="updateFileName()">
+            <label for="profile_picture" class="custom-file-upload" id="file-name-button">Upload Profile Picture</label>
+
             <div class="terms">
                 <input type="checkbox" id="terms" name="terms" required>
                 <label for="terms">
@@ -268,30 +296,31 @@
                 </a>
             </div>
         </div>
+        
         <div class="signup-link">
-            <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+            <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
         </div>
     </main>
 
     <script>
-            function validatePassword() {
-        const password = document.getElementById("password").value;
-        const errorField = document.getElementById("password-error");
-
-        // Password pattern: 8 characters, one letter, one number, one special character
-        const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-        if (!pattern.test(password)) {
-            errorField.textContent = "Password must be at least 8 characters long, contain a letter, a number, and a special character.";
-            errorField.style.display = "block";  // Show error message
-            return false;  // Prevent form submission
+        function updateFileName() {
+            const fileInput = document.getElementById("profile_picture");
+            const fileNameButton = document.getElementById("file-name-button");
+            const fileName = fileInput.files[0] ? fileInput.files[0].name : "No file chosen";
+            fileNameButton.textContent = fileName;
         }
 
-        errorField.textContent = "";  // Clear error if validation passes
-        errorField.style.display = "none";  // Hide error message
-        return true;  // Allow form submission
-    }
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var errorMessage = document.getElementById("password-error");
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
+            if (!passwordRegex.test(password)) {
+                errorMessage.textContent = "Password must be at least 8 characters long and contain both letters and numbers.";
+                return false;
+            }
+            return true;
+        }
     </script>
 </body>
 </html>
