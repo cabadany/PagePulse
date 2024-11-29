@@ -155,6 +155,14 @@
 
     <h1>WELCOME BACK</h1>
     <h2>Dive back into your favorite stories or explore new worlds waiting for you.</h2>
+
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
     
     <form class="login-form" action="{% url 'login' %}" method="POST">
         {% csrf_token %}

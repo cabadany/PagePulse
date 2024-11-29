@@ -22,6 +22,9 @@ def login_view(request):
                 return redirect('homepage')
             else:
                 messages.error(request, "Invalid username or password.")
+        else:
+            # AuthenticationForm already adds error messages for invalid forms
+            messages.error(request, "Invalid username or password.")
     else:
         form = AuthenticationForm()
     
