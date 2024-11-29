@@ -68,3 +68,6 @@ def signup_view(request):
 
 def terms_conditions(request):
     return render(request, 'terms_conditions.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
