@@ -37,28 +37,43 @@ def signup_view(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         profile_picture = request.FILES.get('profile_picture')
+        username = request.POST.get('username')
         terms = request.POST.get('terms')
 
-        if User.objects.filter(username=email).exists():
+        # Check if the username is unique and has at least 4 characters
+        if len(username) < 4:
+            messages.error(request, "Username must be at least 4 characters long.")
+            return render(request, 'signup.html')
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists. Please choose another one.")
+            return render(request, 'signup.html')
+
+        # Check if the email is already registered
+        if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists. Please choose another one.")
             return render(request, 'signup.html')
 
+        # Check if Terms and Conditions are agreed
         if not terms:
             messages.error(request, "You must agree to the Terms and Conditions.")
             return render(request, 'signup.html')
 
+        # Validate password complexity
         if len(password) < 8 or not re.search(r"[A-Za-z]", password) or not re.search(r"\d", password) or not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
             messages.error(request, "Password must be at least 8 characters long, contain a letter, a number, and a special character.")
             return render(request, 'signup.html')
 
+        # Create the user
         user = User.objects.create_user(
-            username=email, 
+            username=username, 
             password=password, 
             first_name=first_name, 
             last_name=last_name,
             email=email,
         )
 
+        # Add profile picture if provided
         if profile_picture:
             user.profile.profile_picture = profile_picture
             user.profile.save()
