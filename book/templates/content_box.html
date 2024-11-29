@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FAF9F6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 600px;
+            padding: 30px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #FF6F61;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+            margin: 10px 0 5px;
+            color: #666;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 14px;
+            border-radius: 8px;
+            background-color: #FAF9F6;
+            border: 2px solid #CCC;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 200px;
+            resize: none;
+        }
+
+        .button {
+            font-size: 16px;
+            background: #FF6F61;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #FF4F41;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+            color: #FF6F61;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .back-link::before {
+            content: "← ";
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>New Book</h1>
+        <form method="post" id="new-book-form">
+            {% csrf_token %}
+            <label for="id_title">Title</label>
+            <input type="text" id="id_title" name="title" placeholder="Enter book title" required>
+
+            <label for="id_content">Content</label>
+            <textarea id="id_content" name="content" placeholder="Write the book content here..." required></textarea>
+
+            <button type="submit" class="button">Save Book</button>
+        </form>
+        <a href="{% url 'homepage' %}" class="back-link">Back to Homepage</a>
+    </div>
+</body>
+</html>

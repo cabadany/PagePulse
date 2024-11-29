@@ -7,6 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ category }} Books</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #FAF9F6;
+            background-color: #FAF9F6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #555;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: #4F4F4F;
+        }
+
+        .back-button svg {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -17,14 +47,18 @@
             height: 100%;
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
+            background-color: #fff;
             padding: 20px;
-            border: 1px solid #888;
+            border-radius: 10px;
             width: 80%;
+            max-width: 500px;
+            color: #333;
+            text-align: center;
         }
 
         .close {
@@ -51,7 +85,7 @@
         .book-item {
             cursor: pointer;
             text-align: center;
-            border: 1px solid #ddd;
+            color: #4F4F4F;
             padding: 10px;
             border-radius: 8px;
             transition: transform 0.2s;
@@ -71,14 +105,60 @@
             font-size: 1.2em;
         }
 
+        h1 {
+            color: #4F4F4F;
+        }
+
         p {
             margin-top: 5px;
             font-size: 1em;
             color: #555;
         }
+
+        .book-item p {
+            color: #ff6f61;
+        }
+
+        .modal-content img {
+            width: 100px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .start-reading-button,
+        .add-to-lib {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid #FF6F61;
+            color: #FF6F61;
+            background: transparent;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .start-reading-button:hover,
+        .add-to-lib:hover {
+            background: #FF6F61;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
+    <a href="{% url 'homepage' %}" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path>
+        </svg>
+        Back to Homepage
+    </a>
+
     <header>
         <h1>{{ category }} Books</h1>
     </header>
@@ -86,7 +166,7 @@
     <div class="book-grid">
         {% for book in books %}
         <div class="book-item" onclick="openModal(
-            '{% if book.book_image %}{{ book.cover_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
+            '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
             '{{ book.title }}',
             '{{ book.author }}',
             '{{ book.category }}',
@@ -107,26 +187,31 @@
     <div id="bookModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <div id="bookDetails"></div>
+            <img id="modalImage" src="" alt="">
+            <h2 id="modalTitle"></h2>
+            <p><strong>Author:</strong> <span id="modalAuthor"></span></p>
+            <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+            <p id="modalDescription"></p>
+            <div class="button-container">
+                <button class="start-reading-button">Start Reading</button>
+                <button class="add-to-lib">Add to Library</button>
+            </div>
         </div>
     </div>
 
     <script>
         function openModal(image, title, author, category, description) {
             const modal = document.getElementById('bookModal');
-            modal.style.display = 'block';
-            document.getElementById('bookDetails').innerHTML = `
-                <img src="${image}" alt="${title}" style="width: 100px;">
-                <h2>${title}</h2>
-                <p><strong>Author:</strong> ${author}</p>
-                <p><strong>Category:</strong> ${category}</p>
-                <p><strong>Description:</strong> ${description}</p>
-            `;
+            modal.style.display = 'flex';
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalAuthor').textContent = author;
+            document.getElementById('modalCategory').textContent = category;
+            document.getElementById('modalDescription').textContent = description;
         }
 
         function closeModal() {
-            const modal = document.getElementById('bookModal');
-            modal.style.display = 'none';
+            document.getElementById('bookModal').style.display = 'none';
         }
 
         window.addEventListener('keydown', function(event) {
