@@ -27,3 +27,8 @@ def read_book(request, book_id, chapter_id=None):
         'chapter': chapter,
         'chapters': chapters,
     })
+
+def search_results(request):
+    query = request.GET.get('q')
+    results = Book.objects.filter(title__icontains=query) if query else []
+    return render(request, 'search_results.html', {'results': results, 'query': query})

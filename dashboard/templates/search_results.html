@@ -1,0 +1,438 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category }} Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #FAF9F6;
+            background-color: #FAF9F6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            text-decoration: none;
+            color: #555;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: #4F4F4F;
+        }
+
+        .back-button svg {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            color: #333;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .book-item {
+            cursor: pointer;
+            text-align: center;
+            color: #4F4F4F;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .book-item:hover {
+            transform: scale(1.05);
+        }
+
+        .book-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        h3 {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        h1 {
+            color: #4F4F4F;
+        }
+
+        p {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .book-item p {
+            color: #ff6f61;
+        }
+
+        .modal-content img {
+            width: 100px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .start-reading-button,
+        .add-to-lib {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid #FF6F61;
+            color: #FF6F61;
+            background: transparent;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .start-reading-button:hover,
+        .add-to-lib:hover {
+            background: #FF6F61;
+            color: #fff;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        .logo img {
+            height: 70px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 93%;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            color: #4F4F4F;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .nav-item a {
+            white-space: nowrap;
+            font-weight: 50;
+            text-decoration: none; 
+            color: #4F4F4F;
+            font-size: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #FF6F61;
+        }
+
+        .nav-link.active {
+            color: #FF6F61;
+        }
+
+
+        .profile-icon {
+            height: 40px;
+            width: auto;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .search-container {
+            display: flex;
+
+        }
+
+        .search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.search-field {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-field::placeholder {
+    color: #aaa;
+}
+
+        .search-text {
+            font-size: 20px;
+            color: #4F4F4F;
+            font-weight: 400;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff; 
+            border-radius: 10px; 
+            border: 1px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            min-width: 160px;
+            z-index: 1;
+            padding: 10px 0;
+            left: auto; 
+            right: 0;
+            overflow: hidden;
+        }
+        .dropdown a, 
+        .profile-dropdown a {
+            color: #4F4F4F;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .dropdown a:hover {
+            background-color: #FF6F61;
+            color: #fff;
+        }
+        .dropdown-toggle,
+        .profile-toggle {
+            position: relative;
+        }
+        .dropdown-toggle:hover .dropdown {
+            display: block;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff; 
+            border-radius: 10px;
+            border: 1px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 160px;
+            z-index: 1;
+            padding: 10px 0;
+            right: 0; 
+            top: 50px; 
+            overflow: hidden; 
+        }
+
+        .profile-dropdown a {
+            color: #4F4F4F;
+            padding: 10px 20px; 
+            text-decoration: none;
+            display: block;
+            border-radius: 5px; 
+        }
+        .profile-dropdown a:hover {
+            background-color: #FF6F61;
+            color: #fff;
+        }
+        .profile-toggle:hover .profile-dropdown {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+                </a>
+            </div>
+            
+            <form method="GET" action="{% url 'search_results' %}" class="search-bar">
+                    <input type="search" name="q" class="search-field" placeholder="Search" aria-label="Search for books">
+                    <button type="submit" style="border: none; background: none;">
+                        <img src="{% static 'Images/search.png' %}" alt="Submit search" style="width: 20px; height: 20px;">
+                    </button>
+            </form>
+            <div class="nav-container">
+                <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></div>
+                <div class="nav-item"><a href="#" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
+
+                <div class="nav-item dropdown-toggle">
+                    Write
+                    <div class="dropdown">
+                        <a href="{% url 'new_story' %}">Create a new story</a>
+                        <a href="{% url 'my_stories' %}">My Stories</a>
+                    </div>
+                </div>
+                <div class="profile-toggle">
+                    <img src="{% static 'Images/profile.png' %}" alt="Profile" class="profile-icon">
+                    <div class="profile-dropdown">
+                        <a href="#">Settings</a>
+                        <a href="/" onclick="event.preventDefault(); window.location.href='/';">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--
+    <a href="{% url 'homepage' %}" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path>
+        </svg>
+        Back to Homepage
+    </a>-->
+
+    {% block content %}
+    <header>
+        <h1>Search Results for "{{ query }}"</h1>
+    </header>
+
+    <div class="book-grid">
+        {% if results %}
+            {% for book in results %}
+            <div class="book-item" onclick="openModal(
+                '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
+                '{{ book.title }}',
+                '{{ book.author }}',
+                '{{ book.category }}',
+                '{{ book.description|escapejs }}')">
+                {% if book.book_image %}
+                <img src="{{ book.book_image.url }}" alt="{{ book.title }}">
+                {% else %}
+                <img src="{% static 'images/default_book_cover.jpg' %}" alt="No cover available">
+                {% endif %}
+                <h3>{{ book.title }}</h3>
+                <p>{{ book.author }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found for "{{ query }}".</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <h2 id="modalTitle"></h2>
+            <p><strong>Author:</strong> <span id="modalAuthor"></span></p>
+            <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+            <p id="modalDescription"></p>
+            <div class="button-container">
+                <button class="start-reading-button">Start Reading</button>
+                <button class="add-to-lib">Add to Library</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(image, title, author, category, description) {
+            const modal = document.getElementById('bookModal');
+            modal.style.display = 'flex';
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalAuthor').textContent = author;
+            document.getElementById('modalCategory').textContent = category;
+            document.getElementById('modalDescription').textContent = description;
+        }
+
+        function closeModal() {
+            document.getElementById('bookModal').style.display = 'none';
+        }
+
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

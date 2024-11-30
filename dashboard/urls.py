@@ -8,6 +8,7 @@ urlpatterns = [
     path('read/<int:book_id>/', views.read_book, name='read_book'),
     path('read/<int:book_id>/<int:chapter_id>/', views.read_book, name='read_specific_chapter'),
     path('category/<str:category>/', views.category_view, name='category_view'),
+    path('search/', views.search_results, name='search_results'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

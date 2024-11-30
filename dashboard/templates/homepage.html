@@ -98,25 +98,32 @@
         }
 
         .search-bar {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    max-width: 400px;
+    margin: auto;
+}
 
-        .search-icon {
-            height: 30px;
-            width: auto;
-            margin-right: 10px;
-        }
+.search-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
 
-        .search-field {
-            padding: 10px 10px 10px 10px;
-            font-size: 16px;
-            border: 2px solid #FAF9F6;
-            border-radius: 10px;
-            width: 300px;
-            background-color: #FAF9F6;
-        }
+.search-field {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-field::placeholder {
+    color: #aaa;
+}
+
         .search-text {
             font-size: 20px;
             color: #4F4F4F;
@@ -425,17 +432,16 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="{% static 'Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+                </a>
             </div>
-            <div class="search-container">
-                <div class="search-bar">
-                    <img src="{% static 'Images/search.png' %}" alt="Search" class="search-icon">
-                    <input type="search" class="search-field" placeholder="Search">
-                </div>
-                
-                
-            </div>
-            
+            <form method="GET" action="{% url 'search_results' %}" class="search-bar">
+                    <input type="search" name="q" class="search-field" placeholder="Search for books" aria-label="Search for books">
+                    <button type="submit" style="border: none; background: none;">
+                        <img src="{% static 'Images/search.png' %}" alt="Submit search" style="width: 20px; height: 20px;">
+                    </button>
+            </form>
             <div class="nav-container">
                 <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></div>
                 <div class="nav-item"><a href="#" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
@@ -481,11 +487,11 @@
             {% for book in books %}
             <li>
                 <div class="book-item" 
-                     {% if book.book_image %}
-                     onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.genre }}', '{{ book.description }}', '{{ book.id }}')"
-                     {% else %}
-                     onclick="openModal('#', '{{ book.title }}', '{{ book.author }}', '{{ book.genre }}', '{{ book.description }}', '{{ book.id }}')"
-                     {% endif %}>
+                    {% if book.book_image %}
+                    onclick="openModal('{{ book.book_image.url }}', '{{ book.title }}', '{{ book.author }}', '{{ book.genre }}', '{{ book.description }}', '{{ book.id }}')"
+                    {% else %}
+                    onclick="openModal('#', '{{ book.title }}', '{{ book.author }}', '{{ book.genre }}', '{{ book.description }}', '{{ book.id }}')"
+                    {% endif %}>
                     
                     {% if book.book_image %}
                         <img src="{{ book.book_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
