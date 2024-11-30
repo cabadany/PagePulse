@@ -23,11 +23,27 @@ def content_box(request, book_id):
     book = get_object_or_404(Book, id=book_id)
 
     if request.method == 'POST':
+        # Get the data from the form
         title = request.POST.get('title')
         content = request.POST.get('content')
 
-        Chapter.objects.create(book=book, title=title, content=content)
+        # Debugging: Check if data is being passed
+        print(f"Received title: {title}")
+        print(f"Received content: {content}")
 
-        return redirect('homepage')  
+        if title and content:
+            # Save the new chapter to the database
+            new_chapter = Chapter(book=book, title=title, content=content)
+            new_chapter.save()
+
+            # Debugging: Print saved chapter to ensure it's stored
+            print(f"Saved chapter: {new_chapter}")
+
+            # Redirect to the same page to clear the form (and avoid resubmission issues)
+            return redirect('content_box', book_id=book.id)
+        else:
+            # If title or content are missing, show an error message
+            error_message = "Both title and content are required."
+            return render(request, 'content_box.html', {'book': book, 'error_message': error_message})
 
     return render(request, 'content_box.html', {'book': book})
