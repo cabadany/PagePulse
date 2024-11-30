@@ -144,6 +144,11 @@ EMAIL_HOST_USER = 'pagepulse.pulse@gmail.com'  # Your Gmail address
 EMAIL_HOST_PASSWORD = 'ddzfpfqsnwhjyltu'  # Your App Password (16-character code)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Set the "From" email to your Gmail address
 
+# Email Subject Prefix
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[PagePulse] '
+
+# Default From Email
+DEFAULT_FROM_EMAIL = 'pagepulse.pulse@gmail.com'
 
 # For static files (CSS, JS, etc.)
 STATIC_URL = '/static/'
