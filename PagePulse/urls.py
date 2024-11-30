@@ -28,6 +28,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('new_story/', include('book.urls')),
     path('my_stories/', include('book.urls')),
+    path('mylibrary/', include('mylibrary.urls')),
     
 ]
 

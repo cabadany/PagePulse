@@ -444,7 +444,7 @@
             </form>
             <div class="nav-container">
                 <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></div>
-                <div class="nav-item"><a href="#" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
+                <div class="nav-item"><a href="{% url 'user_library' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
 
                 <div class="nav-item dropdown-toggle">
                     Write
@@ -543,7 +543,8 @@
                 </button>
             </a>
             
-                <button class="add-to-lib">+</button>
+            <button class="add-to-lib" onclick="addToLibrary({{ book.id }})">+</button>
+
             </div>
             </div>
         </div>
@@ -555,9 +556,7 @@ function openModal(imageUrl, title, author, genre, description, bookId) {
     document.getElementById("modalBookImage").src = imageUrl;
     document.getElementById("modalBookTitle").textContent = title;
     document.getElementById("modalBookAuthor").textContent = `${author}`;
-    
     document.getElementById("modalBookGenre").innerHTML = `Genre <strong>${genre}</strong>`;
-    
     document.getElementById("modalBookDescription").textContent = description;
 
     document.querySelector(".add-to-lib").setAttribute("onclick", `addToLibrary(${bookId})`);
@@ -566,53 +565,42 @@ function openModal(imageUrl, title, author, genre, description, bookId) {
 
     const startReadingLink = document.querySelector(".start-reading-button").parentElement;
     startReadingLink.href = `/dashboard/read/${bookId}/`;  // Ensure this matches your URL pattern
-
 }
+
+function addToLibrary(bookId) {
+    // Make an AJAX request to the backend to add the book to the user's library
+    fetch(`/mylibrary/add-to-library/${bookId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()  // Ensure CSRF protection
+        },
+        body: JSON.stringify({ book_id: bookId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Show a message to the user
+        alert(data.message);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Helper function to get the CSRF token
+function getCsrfToken() {
+    let csrfToken = null;
+    const csrfCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
+    if (csrfCookie) {
+        csrfToken = csrfCookie.split('=')[1];
+    }
+    return csrfToken;
+}
+
 
 
 function closeModal() {
     document.getElementById("bookModal").style.display = "none";
-}
-
-const csrftoken = "{{ csrf_token }}"; 
-
-function addToLibrary(bookId) {
-fetch('/add-to-library/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken
-    },
-
-    body: JSON.stringify({ book_id: bookId })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.success) {
-        alert(data.message);
-    } else {
-        alert(data.message);
-    }
-})
-.catch(error => {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again.');
-});
-}
-
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
 }
 
 </script>

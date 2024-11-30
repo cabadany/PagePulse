@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'dashboard',
     'forgot_password',
     'book',
-     'widget_tweaks',
+    'widget_tweaks',
+    'mylibrary',
 ]
 
 MIDDLEWARE = [
