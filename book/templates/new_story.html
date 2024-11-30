@@ -89,24 +89,24 @@
 
         input[type="text"], textarea, select, input[type="date"] {
             width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    border-radius: 8px;
-    background-color: #FAF9F6;
-    box-sizing: border-box;
-    border: 2px solid #CCC;
-}
+            padding: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            border-radius: 8px;
+            background-color: #FAF9F6;
+            box-sizing: border-box;
+            border: 2px solid #CCC;
+        }
 
-textarea {
-    height: 80px;
-    resize: none;
-}
+        textarea {
+            height: 80px;
+            resize: none;
+        }
 
-select, input[type="date"] {
-    height: 38px;
-}
+        select, input[type="date"] {
+            height: 38px;
+        }
 
         .form-row {
             display: flex;
@@ -185,14 +185,14 @@ select, input[type="date"] {
     </style>
 </head>
 <body>
-    <a href="#" class="back-link">Back</a>
+    <a href="{% url 'my_stories' %}" class="back-link">Back</a>
     <a href="#" class="continue-link" id="continue-link">Continue</a>
 
     <div class="container">
         <div class="cover-container">
             <div class="cover-box" id="cover-box">
                 <p>Add a cover</p>
-                <input type="file" id="cover-input" accept="image/*" style="display:none">
+                <input type="file" id="cover-input" accept="image/*" style="display:none" name="book_image">
                 <img id="cover-image" style="display:none">
                 <button class="delete-button" id="delete-button" style="display:none">X</button>
             </div>
@@ -205,33 +205,36 @@ select, input[type="date"] {
                 {% csrf_token %}
 
                 <label for="id_title">Title</label>
-                <input type="text" id="id_title" name="title" placeholder="Untitled Story">
+                <input type="text" id="id_title" name="title" placeholder="Untitled Story" value="{{ form.title.value }}">
+
+                <label for="id_author">Author</label>
+                <input type="text" id="id_author" name="author" placeholder="Author's Name" value="{{ form.author.value }}">
 
                 <label for="id_description">Description</label>
-                <textarea id="id_description" name="description"></textarea>
+                <textarea id="id_description" name="description">{{ form.description.value }}</textarea>
 
                 <div class="form-row">
                     <div>
-                        <label for="id_category">Category</label>
-                        <select name="category" id="id_category">
-                            <option value="" disabled selected>Select a category</option>
-                            <option value="Fiction">Fiction</option>
-                            <option value="Mystery">Mystery</option>
-                            <option value="Romance">Romance</option>
-                            <option value="Fantasy">Fantasy</option>
-                            <option value="New Adult">New Adult</option>
-                            <option value="Short Story">Short Story</option>
-                            <option value="Thriller">Thriller</option>
-                            <option value="Adventure">Adventure</option>
-                            <option value="LGBTQ+">LGBTQ+</option>
+                        <label for="id_genre">Genre</label>
+                        <select name="genre" id="id_genre">
+                            <option value="" disabled selected>Select a genre</option>
+                            <option value="Fiction" {% if form.genre.value == 'Fiction' %}selected{% endif %}>Fiction</option>
+                            <option value="Mystery" {% if form.genre.value == 'Mystery' %}selected{% endif %}>Mystery</option>
+                            <option value="Romance" {% if form.genre.value == 'Romance' %}selected{% endif %}>Romance</option>
+                            <option value="Fantasy" {% if form.genre.value == 'Fantasy' %}selected{% endif %}>Fantasy</option>
+                            <option value="Thriller" {% if form.genre.value == 'Thriller' %}selected{% endif %}>Thriller</option>
+                            <option value="Adventure" {% if form.genre.value == 'Adventure' %}selected{% endif %}>Adventure</option>
+                            <option value="LGBTQ+" {% if form.genre.value == 'LGBTQ+' %}selected{% endif %}>LGBTQ+</option>
+                            <option value="New Adult" {% if form.genre.value == 'New Adult' %}selected{% endif %}>New Adult</option>
+                            <option value="Short Story" {% if form.genre.value == 'Short Story' %}selected{% endif %}>Short Story</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Published Date -->
-                <label for="id_published_date">Published Date</label>
-                <input type="date" name="published_date" id="id_published_date">
+                                <label for="id_published_date">Published Date</label>
+                <input type="date" name="published_date" id="id_published_date" value="{{ form.published_date.value }}">
 
+                <button type="submit" class="button">Save Story</button>
             </form>
         </div>
     </div>
