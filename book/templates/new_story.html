@@ -182,21 +182,11 @@
             content: "←";
             margin-right: 8px;
         }
+    
     </style>
 </head>
 <body>
     <a href="{% url 'my_stories' %}" class="back-link">Back</a>
-    <a href="#" class="continue-link" id="continue-link">Continue</a>
-
-    <div class="container">
-        <div class="cover-container">
-            <div class="cover-box" id="cover-box">
-                <p>Add a cover</p>
-                <input type="file" id="cover-input" accept="image/*" style="display:none" name="book_image">
-                <img id="cover-image" style="display:none">
-                <button class="delete-button" id="delete-button" style="display:none">X</button>
-            </div>
-        </div>
 
         <div class="form-container">
             <h1>Story Details</h1>
@@ -208,7 +198,7 @@
                 <input type="text" id="id_title" name="title" placeholder="Untitled Story" value="{{ form.title.value }}">
 
                 <label for="id_author">Author</label>
-                <input type="text" id="id_author" name="author" placeholder="Author's Name" value="{{ form.author.value }}">
+                <input type="text" id="id_author" name="author" placeholder="Author's Name" value="{{ form.author.value|default:request.user.username }}">                
 
                 <label for="id_description">Description</label>
                 <textarea id="id_description" name="description">{{ form.description.value }}</textarea>
@@ -231,8 +221,11 @@
                     </div>
                 </div>
 
-                                <label for="id_published_date">Published Date</label>
+                <label for="id_published_date">Published Date</label>
                 <input type="date" name="published_date" id="id_published_date" value="{{ form.published_date.value }}">
+
+                <label for="id_book_image">Cover Image</label>
+                <input type="file" id="id_book_image" name="book_image">
 
                 <button type="submit" class="button">Save Story</button>
             </form>

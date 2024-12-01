@@ -188,6 +188,24 @@
         .create-story-btn:hover {
             background-color: #FF6F61;
         }
+        .book-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.book-image {
+    width: 50px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.book-title {
+    font-size: 18px;
+    color: #4F4F4F; /* This will apply the color to the title */
+}
     </style>
 </head>
 <body>
@@ -227,9 +245,29 @@
         <h1>My Stories</h1>
         <div class="container">
             <img src="{% static 'Images/book_icon.png' %}" alt="Book Logo">
-            <h2>Hi {% if not user.is_staff %}{{ user.username }}! You haven’t written any stories yet.</h2>
+            
+            {% if user_books %}
+                <h2>Hi {{ user.username }}! Here are your stories:</h2>
+                <ul>
+                    {% for book in user_books %}
+                        <li>
+                            <div class="book-item">
+                                {% if book.book_image %}
+                                    <img src="{{ book.book_image.url }}" alt="{{ book.title }} cover" class="book-image">
+                                {% else %}
+                                    <img src="{% static 'Images/default_book_image.png' %}" alt="Default cover" class="book-image">
+                                {% endif %}
+                                <div class="book-title" style="color: #4F4F4F;">{{ book.title }}</div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h2>Hi {{ user.username }}! You haven’t written any stories yet.</h2>
+            {% endif %}
+        
             <button class="create-story-btn" onclick=location.href="{% url 'new_story' %}">+ Create a Story</button>
         </div>
-    </div>
+    </div>            
 </body>
 </html>
