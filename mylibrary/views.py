@@ -24,3 +24,8 @@ def add_to_library(request, book_id):
 
     # Return a JSON response to notify the front-end
     return JsonResponse({'message': message})
+
+def remove_from_library(request, user_library_id):
+    user_library = UserLibrary.objects.get(id=user_library_id)
+    user_library.delete()  # This deletes the record from the user's library
+    return redirect('user_library')  # Redirect back to the user library page
