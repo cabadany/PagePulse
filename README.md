@@ -77,9 +77,3 @@
 ## Contributing
 
 We welcome contributions! Feel free to fork the repository and submit pull requests. Please make sure to follow the coding standards and guidelines defined in the [Contributing Guidelines](#) *(insert link to contributing guidelines if available)*.
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
