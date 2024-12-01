@@ -5,6 +5,9 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from control_panel.models import Book
+from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from .forms import UserForm
 
 def admin_login(request):
     if request.method == 'POST':
@@ -62,9 +65,91 @@ def admin_dashboard(request):
 
     return render(request, 'control_panel/admin_dashboard.html', context)
 
+
 def admin_manage_users(request):
-    # Your logic to handle the view for managing users
-    return render(request, 'control_panel/manage_users.html')
+    
+    users = User.objects.all()
+
+    
+    action = request.GET.get('action')
+    user_id = request.GET.get('user_id')
+    
+    if action and user_id:
+        try:
+            user = User.objects.get(id=user_id)
+            
+            if action == 'delete':
+                
+                if user.is_superuser:
+                    messages.error(request, "You cannot delete a superuser.")
+                else:
+                    user.delete()
+                    messages.success(request, "User deleted successfully.")
+            elif action == 'suspend':
+                #
+                user.is_active = False
+                user.save()
+                messages.success(request, "User suspended successfully.")
+        except User.DoesNotExist:
+            messages.error(request, "User not found.")
+    
+    
+    users = User.objects.all()
+
+    
+    context = {
+        'users': users,
+    }
+
+    return render(request, 'control_panel/manage_users.html', context)
+
+
+def admin_add_user(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_manage_users')  # Redirect to the manage users page after success
+    else:
+        form = UserForm()
+    return render(request, 'control_panel/add_user.html', {'form': form})
+
+# Edit User Function
+def edit_user(request, user_id):
+    # Get the user object based on user_id
+    user = get_object_or_404(User, id=user_id)
+
+    # If the request method is POST, process the form data
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()  # Save the updated user data
+            return redirect('admin_manage_users')  # Redirect to the manage users page (you can change this URL as needed)
+    else:
+        # If it's a GET request, just display the form with the user's current data
+        form = UserForm(instance=user)
+
+    # Render the 'edit_user' template with the form
+    return render(request, 'control_panel/edit_user.html', {'form': form, 'user': user})
+
+def suspend_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    
+    # Here you can suspend the user, e.g., by setting the is_active field to False
+    user.is_active = False
+    user.save()
+
+    # Optionally, you can redirect back to the manage users page with a success message
+    return redirect('control_panel/admin_manage_users')
+
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    
+    # You can delete the user
+    user.delete()
+
+    # Optionally, redirect back to the manage users page
+    return redirect('control_panel/admin_manage_users')
 
 def admin_manage_content(request):
     # Your logic for managing content
@@ -76,4 +161,4 @@ def admin_settings(request):
 
 def admin_logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('control_panel/admin_logout.html')
