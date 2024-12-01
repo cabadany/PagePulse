@@ -30,7 +30,7 @@ urlpatterns = [
     path('my_stories/', include('book.urls')),
     path('mylibrary/', include('mylibrary.urls')),
     path('reading/', include('reading.urls')),
-    
+    path('profile/', include('profile_settings.urls')),
 ]
 
 if settings.DEBUG:

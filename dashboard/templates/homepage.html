@@ -464,7 +464,7 @@
                     {% if user.is_authenticated %}
                         <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'Images/default_profile.png' %}{% endif %}" alt="Profile" class="profile-icon">
                         <div class="profile-dropdown">
-                            <a href="#">Profile</a>
+                            <a href="{% url 'profile' %}">Profile</a>
                             <a href="{% url 'login' %}">Log Out</a>
                         </div>
                     {% else %}
@@ -574,11 +574,8 @@ function openModal(imageUrl, title, author, genre, description, bookId) {
     document.getElementById("bookModal").style.display = "flex";
 
     const startReadingLink = document.querySelector(".start-reading-button").parentElement;
-<<<<<<< HEAD
     startReadingLink.href = `/dashboard/read/${bookId}/`;
-=======
     startReadingLink.href = `/reading/read/${bookId}/`;  // Ensure this matches your URL pattern
->>>>>>> ec5d158209a19d2bc18feaeaf87f99c2c0d5af16
 }
 
 function addToLibrary(bookId) {

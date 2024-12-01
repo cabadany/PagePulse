@@ -25,25 +25,21 @@
             font-weight: bold;
             transition: color 0.3s ease;
         }
-
         .back-button:hover {
             color: #4F4F4F;
         }
-
         .back-button svg {
             margin-right: 8px;
             width: 20px;
             height: 20px;
             fill: currentColor;
         }
-
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-
         .book-item {
             cursor: pointer;
             text-align: center;
@@ -52,31 +48,25 @@
             border-radius: 8px;
             transition: transform 0.2s;
         }
-
         .book-item:hover {
             transform: scale(1.05);
         }
-
         .book-item img {
             width: 100%;
             border-radius: 5px;
         }
-
         h3 {
             margin-top: 10px;
             font-size: 1.2em;
         }
-
         h1 {
             color: #4F4F4F;
         }
-
         p {
             margin-top: 5px;
             font-size: 1em;
             color: #555;
         }
-
         .book-item p {
             color: #ff6f61;
         }
@@ -92,59 +82,49 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal-content {
-            background-color: #fff;
+            background-color: #FAF9F6;
             color: #444;
             padding: 20px;
             border-radius: 10px;
-            width: 600px; /* Keep a fixed width */
-            max-height: 90%; /* Adjust height to content, but limit to 90% of viewport */
+            width: 600px;
+            max-height: 90%;
             display: flex;
             flex-direction: column;
             position: relative;
             justify-content: center;
             align-items: center;
-            overflow: auto; /* Add scroll if content exceeds max height */
+            overflow: auto;
         }
-
-
         .modal-body {
             display: flex;
             gap: 20px;
             align-items: flex-start;
-            flex-wrap: wrap; /* Allow wrapping if content exceeds width */
+            flex-wrap: wrap;
         }
-
         .modal-left {
             flex: 1;
         }
-
         .modal-left img {
             max-width: 100%;
             max-height: 100%;
             object-fit: cover;
             border-radius: 8px;
         }
-
         .modal-right {
             flex: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-
         .modal-right h2 {
             margin-top: 0;
             font-size: 24px;
         }
-
         .modal-right p {
             margin: 10px 0;
             font-size: 15px;
         }
-
-
         .close {  
             padding: 10px 20px;
             cursor: pointer;
@@ -153,7 +133,6 @@
             right: 10px;
             font-size: 16px;
         }
-
         .start-reading-button{
             cursor: pointer;
             font-weight: 700;
@@ -166,7 +145,7 @@
             align-items: center;
             font-size: 15px;
             color: #FF6F61;
-            }
+        }
         .add-to-lib {
             cursor: pointer;
             font-weight: 700;
@@ -178,36 +157,32 @@
             display: flex;
             align-items: center;
             font-size: 15px;
-            }
+        }
         .add-to-lib:hover {
             background: black;
             color: #FAF9F6;
-            }
-
+        }
         .start-reading-button:hover{
             background: #FF6F61;
             color: #FAF9F6;
-            }
-
+        }
         .start-reading-button > svg {
             width: 30px;
             margin-left: 10px;
             transition: transform 0.3s ease-in-out;
-            }
-
+        }
         .start-reading-button:hover svg {
             transform: translateX(5px);
-            }
-
+        }
         .start-reading-button:active {
             transform: scale(0.95);
-            }
+        }
         .start-reading-button:hover svg circle {
             stroke: #FAF9F6;
-            }
+        }
         .start-reading-button:hover svg path {
             fill: #FAF9F6;
-            }
+        }
         .btn-container {
             margin-top: 20px;
             display: flex;
@@ -229,7 +204,7 @@
             
         }
         .read {
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
         }
         .header-container {
             display: flex;
@@ -308,38 +283,33 @@
         }
 
         .search-bar {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    padding: 5px 10px;
-    max-width: 400px;
-    margin: auto;
-}
-
-.search-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.search-field {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    font-size: 16px;
-}
-
-.search-field::placeholder {
-    color: #aaa;
-}
-
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            padding: 5px 10px;
+            max-width: 400px;
+            margin: auto;
+        }
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .search-field {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-field::placeholder {
+            color: #aaa;
+        }
         .search-text {
             font-size: 20px;
             color: #4F4F4F;
             font-weight: 400;
         }
-
         .dropdown {
             display: none;
             position: absolute;
@@ -374,7 +344,6 @@
         .dropdown-toggle:hover .dropdown {
             display: block;
         }
-
         .profile-dropdown {
             display: none;
             position: absolute;
@@ -389,7 +358,6 @@
             top: 50px; 
             overflow: hidden; 
         }
-
         .profile-dropdown a {
             color: #4F4F4F;
             padding: 10px 20px; 
@@ -482,9 +450,7 @@
     </div>
     {% endblock %}
 
-    
-<!-- Modal structure -->
-<div id="bookModal" class="modal">
+    <div id="bookModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&#10005;</span>
         <div class="modal-body">
@@ -537,22 +503,20 @@
         document.getElementById("bookModal").style.display = "flex";
     
         const startReadingLink = document.querySelector(".start-reading-button").parentElement;
-        startReadingLink.href = `/reading/read/${bookId}/`;  // Ensure this matches your URL pattern
+        startReadingLink.href = `/reading/read/${bookId}/`;  
     }
     
     function addToLibrary(bookId) {
-        // Make an AJAX request to the backend to add the book to the user's library
         fetch(`/mylibrary/add-to-library/${bookId}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCsrfToken()  // Ensure CSRF protection
+                'X-CSRFToken': getCsrfToken()  
             },
             body: JSON.stringify({ book_id: bookId })
         })
         .then(response => response.json())
         .then(data => {
-            // Show a message to the user
             alert(data.message);
         })
         .catch(error => {
@@ -560,7 +524,6 @@
         });
     }
     
-    // Helper function to get the CSRF token
     function getCsrfToken() {
         let csrfToken = null;
         const csrfCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
