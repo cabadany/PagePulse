@@ -37,21 +37,27 @@ def admin_dashboard(request):
     total_users = User.objects.count()
     
     # Get the total number of non-staff users
-    non_staff_users = User.objects.filter(is_staff=False).count()
+    non_staff_users = User.objects.filter(is_staff=False)
     
     # Get the total number of books
     total_books = Book.objects.count()
 
     # Get the number of active users (active users are those who have logged in recently)
-    # Assuming that the active users are defined by some criteria like recent login or activity
-    active_users = User.objects.filter(is_active=True).count()
+    # Active users are those who have logged in within the last 30 days (you can adjust the filter)
+    active_users = User.objects.filter(is_active=True)
+
+    # Get recent activities for non-staff and staff users
+    recent_non_staff_activities = non_staff_users.order_by('-last_login')[:5]  # Get the 5 most recent non-staff users' activities
+    recent_admin_activities = User.objects.filter(is_staff=True).order_by('-last_login')[:5]  # Get the 5 most recent admin activities
 
     # Pass the data to the template
     context = {
         'total_users': total_users,
-        'non_staff_users': non_staff_users,
+        'non_staff_users': non_staff_users.count(),
         'total_books': total_books,
-        'active_users': active_users,
+        'active_users': active_users.count(),
+        'recent_non_staff_activities': recent_non_staff_activities,
+        'recent_admin_activities': recent_admin_activities,
     }
 
     return render(request, 'control_panel/admin_dashboard.html', context)

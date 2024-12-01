@@ -71,11 +71,49 @@
             transition: margin-left 0.3s ease;
         }
 
-        header h1 {
-            font-size: 28px;
-            color: #333;
+        header {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
-            font-weight: 600;
+            text-align: center;
+        }
+
+        .welcome-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+                font-size: 32px;
+                color: #333;
+                font-weight: 700;
+                margin-bottom: 15px;
+                text-transform: uppercase; /* Adds emphasis to the header */
+                letter-spacing: 1px; /* Adds spacing for a more polished look */
+                transition: color 0.3s ease; /* Smooth transition for hover effect */
+            }
+            header h1:hover {
+            color: #f4728f; 
+        }
+                .welcome-message {
+            font-size: 18px;
+            color: #666;
+            font-weight: 400;
+            margin-top: 10px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px; /* Adjust font size for smaller screens */
+            }
+
+            .welcome-message {
+                font-size: 16px; /* Adjust font size for smaller screens */
+            }
         }
 
         /* Statistics Section */
@@ -116,6 +154,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
 
         .recent-activity h2 {
@@ -139,6 +178,20 @@
 
         .recent-activity ul li:hover {
             color: #f4728f;
+        }
+
+        .recent-activity ul li .activity-info {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Distinction Between Admin and Non-Staff Activities */
+        .recent-activity.non-staff {
+            border-left: 5px solid #f4728f;
+        }
+
+        .recent-activity.admin {
+            border-left: 5px solid #4CAF50;
         }
 
         /* Responsive Design */
@@ -202,6 +255,7 @@
     <div class="main-content">
         <header>
             <h1>Welcome to the Admin Dashboard</h1>
+            <p class="welcome-message">Your hub for managing users, content, and more.</p>
         </header>
 
         <section class="statistics">
@@ -219,14 +273,30 @@
             </div>
         </section>
 
-        <section class="recent-activity">
-            <h2>Recent Activities</h2>
+        <section class="recent-activity non-staff">
+            <h2>Recent Non-Staff Activities</h2>
             <ul>
-                <li>Added a new content item.</li>
-                <li>Updated user profile for user 123.</li>
-                <li>Removed inactive user account.</li>
+                {% for user in recent_non_staff_activities %}
+                    <li>
+                        <strong>{{ user.username }}</strong>
+                        <div class="activity-info">Last Login: {{ user.last_login }}</div>
+                    </li>
+                {% endfor %}
             </ul>
         </section>
+
+        <section class="recent-activity admin">
+            <h2>Recent Admin Activities</h2>
+            <ul>
+                {% for user in recent_admin_activities %}
+                    <li>
+                        <strong>{{ user.username }}</strong>
+                        <div class="activity-info">Last Login: {{ user.last_login }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
     </div>
 
 </body>
