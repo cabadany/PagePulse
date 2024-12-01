@@ -569,7 +569,7 @@ function openModal(imageUrl, title, author, genre, description, bookId) {
     document.getElementById("bookModal").style.display = "flex";
 
     const startReadingLink = document.querySelector(".start-reading-button").parentElement;
-    startReadingLink.href = `/dashboard/read/${bookId}/`;  // Ensure this matches your URL pattern
+    startReadingLink.href = `/reading/read/${bookId}/`;  // Ensure this matches your URL pattern
 }
 
 function addToLibrary(bookId) {
