@@ -3,9 +3,11 @@ from book.models import Book
 
 def homepage(request):
     books = Book.objects.all()
+    user = request.user if request.user.is_authenticated else None
 
     return render(request, 'homepage.html', {
         'books': books,
+        'user': user,
     })
 
 def category_view(request, category):

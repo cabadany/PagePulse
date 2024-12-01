@@ -86,8 +86,10 @@
 
 
         .profile-icon {
-            height: 40px;
-            width: auto;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%; 
+            object-fit: cover;
             cursor: pointer;
             margin-left: 20px;
         }
@@ -297,14 +299,14 @@
             color: #444;
             padding: 20px;
             border-radius: 10px;
-            width: 600px; /* Keep a fixed width */
-            max-height: 90%; /* Adjust height to content, but limit to 90% of viewport */
+            width: 600px;
+            max-height: 90%;
             display: flex;
             flex-direction: column;
             position: relative;
             justify-content: center;
             align-items: center;
-            overflow: auto; /* Add scroll if content exceeds max height */
+            overflow: auto;
         }
 
 
@@ -312,7 +314,7 @@
             display: flex;
             gap: 20px;
             align-items: flex-start;
-            flex-wrap: wrap; /* Allow wrapping if content exceeds width */
+            flex-wrap: wrap;
         }
 
         .modal-left {
@@ -428,7 +430,7 @@
             
         }
         .read {
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
         }
 
     </style>
@@ -459,11 +461,15 @@
                     </div>
                 </div>
                 <div class="profile-toggle">
-                    <img src="{% static 'Images/profile.png' %}" alt="Profile" class="profile-icon">
-                    <div class="profile-dropdown">
-                        <a href="#">Settings</a>
-                        <a href="/" onclick="event.preventDefault(); window.location.href='/';">Log Out</a>
-                    </div>
+                    {% if user.is_authenticated %}
+                        <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'Images/default_profile.png' %}{% endif %}" alt="Profile" class="profile-icon">
+                        <div class="profile-dropdown">
+                            <a href="#">Profile</a>
+                            <a href="{% url 'login' %}">Log Out</a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login' %}">Log In</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -515,7 +521,6 @@
     </section>
     
 
-<!-- Modal structure -->
 <div id="bookModal" class="modal">
 <div class="modal-content">
     <span class="close" onclick="closeModal()">&#10005;</span>
@@ -569,22 +574,20 @@ function openModal(imageUrl, title, author, genre, description, bookId) {
     document.getElementById("bookModal").style.display = "flex";
 
     const startReadingLink = document.querySelector(".start-reading-button").parentElement;
-    startReadingLink.href = `/dashboard/read/${bookId}/`;  // Ensure this matches your URL pattern
+    startReadingLink.href = `/dashboard/read/${bookId}/`;
 }
 
 function addToLibrary(bookId) {
-    // Make an AJAX request to the backend to add the book to the user's library
     fetch(`/mylibrary/add-to-library/${bookId}/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCsrfToken()  // Ensure CSRF protection
+            'X-CSRFToken': getCsrfToken() 
         },
         body: JSON.stringify({ book_id: bookId })
     })
     .then(response => response.json())
     .then(data => {
-        // Show a message to the user
         alert(data.message);
     })
     .catch(error => {
@@ -592,7 +595,6 @@ function addToLibrary(bookId) {
     });
 }
 
-// Helper function to get the CSRF token
 function getCsrfToken() {
     let csrfToken = null;
     const csrfCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
