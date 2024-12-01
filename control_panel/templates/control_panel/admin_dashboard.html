@@ -6,6 +6,7 @@
     <title>Admin Dashboard</title>
     {% load static %}
     <style>
+        /* General Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -15,10 +16,7 @@
             background-color: #f4f4f9;
         }
 
-        body .main-content {
-        margin-left: 289px;
-        }
-
+        /* Sidebar Styles */
         .sidebar {
             background-color: #333;
             color: #fff;
@@ -29,6 +27,7 @@
             top: 0;
             left: 0;
             box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
 
         .sidebar .logo img {
@@ -64,9 +63,10 @@
             background-color: #f4728f;
         }
 
+        /* Main Content Styles */
         .main-content {
             flex: 1;
-            margin-left: 250px;  /* Adjusted for the sidebar */
+            margin-left: 289px; /* Adjusted for the sidebar */
             padding: 30px;
             transition: margin-left 0.3s ease;
         }
@@ -78,6 +78,7 @@
             font-weight: 600;
         }
 
+        /* Statistics Section */
         .statistics {
             display: flex;
             gap: 20px;
@@ -109,6 +110,7 @@
             font-weight: 700;
         }
 
+        /* Recent Activities Section */
         .recent-activity {
             background-color: #fff;
             padding: 20px;
@@ -161,7 +163,7 @@
         @media (max-width: 480px) {
             .sidebar {
                 width: 100%;
-                position: relative;
+                position: relative; /* Sidebar stacks on top */
             }
 
             .main-content {
@@ -189,10 +191,10 @@
         </div>
         <ul class="menu">
             <li><a href="{% url 'admin_dashboard' %}" class="active">Dashboard</a></li>
-          <!--  <li><a href="{% url 'admin_manage_users' %}">Manage Users</a></li>
+            <li><a href="{% url 'admin_manage_users' %}">Manage Users</a></li>
             <li><a href="{% url 'admin_manage_content' %}">Manage Content</a></li>
             <li><a href="{% url 'admin_settings' %}">Settings</a></li>
-            <li><a href="{% url 'admin_logout' %}">Logout</a></li>-->
+            <li><a href="{% url 'admin_logout' %}">Logout</a></li>
         </ul>
     </div>
 
@@ -205,15 +207,15 @@
         <section class="statistics">
             <div class="stat-box">
                 <h3>Total Users</h3>
-                <p>150</p>
+                <p>{{ non_staff_users }}</p>
             </div>
             <div class="stat-box">
-                <h3>Total Content</h3>
-                <p>45</p>
+                <h3>Total Books</h3>
+                <p>{{ total_books }}</p>
             </div>
             <div class="stat-box">
-                <h3>Active Users</h3>
-                <p>120</p>
+                <h3>Total Active Users</h3>
+                <p>{{ active_users }}</p>
             </div>
         </section>
 

@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from control_panel.models import Book
 
 def admin_login(request):
     if request.method == 'POST':
@@ -31,7 +33,28 @@ def admin_login(request):
 
 
 def admin_dashboard(request):
-    return render(request, 'control_panel/admin_dashboard.html')
+    # Get the total number of users
+    total_users = User.objects.count()
+    
+    # Get the total number of non-staff users
+    non_staff_users = User.objects.filter(is_staff=False).count()
+    
+    # Get the total number of books
+    total_books = Book.objects.count()
+
+    # Get the number of active users (active users are those who have logged in recently)
+    # Assuming that the active users are defined by some criteria like recent login or activity
+    active_users = User.objects.filter(is_active=True).count()
+
+    # Pass the data to the template
+    context = {
+        'total_users': total_users,
+        'non_staff_users': non_staff_users,
+        'total_books': total_books,
+        'active_users': active_users,
+    }
+
+    return render(request, 'control_panel/admin_dashboard.html', context)
 
 def admin_manage_users(request):
     # Your logic to handle the view for managing users
