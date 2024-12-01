@@ -399,7 +399,6 @@ progress::-moz-progress-bar {
                             <label>Progress:</label>
                             <progress value="{{ user_library.progress }}" max="100"></progress>
                         </div>
-                        <!-- Remove from Library button -->
                         <form method="POST" action="{% url 'remove_from_library' user_library.id %}">
                             {% csrf_token %}
                             <button type="submit" class="remove-button" style="margin-top: 10px; padding: 10px 20px; background-color: #FF6F61; color: white; border: none; border-radius: 5px; cursor: pointer;">Remove from Library</button>
