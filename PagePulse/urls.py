@@ -31,6 +31,7 @@ urlpatterns = [
     path('mylibrary/', include('mylibrary.urls')),
     path('reading/', include('reading.urls')),
     path('profile/', include('profile_settings.urls')),
+    path('control_panel/', include('control_panel.urls')),
 ]
 
 if settings.DEBUG:

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'mylibrary',
     'reading',
     'profile_settings',
+    'control_panel',
 ]
 
 MIDDLEWARE = [
