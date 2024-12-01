@@ -348,6 +348,23 @@
     color: #000;
 }
 
+.bookmark-btn {
+            background-color: #007BFF;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .bookmark-btn:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -408,6 +425,8 @@
         <p>{{ chapter.content }}</p>
     </div>
 
+    <button id="bookmark-btn" class="bookmark-btn">Bookmark This</button>
+
     <div class="comments-section">
         <h3>Comments</h3>
     
@@ -430,5 +449,46 @@
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const savedPosition = {{ saved_position }};
+            console.log("Restoring position:", savedPosition);
+            if (savedPosition > 0) {
+                window.scrollTo(0, savedPosition);
+            }
+    
+            document.getElementById("bookmark-btn").addEventListener("click", function () {
+                const position = window.scrollY; 
+                console.log("Bookmarking position:", position);
+    
+                fetch("{% url 'save_bookmark' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({
+                        book_id: "{{ book.id }}",
+                        position: position
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Response:", data);
+                    if (data.status === "success") {
+                        alert("Bookmark saved successfully!");
+                        window.location.href = "{% url 'homepage' %}";
+                    } else {
+                        alert("Failed to save bookmark: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error saving bookmark:", error);
+                    alert("An error occurred while saving the bookmark.");
+                });
+            });
+        });
+        </script>
 </body>
 </html>

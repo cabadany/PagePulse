@@ -3,6 +3,11 @@ from .forms import BookForm
 from .models import Chapter, Book, Comment
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Bookmark
+import json
+import logging
 
 @login_required
 def my_stories(request):
@@ -82,4 +87,32 @@ def chapter_detail(request, book_id, chapter_id):
         'book': book,
         'chapter': chapter,
         'comments': comments,
+    })
+
+@csrf_exempt  
+def save_bookmark(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body) 
+            book_id = data.get('book_id')
+            position = data.get('position')
+
+            bookmark = Bookmark.objects.create(book_id=book_id, position=position, user=request.user)
+            bookmark.save()
+
+            return JsonResponse({"status": "success"})  
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)})  
+    return JsonResponse({"status": "error", "message": "Invalid request method"})
+
+def chapter_view(request, book_id, chapter_id):
+    chapter = Chapter.objects.get(id=chapter_id, book_id=book_id)
+    
+    saved_position = Bookmark.objects.filter(user=request.user, book_id=book_id).first()
+    saved_position = saved_position.position if saved_position else 0
+    
+    return render(request, 'chapter.html', {
+        'chapter': chapter,
+        'saved_position': saved_position,
+        'book': chapter.book
     })

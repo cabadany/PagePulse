@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
@@ -38,3 +39,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.user} on {self.created_at}"
+    
+class Bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    chapter = models.ForeignKey('Chapter', on_delete=models.CASCADE)
+    position = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Bookmark for {self.user} in {self.book} at position {self.position}"
