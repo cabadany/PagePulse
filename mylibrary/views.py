@@ -1,9 +1,10 @@
-from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import UserLibrary
-from book.models import Book
+from book.models import Book, Chapter
 from django.http import JsonResponse
+from django.core.paginator import Paginator
+import json
 
 @login_required
 def user_library(request):
@@ -14,18 +15,49 @@ def user_library(request):
 def add_to_library(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     
-    # Check if the book is already in the user's library
     if not UserLibrary.objects.filter(user=request.user, book=book).exists():
-        # Add the book to the user's library
         UserLibrary.objects.create(user=request.user, book=book)
         message = "Book added to your library."
     else:
         message = "This book is already in your library."
 
-    # Return a JSON response to notify the front-end
     return JsonResponse({'message': message})
 
 def remove_from_library(request, user_library_id):
     user_library = UserLibrary.objects.get(id=user_library_id)
-    user_library.delete()  # This deletes the record from the user's library
-    return redirect('user_library')  # Redirect back to the user library page
+    user_library.delete() 
+    return redirect('user_library') 
+
+@login_required
+def update_bookmark(request, book_id):
+    if request.method == 'POST':
+        user_library = get_object_or_404(UserLibrary, user=request.user, book_id=book_id)
+
+        try:
+            current_chapter_id = int(request.POST.get('current_chapter_id', 0))
+            current_page = int(request.POST.get('current_page', 0))
+        except ValueError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid input'})
+
+        current_chapter = get_object_or_404(Chapter, id=current_chapter_id)
+        user_library.current_chapter = current_chapter
+        user_library.current_page_in_chapter = current_page
+        user_library.update_progress()
+        user_library.save()
+
+        return JsonResponse({'status': 'success', 'progress': user_library.progress})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'})
+
+@login_required
+def read_book_view(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    chapters = book.chapters.all()  
+
+    chapters_data = [{'id': chapter.id, 'title': chapter.title} for chapter in chapters]
+
+    context = {
+        'book': book,
+        'chapters': chapters, 
+        'chapters_json': json.dumps(chapters_data),  
+    }
+    return render(request, 'readbook.html', context)
