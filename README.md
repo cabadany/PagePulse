@@ -41,9 +41,9 @@
 
 ## Project Members
 
-- **Cabana, Danisse D.** – Team Leader
-- **Garcia, Gianne Andrea** – Developer
-- **Francisco, Ezzel Jan** – Designer
+- **Cabana, Danisse D.** – Team Leader, Designer, Developer
+- **Garcia, Gianne Andrea** – Designer, Developer
+- **Francisco, Ezzel Jan** – Designer, Developer
 
 ---
 
