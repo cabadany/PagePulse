@@ -9,4 +9,7 @@ urlpatterns = [
     path('new-chapter/', views.content_box, name='content_box'),
     path('my-stories/content-box/<int:book_id>/', views.content_box, name='content_box'),
     path('my-stories/content-box/<int:book_id>/', views.content_box, name='new_chapter'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -48,16 +48,9 @@ def update_bookmark(request, book_id):
         return JsonResponse({'status': 'success', 'progress': user_library.progress})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'})
 
-@login_required
-def read_book_view(request, book_id):
-    book = get_object_or_404(Book, id=book_id)
-    chapters = book.chapters.all()  
-
-    chapters_data = [{'id': chapter.id, 'title': chapter.title} for chapter in chapters]
-
-    context = {
-        'book': book,
-        'chapters': chapters, 
-        'chapters_json': json.dumps(chapters_data),  
-    }
-    return render(request, 'readbook.html', context)
+def read_book(request, book_id):
+    try:
+        book = Book.objects.get(id=book_id)
+        return render(request, 'readbook.html', {'book': book})
+    except Book.DoesNotExist:
+        return render(request, '404.html') 
