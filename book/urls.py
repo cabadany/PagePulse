@@ -9,6 +9,7 @@ urlpatterns = [
     path('new-chapter/', views.content_box, name='content_box'),
     path('my-stories/content-box/<int:book_id>/', views.content_box, name='content_box'),
     path('my-stories/content-box/<int:book_id>/', views.content_box, name='new_chapter'),
+    path('book/<int:book_id>/chapter/<int:chapter_id>/', views.chapter_detail, name='chapter_detail'),
 ]
 
 if settings.DEBUG:

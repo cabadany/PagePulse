@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BookForm
-from .models import Chapter, Book
+from .models import Chapter, Book, Comment
 from django.contrib.auth.decorators import login_required
+from .forms import CommentForm
 
 @login_required
 def my_stories(request):
-    # Adjust the field name to 'author' or the appropriate field in your model
     user_books = Book.objects.filter(author=request.user)
 
-    # Pass the user_books to the template
     return render(request, 'my_stories.html', {'user_books': user_books})
 
 def new_chapter(request):
@@ -50,13 +49,37 @@ def content_box(request, book_id):
 
 def story_create(request):
     if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)  # Include request.FILES
+        form = BookForm(request.POST, request.FILES)  
         if form.is_valid():
             form.save()
-            return redirect('story_success')  # Redirect after saving
+            return redirect('story_success')  
         else:
-            print(form.errors)  # Debug: Check for any form errors
+            print(form.errors)  
     else:
         form = BookForm()
     
     return render(request, 'story_create.html', {'form': form})
+
+def chapter_detail(request, book_id, chapter_id):
+    book = get_object_or_404(Book, id=book_id)
+    chapter = get_object_or_404(Chapter, id=chapter_id, book=book)
+
+    if request.method == 'POST':
+        user = request.POST.get('user')  
+        content = request.POST.get('content')  
+
+        if user and content:
+            Comment.objects.create(
+                user=user,
+                content=content,
+                chapter=chapter
+            )
+            return redirect('chapter_detail', book_id=book.id, chapter_id=chapter.id)
+
+    comments = chapter.comments.all()
+
+    return render(request, 'chapter_detail.html', {
+        'book': book,
+        'chapter': chapter,
+        'comments': comments,
+    })

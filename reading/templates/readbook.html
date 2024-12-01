@@ -253,13 +253,13 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%;  /* Adjust the width if needed */
-    max-width: 300px;  /* Limits the width for larger screens */
+    width: 100%;  
+    max-width: 300px;  
 }
 
 .chapter-dropdown:focus {
     outline: none;
-    border-color: #4F4F4F; /* Highlight the border when the dropdown is focused */
+    border-color: #4F4F4F; 
 }
 
 .chapter-dropdown option {
@@ -276,12 +276,12 @@
     margin-left: 200px;
     margin-right: 200px;
     display: flex;
-    justify-content: center;  /* Centers the content horizontally */
+    justify-content: center;  
 }
 
 .content-container p {
-    max-width: 100%; /* Ensures the content doesn't overflow */
-    word-wrap: break-word; /* Ensures long words break to fit within the container */
+    max-width: 100%; 
+    word-wrap: break-word; 
 }
 .custom-dropdown {
     position: relative;
@@ -301,7 +301,7 @@
     cursor: pointer;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px; /* Adds rounded corners to the header */
+    border-radius: 8px; 
 }
 
 .book-icon {
@@ -406,6 +406,29 @@
     <h2>{{ chapter.title }}</h2>
     <div class="content-container">
         <p>{{ chapter.content }}</p>
+    </div>
+
+    <div class="comments-section">
+        <h3>Comments</h3>
+    
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <label for="content">Your Comment:</label>
+                <textarea name="content" id="content" required></textarea>
+            </div>
+            <button type="submit">Post Comment</button>
+        </form>
+    
+        <div class="comments-list">
+            {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.user }}</strong> says:
+                    <p>{{ comment.content }}</p>
+                    <small>{{ comment.created_at }}</small>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

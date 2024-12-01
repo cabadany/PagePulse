@@ -29,3 +29,12 @@ class Chapter(models.Model):
 
     def __str__(self):
         return f"{self.book.title} - {self.title}"
+    
+class Comment(models.Model):
+    user = models.CharField(max_length=100)  
+    content = models.TextField() 
+    created_at = models.DateTimeField(auto_now_add=True)  
+    chapter = models.ForeignKey('Chapter', related_name='comments', on_delete=models.CASCADE)  
+
+    def __str__(self):
+        return f"Comment by {self.user} on {self.created_at}"
