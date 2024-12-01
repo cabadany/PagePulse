@@ -17,25 +17,23 @@
 
 ## Key Features
 
-- **User Authentication**
-  - Secure user registration and login system.
-  - Password recovery for account security.
+- **User Authentication**  
+  Secure user registration and login system, with password recovery for account security.
 
-- **Library Management**
-  - Add and remove books from your personal library with ease.
-  
-- **Book Creation**
-  - Create and publish your own books to share with others.
+- **Library Management**  
+  Add and remove books from your personal library with ease.
 
-- **Commenting**
-  - Leave comments on specific parts of a book to foster discussions with fellow readers.
+- **Book Creation**  
+  Create and publish your own books to share with others.
 
-- **Bookmarking**
-  - Save your reading progress by bookmarking chapters or entire books.
+- **Commenting**  
+  Leave comments on specific parts of a book to foster discussions with fellow readers.
 
-- **Follow/Unfollow**
-  - Follow other users to stay updated on their new books and activities.
-  - Unfollow users at any time.
+- **Bookmarking**  
+  Save your reading progress by bookmarking chapters or entire books.
+
+- **Follow/Unfollow**  
+  Follow other users to stay updated on their new books and activities, with the ability to unfollow at any time.
 
 ---
 
