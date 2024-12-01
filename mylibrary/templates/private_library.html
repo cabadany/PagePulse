@@ -368,8 +368,6 @@ progress::-moz-progress-bar {
             </div>
         </div>
     </header>
-
-
     <div class="categories">
         <ul>
             <li><a href="{% url 'category_view' category='All' %}"><img src="{% static 'Images/all.png' %}" alt="All"><span>All</span></a></li>
@@ -386,7 +384,6 @@ progress::-moz-progress-bar {
     </div>
 
     <section class="private-library">
-        <h2>My Library</h2>
         <div class="book-grid">
             {% if user_library_books %}
                 {% for user_library in user_library_books %}

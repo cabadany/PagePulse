@@ -14,6 +14,179 @@
             margin: 0;
             padding: 20px;
         }
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        .logo img {
+            height: 70px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 93%;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            color: #4F4F4F;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .nav-item a {
+            white-space: nowrap;
+            font-weight: 50;
+            text-decoration: none; 
+            color: #4F4F4F;
+            font-size: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #FF6F61;
+        }
+
+        .nav-link.active {
+            color: #FF6F61;
+        }
+
+
+        .profile-icon {
+            height: 40px;
+            width: auto;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .search-container {
+            display: flex;
+
+        }
+
+        .search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.search-field {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-field::placeholder {
+    color: #aaa;
+}
+
+        .search-text {
+            font-size: 20px;
+            color: #4F4F4F;
+            font-weight: 400;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff; 
+            border-radius: 10px; 
+            border: 1px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            min-width: 160px;
+            z-index: 1;
+            padding: 10px 0;
+            left: auto; 
+            right: 0;
+            overflow: hidden;
+        }
+        .dropdown a, 
+        .profile-dropdown a {
+            color: #4F4F4F;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .dropdown a:hover {
+            background-color: #FF6F61;
+            color: #fff;
+        }
+        .dropdown-toggle,
+        .profile-toggle {
+            position: relative;
+        }
+        .dropdown-toggle:hover .dropdown {
+            display: block;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff; 
+            border-radius: 10px;
+            border: 1px solid #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 160px;
+            z-index: 1;
+            padding: 10px 0;
+            right: 0; 
+            top: 50px; 
+            overflow: hidden; 
+        }
+
+        .profile-dropdown a {
+            color: #4F4F4F;
+            padding: 10px 20px; 
+            text-decoration: none;
+            display: block;
+            border-radius: 5px; 
+        }
+        .profile-dropdown a:hover {
+            background-color: #FF6F61;
+            color: #fff;
+        }
+        .profile-toggle:hover .profile-dropdown {
+            display: block;
+        }
 
         .back-button {
             display: flex;
@@ -36,29 +209,35 @@
             height: 20px;
             fill: currentColor;
         }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
+        .categories, .for-you, .popular {
+            margin: 20px 0;
         }
-
-        .modal-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 500px;
-            color: #333;
+        .categories ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: 50px;
+            margin-top: -20px;
+            margin-bottom: 30px;
+        }
+        .categories li {
+            margin: 10px;
             text-align: center;
+            flex: 1 1 100px;
+            max-width: 150px;
+        }
+        .categories img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: -25px;
+        }
+        .categories span {
+            color: #4F4F4F;
+        }
+        .categories a {
+            text-decoration: none;
         }
 
         .close {
@@ -119,58 +298,227 @@
             color: #ff6f61;
         }
 
-        .modal-content img {
-            width: 100px;
-            border-radius: 5px;
-            margin-bottom: 10px;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+    background-color: #fff;
+    color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px; /* Keep a fixed width */
+    max-height: 90%; /* Adjust height to content, but limit to 90% of viewport */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Add scroll if content exceeds max height */
+}
+
+
+.modal-body {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow wrapping if content exceeds width */
+}
+
+
+        .modal-left {
+            flex: 1;
         }
 
-        .button-container {
+        .modal-left img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .modal-right {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-right h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .modal-right p {
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+
+        .close {  
+            padding: 10px 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 16px;
+        }
+
+        .start-reading-button{
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: white;
+            border: 2px solid #FF6F61;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #FF6F61;
+            }
+        .add-to-lib {
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: white;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            }
+        .add-to-lib:hover {
+            background: black;
+            color: #FAF9F6;
+            }
+
+        .start-reading-button:hover{
+            background: #FF6F61;
+            color: #FAF9F6;
+            }
+
+        .start-reading-button > svg {
+            width: 30px;
+            margin-left: 10px;
+            transition: transform 0.3s ease-in-out;
+            }
+
+        .start-reading-button:hover svg {
+            transform: translateX(5px);
+            }
+
+        .start-reading-button:active {
+            transform: scale(0.95);
+            }
+        .start-reading-button:hover svg circle {
+            stroke: #FAF9F6;
+            }
+        .start-reading-button:hover svg path {
+            fill: #FAF9F6;
+            }
+        .btn-container {
             margin-top: 20px;
             display: flex;
-            justify-content: center;
             gap: 10px;
         }
-
-        .start-reading-button,
-        .add-to-lib {
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px solid #FF6F61;
-            color: #FF6F61;
-            background: transparent;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+        #modalBookDescription {
+            font-weight: 300;
+            font-family: 'Arial', sans-serif; 
+            color: #666;
+            font-size: 12px;
         }
-
-        .start-reading-button:hover,
-        .add-to-lib:hover {
-            background: #FF6F61;
-            color: #fff;
+        #modalBookAuthor {
+            font-weight: 300; 
+            font-family: 'Arial', sans-serif;
+            color: #666;
+            
+        }
+        .read {
+            text-decoration: none; /* Remove underline */
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="{% url 'homepage' %}">
+                    <img src="{% static 'Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+                </a>
+            </div>
+            <form method="GET" action="{% url 'search_results' %}" class="search-bar">
+                    <input type="search" name="q" class="search-field" placeholder="Search for books" aria-label="Search for books">
+                    <button type="submit" style="border: none; background: none;">
+                        <img src="{% static 'Images/search.png' %}" alt="Submit search" style="width: 20px; height: 20px;">
+                    </button>
+            </form>
+            <div class="nav-container">
+                <div class="nav-item"><a href="{% url 'homepage' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></div>
+                <div class="nav-item"><a href="{% url 'user_library' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">My Library</a></div>
+
+                <div class="nav-item dropdown-toggle">
+                    Write
+                    <div class="dropdown">
+                        <a href="{% url 'new_story' %}">Create a new story</a>
+                        <a href="{% url 'my_stories' %}">My Stories</a>
+                    </div>
+                </div>
+                <div class="profile-toggle">
+                    <img src="{% static 'Images/profile.png' %}" alt="Profile" class="profile-icon">
+                    <div class="profile-dropdown">
+                        <a href="#">Settings</a>
+                        <a href="/" onclick="event.preventDefault(); window.location.href='/';">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--
     <a href="{% url 'homepage' %}" class="back-button">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"></path>
         </svg>
         Back to Homepage
-    </a>
+    </a>-->
+    <div class="categories">
+        <ul>
+            <li><a href="{% url 'category_view' category='All' %}"><img src="{% static 'Images/all.png' %}" alt="All"><span>All</span></a></li>
+            <li><a href="{% url 'category_view' category='Fiction' %}"><img src="{% static 'Images/fiction.png' %}" alt="Fiction"><span>Fiction</span></a></li>
+            <li><a href="{% url 'category_view' category='Mystery' %}"><img src="{% static 'Images/mystery.png' %}" alt="Mystery"><span>Mystery</span></a></li>
+            <li><a href="{% url 'category_view' category='Romance' %}"><img src="{% static 'Images/romance.png' %}" alt="Romance"><span>Romance</span></a></li>
+            <li><a href="{% url 'category_view' category='Fantasy' %}"><img src="{% static 'Images/fantasy.png' %}" alt="Fantasy"><span>Fantasy</span></a></li>
+            <li><a href="{% url 'category_view' category='New Adult' %}"><img src="{% static 'Images/new_adult.png' %}" alt="New Adult"><span>New Adult</span></a></li>
+            <li><a href="{% url 'category_view' category='Short Story' %}"><img src="{% static 'Images/short_story.png' %}" alt="Short Story"><span>Short Story</span></a></li>
+            <li><a href="{% url 'category_view' category='Thriller' %}"><img src="{% static 'Images/thriller.png' %}" alt="Thriller"><span>Thriller</span></a></li>
+            <li><a href="{% url 'category_view' category='Adventure' %}"><img src="{% static 'Images/adventure.png' %}" alt="Adventure"><span>Adventure</span></a></li>
+            <li><a href="{% url 'category_view' category='LGBTQ+' %}"><img src="{% static 'Images/lgbtq+.png' %}" alt="LGBTQ+"><span>LGBTQ+</span></a></li>
+        </ul>
+    </div>
 
-    <header>
-        <h1>{{ category }} Books</h1>
-    </header>
+    
+    <h1>{{ category }} Books</h1>
+    
 
     <div class="book-grid">
         {% for book in books %}
         <div class="book-item" onclick="openModal(
-            '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
-            '{{ book.title }}',
-            '{{ book.author }}',
-            '{{ book.category }}',
-            '{{ book.description|escapejs }}')">
+    '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
+    '{{ book.title }}',
+    '{{ book.author }}',
+    '{{ book.category }}',
+    '{{ book.description|escapejs }}',
+    {{ book.id }})">
+
             {% if book.book_image %}
             <img src="{{ book.book_image.url }}" alt="{{ book.title }}">
             {% else %}
@@ -184,41 +532,96 @@
         {% endfor %}
     </div>
 
-    <div id="bookModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="">
-            <h2 id="modalTitle"></h2>
-            <p><strong>Author:</strong> <span id="modalAuthor"></span></p>
-            <p><strong>Category:</strong> <span id="modalCategory"></span></p>
-            <p id="modalDescription"></p>
-            <div class="button-container">
-                <button class="start-reading-button">Start Reading</button>
-                <button class="add-to-lib">Add to Library</button>
+    <!-- Modal structure -->
+<div id="bookModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&#10005;</span>
+        <div class="modal-body">
+            <div class="modal-left">
+                <img id="modalBookImage" src="" alt="Book Cover">
+            </div>
+            <div class="modal-right">
+                <h2 id="modalBookTitle"></h2>
+                <p id="modalBookAuthor"></p>
+                <p id="modalBookGenre"></p>
+                <p id="modalBookDescription"></p>
+                <div class="btn-container">
+                    <a class="read" {% if book.id %} href="{% url 'read_book' book.id %}" {% else %} href="#" {% endif %}>
+                    <button class="start-reading-button">
+                        <span>Start reading</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 74 74"
+                            height="34"
+                            width="34"
+                        >
+                            <circle stroke-width="3" stroke="#FF6F61" r="35.5" cy="37" cx="37"></circle>
+                            <path
+                                fill="#FF6F61"
+                                d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                            ></path>
+                        </svg>
+                    </button>
+                </a>
+                
+                <button class="add-to-lib" onclick="addToLibrary({{ book.id }})">+</button>
+    
+                </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <script>
-        function openModal(image, title, author, category, description) {
-            const modal = document.getElementById('bookModal');
-            modal.style.display = 'flex';
-            document.getElementById('modalImage').src = image;
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalAuthor').textContent = author;
-            document.getElementById('modalCategory').textContent = category;
-            document.getElementById('modalDescription').textContent = description;
-        }
-
-        function closeModal() {
-            document.getElementById('bookModal').style.display = 'none';
-        }
-
-        window.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
+    
+    <script> 
+    function openModal(imageUrl, title, author, genre, description, bookId) {
+        document.getElementById("modalBookImage").src = imageUrl;
+        document.getElementById("modalBookTitle").textContent = title;
+        document.getElementById("modalBookAuthor").textContent = `${author}`;
+        document.getElementById("modalBookGenre").innerHTML = `Genre <strong>${genre}</strong>`;
+        document.getElementById("modalBookDescription").textContent = description;
+    
+        document.querySelector(".add-to-lib").setAttribute("onclick", `addToLibrary(${bookId})`);
+    
+        document.getElementById("bookModal").style.display = "flex";
+    
+        const startReadingLink = document.querySelector(".start-reading-button").parentElement;
+        startReadingLink.href = `/dashboard/read/${bookId}/`; 
+    }
+    
+    function addToLibrary(bookId) {
+        fetch(`/mylibrary/add-to-library/${bookId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken()  // Ensure CSRF protection
+            },
+            body: JSON.stringify({ book_id: bookId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Show a message to the user
+            alert(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+    }
+    
+    function getCsrfToken() {
+        let csrfToken = null;
+        const csrfCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
+        if (csrfCookie) {
+            csrfToken = csrfCookie.split('=')[1];
+        }
+        return csrfToken;
+    }
+    
+    
+    function closeModal() {
+        document.getElementById("bookModal").style.display = "none";
+    }
+    
     </script>
 </body>
 </html>

@@ -291,23 +291,28 @@
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
             background-color: #fff;
             color: #444;
             padding: 20px;
             border-radius: 10px;
-            width: 600px;
-            height: 400px;
+            width: 600px; /* Keep a fixed width */
+            max-height: 90%; /* Adjust height to content, but limit to 90% of viewport */
             display: flex;
             flex-direction: column;
             position: relative;
-            justify-content: center;  /* Center content vertically */
-            align-items: center;  /* Center content horizontally */
+            justify-content: center;
+            align-items: center;
+            overflow: auto; /* Add scroll if content exceeds max height */
         }
+
+
         .modal-body {
             display: flex;
             gap: 20px;
             align-items: flex-start;
+            flex-wrap: wrap; /* Allow wrapping if content exceeds width */
         }
 
         .modal-left {
@@ -499,7 +504,7 @@
                         <img src="{% static 'Images/no_cover.png' %}" alt="No cover available" style="width: 100%; border-radius: 5px;">
                     {% endif %}
                     
-                    <a href="{% url 'read_book' book.id %}">{{ book.title }}</a> by {{ book.author.username }}
+                    <p><strong style="color: black;">{{ book.title }}</strong></p>
                     <p>{{ book.author }}</p>
                     <p>{{ book.category }}</p>
                 </div>
