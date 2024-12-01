@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'book',
     'widget_tweaks',
     'mylibrary',
+    'reading',
 ]
 
 MIDDLEWARE = [

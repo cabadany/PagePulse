@@ -574,7 +574,11 @@ function openModal(imageUrl, title, author, genre, description, bookId) {
     document.getElementById("bookModal").style.display = "flex";
 
     const startReadingLink = document.querySelector(".start-reading-button").parentElement;
+<<<<<<< HEAD
     startReadingLink.href = `/dashboard/read/${bookId}/`;
+=======
+    startReadingLink.href = `/reading/read/${bookId}/`;  // Ensure this matches your URL pattern
+>>>>>>> ec5d158209a19d2bc18feaeaf87f99c2c0d5af16
 }
 
 function addToLibrary(bookId) {

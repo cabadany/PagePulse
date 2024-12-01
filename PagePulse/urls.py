@@ -29,6 +29,7 @@ urlpatterns = [
     path('new_story/', include('book.urls')),
     path('my_stories/', include('book.urls')),
     path('mylibrary/', include('mylibrary.urls')),
+    path('reading/', include('reading.urls')),
     
 ]
 

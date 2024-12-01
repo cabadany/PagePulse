@@ -310,29 +310,29 @@
             justify-content: center;
             align-items: center;
         }
+
         .modal-content {
-    background-color: #fff;
-    color: #444;
-    padding: 20px;
-    border-radius: 10px;
-    width: 600px; /* Keep a fixed width */
-    max-height: 90%; /* Adjust height to content, but limit to 90% of viewport */
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    overflow: auto; /* Add scroll if content exceeds max height */
-}
+            background-color: #fff;
+            color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            width: 600px; /* Keep a fixed width */
+            max-height: 90%; /* Adjust height to content, but limit to 90% of viewport */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            overflow: auto; /* Add scroll if content exceeds max height */
+        }
 
 
-.modal-body {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    flex-wrap: wrap; /* Allow wrapping if content exceeds width */
-}
-
+        .modal-body {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap; /* Allow wrapping if content exceeds width */
+        }
 
         .modal-left {
             flex: 1;
@@ -431,6 +431,9 @@
             display: flex;
             gap: 10px;
         }
+        form label, form select, form input, form button {
+            color: black;
+        }
         #modalBookDescription {
             font-weight: 300;
             font-family: 'Arial', sans-serif; 
@@ -511,13 +514,14 @@
 
     <div class="book-grid">
         {% for book in books %}
-        <div class="book-item" onclick="openModal(
-    '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
-    '{{ book.title }}',
-    '{{ book.author }}',
-    '{{ book.category }}',
-    '{{ book.description|escapejs }}',
-    {{ book.id }})">
+        <div class="book-item" 
+            onclick="openModal(
+            '{% if book.book_image %}{{ book.book_image.url }}{% else %}{% static 'images/default_book_cover.jpg' %}{% endif %}',
+            '{{ book.title }}',
+            '{{ book.author }}',
+            '{{ book.category }}',
+            '{{ book.description|escapejs }}',
+            {{ book.id }})">
 
             {% if book.book_image %}
             <img src="{{ book.book_image.url }}" alt="{{ book.title }}">
@@ -586,7 +590,7 @@
         document.getElementById("bookModal").style.display = "flex";
     
         const startReadingLink = document.querySelector(".start-reading-button").parentElement;
-        startReadingLink.href = `/dashboard/read/${bookId}/`; 
+        startReadingLink.href = `/reading/read/${bookId}/`; 
     }
     
     function addToLibrary(bookId) {
