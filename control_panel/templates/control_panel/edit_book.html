@@ -1,0 +1,130 @@
+<!-- control_panel/templates/control_panel/edit_book.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 1.2em;
+        }
+        input[type="text"], input[type="date"], input[type="file"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error-list {
+            color: red;
+            margin-bottom: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Book: {{ book.title }}</h2>
+
+        <!-- Display form validation errors -->
+        {% if form.errors %}
+            <div class="error-list">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Book Edit Form -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Title Field -->
+            <div class="form-group">
+                <label for="id_title">Title:</label>
+                {{ form.title }}
+            </div>
+
+            <!-- Author Field -->
+            <div class="form-group">
+                <label for="id_author">Author:</label>
+                {{ form.author }}
+            </div>
+
+            <!-- Published Date Field -->
+            <div class="form-group">
+                <label for="id_published_date">Published Date:</label>
+                {{ form.published_date }}
+            </div>
+
+            <!-- Genre Field -->
+            <div class="form-group">
+                <label for="id_genre">Genre:</label>
+                {{ form.genre }}
+            </div>
+
+            <!-- Book Image Field -->
+            <div class="form-group">
+                <label for="id_book_image">Book Image:</label>
+                {{ form.book_image }}
+            </div>
+
+            <!-- Save Button -->
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <!-- Back to Manage Books Page -->
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="{% url 'control_panel:admin_manage_books' %}">Back to Book Management</a>
+        </p>
+    </div>
+</body>
+</html>

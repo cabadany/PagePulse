@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Settings</title>
-    {% load static %}  <!-- Load static files for CSS and image assets -->
-
+    <title>Add Content</title>
+    {% load static %}
     <style>
         /* General Styles */
         body {
@@ -43,13 +42,6 @@
             margin-bottom: 15px;
         }
 
-        /* Active link pink background */
-        .sidebar .menu li a.active {
-            background-color: #f4728f;
-            color: #fff;
-            padding-left: 20px;
-        }
-
         .sidebar .menu li a {
             color: #fff;
             text-decoration: none;
@@ -82,7 +74,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -91,14 +83,24 @@
             margin: 10px 0 5px;
             font-weight: bold;
         }
-
-        .form-container input, .form-container select {
-            width: 100%;
+        .form-container input{
+            width: 92%;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
             margin-bottom: 20px;
             font-size: 16px;
+            
+        }
+
+        .form-container select {
+            width: 96%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 16px;
+            
         }
 
         .form-container button {
@@ -114,6 +116,48 @@
 
         .form-container button:hover {
             background-color: #e85f78;
+        }
+
+        /* Custom File Input Styles */
+        .file-input-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .file-input-container input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-input-container .file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f4728f;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: center;
+            width: 90%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-input-container .file-label:hover {
+            background-color: #e85f78;
+        }
+
+        .file-input-container .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #777;
+            text-align: center;
         }
 
         /* Responsive Design */
@@ -161,9 +205,8 @@
         <ul class="menu">
             <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
             <li><a href="{% url 'admin_manage_users' %}">Manage Users</a></li>
-            <li><a href="{% url 'admin_manage_books' %}">Manage Books</a></li>
-            <!-- This link will have the 'active' class for the settings page -->
-            <li><a href="{% url 'admin_settings' %}" class="active">Settings</a></li>
+            <li><a href="{% url 'admin_manage_books' %}" class="active">Manage Books</a></li>
+            <li><a href="{% url 'admin_settings' %}">Settings</a></li>
             <li><a href="{% url 'admin_logout' %}">Logout</a></li>
         </ul>
     </div>
@@ -171,36 +214,57 @@
     <!-- Main Content -->
     <div class="main-content">
         <header>
-            <h1>Admin Settings</h1>
+            <h1>Add New Content</h1>
         </header>
 
-        <!-- Settings Form -->
+        <!-- Form to Add Content -->
         <div class="form-container">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                
-                <label for="site_name">Site Name</label>
-                <input type="text" id="site_name" name="site_name" placeholder="Enter the website name" value="{{ site_name }}" required>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" required placeholder="Enter the title">
 
-                <label for="site_logo">Site Logo</label>
-                <input type="file" id="site_logo" name="site_logo" accept="image/*">
+                <label for="author">Author</label>
+                <input type="text" name="author" id="author" required placeholder="Enter the author's name">
 
-                <label for="admin_email">Admin Email</label>
-                <input type="email" id="admin_email" name="admin_email" placeholder="Enter admin email" value="{{ admin_email }}" required>
+                <label for="published_date">Published Date</label>
+                <input type="date" name="published_date" id="published_date" required>
 
-                <label for="contact_info">Contact Information</label>
-                <textarea id="contact_info" name="contact_info" rows="4" placeholder="Enter contact information">{{ contact_info }}</textarea>
-
-                <label for="theme">Theme Color</label>
-                <select name="theme" id="theme" required>
-                    <option value="light" {% if theme == 'light' %}selected{% endif %}>Light</option>
-                    <option value="dark" {% if theme == 'dark' %}selected{% endif %}>Dark</option>
+                <label for="genre">Genre</label>
+                <select name="genre" id="genre" required>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="science-fiction">Science Fiction</option>
+                    <option value="biography">Biography</option>
+                    <option value="history">History</option>
+                    <option value="romance">Romance</option>
+                    <option value="adventure">Adventure</option>
                 </select>
 
-                <button type="submit">Save Settings</button>
+                <!-- Enhanced Book Image File Input -->
+                <div class="file-input-container">
+                    <label for="book_image" class="file-label">Choose Book Image</label>
+                    <input type="file" name="book_image" id="book_image" accept="image/*" required>
+                    <div class="file-name" id="file-name-display">No file chosen</div>
+                </div>
+
+                <button type="submit">Add New Book</button>
             </form>
         </div>
     </div>
+
+    <!-- JavaScript to Update File Name Display -->
+    <script>
+        const fileInput = document.getElementById('book_image');
+        const fileNameDisplay = document.getElementById('file-name-display');
+
+        fileInput.addEventListener('change', function() {
+            const fileName = fileInput.files[0] ? fileInput.files[0].name : 'No file chosen';
+            fileNameDisplay.textContent = fileName;
+        });
+    </script>
 
 </body>
 </html>

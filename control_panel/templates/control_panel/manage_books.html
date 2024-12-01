@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users</title>
+    <title>Manage Books</title>
     {% load static %}
     <style>
         /* General Styles */
@@ -78,13 +78,13 @@
             text-align: center;
         }
 
-        /* Add User Button */
-        .add-user-btn {
+        /* Manage Books Button */
+        .manage-content-btn {
             text-align: right;
             margin-bottom: 20px;
         }
 
-        .add-user-btn .btn {
+        .manage-content-btn .btn {
             background-color: #f4728f;
             color: #fff;
             padding: 10px 20px;
@@ -94,48 +94,47 @@
             transition: background-color 0.3s ease;
         }
 
-        .add-user-btn .btn:hover {
+        .manage-content-btn .btn:hover {
             background-color: #e85f78;
         }
 
         /* Table Section */
-        .user-table-section {
+        .content-table-section {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .user-table {
+        .content-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .user-table th,
-        .user-table td {
+        .content-table th,
+        .content-table td {
             padding: 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
-        .user-table th {
+        .content-table th {
             background-color: #f4728f;
             color: #fff;
         }
 
-        .user-table td {
+        .content-table td {
             color: #666;
         }
 
-        .user-table tr:hover {
+        .content-table tr:hover {
             background-color: #f9f9f9;
         }
 
         /* Action Buttons */
         .btn-edit,
         .btn-delete,
-        .btn-suspend {
-            color: #fff;
+        .btn-publish {
             padding: 6px 12px;
             border-radius: 5px;
             text-decoration: none;
@@ -145,11 +144,11 @@
         }
 
         .btn-edit {
-            background-color: #e75083;
+            background-color: #4CAF50;
         }
 
         .btn-edit:hover {
-            background-color: #ca5b92;
+            background-color: #45a049;
         }
 
         .btn-delete {
@@ -160,11 +159,11 @@
             background-color: #c7445e;
         }
 
-        .btn-suspend {
+        .btn-publish {
             background-color: #f4728f;
         }
 
-        .btn-suspend:hover {
+        .btn-publish:hover {
             background-color: #e85f78;
         }
 
@@ -182,8 +181,8 @@
                 font-size: 24px;
             }
 
-            .user-table th,
-            .user-table td {
+            .content-table th,
+            .content-table td {
                 font-size: 14px;
                 padding: 10px;
             }
@@ -199,13 +198,13 @@
                 margin-left: 0;
             }
 
-            .user-table th,
-            .user-table td {
+            .content-table th,
+            .content-table td {
                 font-size: 12px;
                 padding: 8px;
             }
 
-            .add-user-btn .btn {
+            .manage-content-btn .btn {
                 font-size: 14px;
                 padding: 8px 16px;
             }
@@ -221,8 +220,8 @@
         </div>
         <ul class="menu">
             <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'admin_manage_users' %}" class="active">Manage Users</a></li>
-            <li><a href="{% url 'admin_manage_books' %}">Manage Content</a></li>
+            <li><a href="{% url 'admin_manage_users' %}">Manage Users</a></li>
+            <li><a href="{% url 'admin_manage_books' %}" class="active">Manage Books</a></li>
             <li><a href="{% url 'admin_settings' %}">Settings</a></li>
             <li><a href="{% url 'admin_logout' %}">Logout</a></li>
         </ul>
@@ -231,80 +230,55 @@
     <!-- Main Content -->
     <div class="main-content">
         <header>
-            <h1>Manage Users</h1>
+            <h1>Manage Books</h1>
         </header>
 
-        <!-- Add User Button -->
-        <div class="add-user-btn">
-            <a href="{% url 'admin_add_user' %}" class="btn">+ Add New User</a>
+        <!-- Add New Book Button -->
+        <div class="manage-content-btn">
+            <a href="{% url 'admin_add_book' %}" class="btn">+ Add New Book</a>
         </div>
 
-        <!-- Users Table -->
-        <section class="user-table-section">
-    <table class="user-table">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Last Login</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
+       <!-- Books Table -->
+       <section class="content-table-section">
+        <table class="content-table">
+            <thead>
                 <tr>
-                    <!-- Username Column -->
-                    <td>
-                        {% if user.username %}
-                            {{ user.username }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Created On</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.category }}</td>
+                        <td>
+                            {% if book.is_published %}
+                                Published
+                            {% else %}
+                                Unpublished
+                            {% endif %}
+                        </td>
+                        <td>{{ book.created_on }}</td>
+                        <td>
+                            <!-- Edit Button -->
+                            <a href="{% url 'admin_edit_book' book.id %}" class="btn-edit">Edit</a>
 
-                    <!-- Email Column -->
-                    <td>
-                        {% if user.email %}
-                            {{ user.email }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
+                            <!-- Publish Button -->
+                            {% if not book.is_published %}
+                                <a href="{% url 'admin_publish_book' book.id %}" class="btn-publish">Publish</a>
+                            {% else %}
+                                <span class="btn-publish">Published</span>
+                            {% endif %}
 
-                    <!-- Role Column -->
-                    <td>
-                        {% if user.is_superuser %}
-                            Admin
-                        {% elif user.is_staff %}
-                            Staff
-                        {% else %}
-                            User
-                        {% endif %}
-                    </td>
-
-                    <!-- Last Login Column -->
-                    <td>
-                        {% if user.last_login %}
-                            {{ user.last_login }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                            <td>
-                                <!-- Edit Button -->
-                                <a href="{% url 'admin_edit_user' user.id %}" class="btn-edit">Edit</a>
-
-                                <!-- Suspend Button -->
-                                {% if user.is_active %}
-                                    <a href="{% url 'admin_suspend_user' user.id %}" class="btn-suspend">Suspend</a>
-                                {% else %}
-                                    <span class="btn-suspend">Suspended</span>
-                                {% endif %}
-
-                                <!-- Delete Button -->
-                                <a href="{% url 'admin_delete_user' user.id %}" class="btn-delete">Delete</a>
-                            </td>
+                            <!-- Delete Button -->
+                            <a href="{% url 'admin_delete_book' book.id %}" class="btn-delete">Delete</a>
+                        </td>
                         </tr>
                     {% endfor %}
                 </tbody>

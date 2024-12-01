@@ -8,6 +8,14 @@ from control_panel.models import Book
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .forms import UserForm
+from django.views import View
+from .forms import ContentForm
+from .models import Content
+from .forms import BookForm  
+from .models import Settings  # Assuming Settings is a model to store site settings
+from .forms import SettingsForm
+
+
 
 def admin_login(request):
     if request.method == 'POST':
@@ -151,13 +159,83 @@ def delete_user(request, user_id):
     # Optionally, redirect back to the manage users page
     return redirect('control_panel/admin_manage_users')
 
-def admin_manage_content(request):
-    # Your logic for managing content
-    return render(request, 'control_panel/manage_content.html')
+def admin_manage_books(request):
+    # Query all books from the database
+    books = Book.objects.all()  # Fetch all books
+    
+    print(books)  # Debugging line to print the queryset
+    
+    return render(request, 'control_panel/manage_books.html', {'books': books})
 
+
+class AddBookView(View):
+    def get(self, request):
+        form = BookForm()
+        return render(request, 'control_panel/add_book.html', {'form': form})
+
+    def post(self, request):
+        form = BookForm(request.POST)
+        if form.is_valid():
+            print("Form is valid, saving book...")
+            form.save()  # Save the new book to the database
+            return redirect('admin_manage_books')  # Redirect to the books management page
+        else:
+            print("Form is not valid. Errors:")
+            print(form.errors)  # Output form errors in the console
+        return render(request, 'control_panel/add_book.html', {'form': form})
+
+
+def admin_edit_book(request, book_id):
+    # Retrieve the book object using the book_id (primary key)
+    book = get_object_or_404(Book, pk=book_id)
+    
+    # If the request method is POST, handle the form submission
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            # Save the updated book information
+            form.save()
+            # Redirect to the book management page (or anywhere you want)
+            return redirect('control_panel:admin_manage_books')  # Adjust the redirect URL as necessary
+    else:
+        # If GET request, display the form with the current book data
+        form = BookForm(instance=book)
+    
+    # Render the form in the template
+    return render(request, 'control_panel/edit_book.html', {'form': form, 'book': book})
+
+def admin_publish_book(request, book_id):
+    # Retrieve the book object by ID
+    book = get_object_or_404(Book, pk=book_id)
+    
+    # Set the 'is_published' field to True
+    book.is_published = True
+    book.save()  # Save the changes to the database
+    
+    # Redirect to the manage books page
+    return redirect('control_panel/manage_books.html')
+
+def admin_delete_book(request, book_id):
+    # Retrieve the book object by ID, or return 404 if not found
+    book = get_object_or_404(Book, pk=book_id)
+    
+    # Delete the book from the database
+    book.delete()
+    
+    # Redirect to the manage books page after deletion
+    return redirect('admin_manage_books')
+                        
 def admin_settings(request):
-    # Your logic for settings management
-    return render(request, 'control_panel/settings.html')
+    if request.method == "POST":
+        form = SettingsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_settings')
+    else:
+        settings = Settings.objects.first()  # Fetch the first settings record
+        form = SettingsForm(instance=settings) if settings else SettingsForm()
+
+    return render(request, 'control_panel/settings.html', {'form': form, 'site_name': settings.site_name, 'admin_email': settings.admin_email, 'contact_info': settings.contact_info, 'theme': settings.theme})
 
 def admin_logout(request):
     logout(request)
