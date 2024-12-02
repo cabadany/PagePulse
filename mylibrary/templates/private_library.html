@@ -327,43 +327,157 @@ progress::-moz-progress-bar {
     color: #555;
     margin-top: 20px;
 }
-
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
+        .modal-content {
+            background-color: #fff;
+            color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            width: 600px;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
 
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+        .modal-body {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .modal-left {
+            flex: 1;
+        }
+
+        .modal-left img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .modal-right {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-right h2 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        .modal-right p {
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+
+        .close {  
+            padding: 10px 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 16px;
+        }
+
+        .start-reading-button{
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: white;
+            border: 2px solid #FF6F61;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            color: #FF6F61;
+            }
+        .add-to-lib {
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: white;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            }
+        .add-to-lib:hover {
+            background: black;
+            color: #FAF9F6;
+            }
+
+        .start-reading-button:hover{
+            background: #FF6F61;
+            color: #FAF9F6;
+            }
+
+        .start-reading-button > svg {
+            width: 30px;
+            margin-left: 10px;
+            transition: transform 0.3s ease-in-out;
+            }
+
+        .start-reading-button:hover svg {
+            transform: translateX(5px);
+            }
+
+        .start-reading-button:active {
+            transform: scale(0.95);
+            }
+        .start-reading-button:hover svg circle {
+            stroke: #FAF9F6;
+            }
+        .start-reading-button:hover svg path {
+            fill: #FAF9F6;
+            }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        form label, form select, form input, form button {
+            color: black;
+        }
+        #modalBookDescription {
+            font-weight: 300;
+            font-family: 'Arial', sans-serif; 
+            color: #666;
+            font-size: 12px;
+        }
+        #modalBookAuthor {
+            font-weight: 300; 
+            font-family: 'Arial', sans-serif;
+            color: #666;
+            
+        }
+        .read {
+            text-decoration: none;
+        }
 
 
     </style>
@@ -422,22 +536,22 @@ progress::-moz-progress-bar {
         <div class="book-grid">
             {% if user_library_books %}
                 {% for user_library in user_library_books %}
-                    <div class="book-item">
-                        <!-- Make the book image clickable -->
-                        <a href="{% url 'read_book' book_id=user_library.book.id %}">
-                            {% if user_library.book.book_image %}
-                                <img src="{{ user_library.book.book_image.url }}" alt="{{ user_library.book.title }}" style="width: 100%; border-radius: 5px;">
-                            {% else %}
-                                <img src="#" alt="No cover available" style="width: 100%; border-radius: 5px;">
-                            {% endif %}
-                        </a>
-
-                        <!-- Make the book title clickable -->
-                        <a href="{% url 'read_book' book_id=user_library.book.id %}">
-                            <h3>{{ user_library.book.title }}</h3>
-                        </a>
-
+                    <div class="book-item"
+                        {% if book.book_image %}
+                        onclick="openModal('{{ user_library.book.book_image.url }}', '{{ user_library.book.title }}', '{{ user_library.book.author }}', '{{ user_library.book.genre }}', '{{ user_library.book.description }}', '{{ user_library.book.id }}')"
+                        {% else %}
+                        onclick="openModal('#', '{{ user_library.book.title }}', '{{ user_library.book.author }}', '{{ user_library.book.genre }}', '{{ user_library.book.description }}', '{{ user_library.book.id }}')"
+                        {% endif %}>
+                        
+                        {% if user_library.book.book_image %}
+                            <img src="{{ user_library.book.book_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
+                        {% else %}
+                            <img src="{% static 'Images/no_cover.png' %}" alt="No cover available" style="width: 100%; border-radius: 5px;">
+                        {% endif %}
+                        
+                        <p><strong style="color: black;">{{ user_library.book.title }}</strong></p>
                         <p>{{ user_library.book.author }}</p>
+                        <p>{{ user_library.book.category }}</p>
                         <div class="progress-container">
                             <label>Progress:</label>
                             <progress value="{{ user_library.progress }}" max="100"></progress>
@@ -454,7 +568,7 @@ progress::-moz-progress-bar {
             {% endif %}
         </div>
     </section>
-
+    <!--
     <div id="bookModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -487,6 +601,65 @@ progress::-moz-progress-bar {
 
         function closeModal() {
             document.getElementById('bookModal').style.display = "none";
+    }-->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&#10005;</span>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <img id="modalBookImage" src="" alt="Book Cover">
+                </div>
+                <div class="modal-right">
+                    <h2 id="modalBookTitle"></h2>
+                    <p id="modalBookAuthor"></p>
+                    <p id="modalBookGenre"></p>
+                    <p id="modalBookDescription"></p>
+                    <div class="btn-container">
+                        <a class="read" {% if book.id %} href="{% url 'read_book' book.id %}" {% else %} href="#" {% endif %}>
+                        <button class="start-reading-button">
+                            <span>Continue reading</span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 74 74"
+                                height="34"
+                                width="34"
+                            >
+                                <circle stroke-width="3" stroke="#FF6F61" r="35.5" cy="37" cx="37"></circle>
+                                <path
+                                    fill="#FF6F61"
+                                    d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                                ></path>
+                            </svg>
+                        </button>
+                    </a>
+                    
+                    <button class="add-to-lib" onclick="addToLibrary({{ book.id }})">+</button>
+        
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script> 
+        function openModal(imageUrl, title, author, genre, description, bookId) {
+            document.getElementById("modalBookImage").src = imageUrl;
+            document.getElementById("modalBookTitle").textContent = title;
+            document.getElementById("modalBookAuthor").textContent = `${author}`;
+            document.getElementById("modalBookGenre").innerHTML = `Genre <strong>${genre}</strong>`;
+            document.getElementById("modalBookDescription").textContent = description;
+        
+            document.querySelector(".add-to-lib").setAttribute("onclick", `addToLibrary(${bookId})`);
+        
+            document.getElementById("bookModal").style.display = "flex";
+        
+            const startReadingLink = document.querySelector(".start-reading-button").parentElement;
+            startReadingLink.href = `/dashboard/read/${bookId}/`;
+            startReadingLink.href = `/reading/read/${bookId}/`;  // Ensure this matches your URL pattern
+        }
+        function closeModal() {
+            document.getElementById("bookModal").style.display = "none";
         }
     </script>    
 </body>
