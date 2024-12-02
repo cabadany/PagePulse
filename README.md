@@ -1,68 +1,72 @@
+<br>
+
 <p align="center">
-  📚 <strong>PagePulse</strong> 📚
+    <img src="https://i.imgur.com/owsuq6w.png"></img>
 </p>
 
-**PagePulse** is a user-friendly online eBook platform that enables users to manage their libraries, create and share books, and engage with a vibrant community of readers and writers. The platform offers essential features such as book creation, commenting, bookmarking, and following other users.
+<br>
 
----
+<p align="justify">
+<strong>PagePulse</strong> is a user-friendly online eBook platform that enables users to manage their libraries, create and share books, and engage with a vibrant community of readers and writers. The platform offers essential features such as book creation, commenting, bookmarking, and following other users.
+</p>
 
-## Project Documentation
+<br>
 
-- [Functional Requirements](https://docs.google.com/document/d/1kCOF8eaMmoPbc_Flg5Wyz1586ZgGdN8v/edit?usp=drive_link&ouid=106838395546630797936&rtpof=true&sd=true)
-- [Gantt Chart](https://cebuinstituteoftechnology-my.sharepoint.com/:x:/r/personal/danisse_cabana_cit_edu/_layouts/15/Doc.aspx?sourcedoc=%7B24263AC0-B7D5-42D5-BA7F-000ED30C46B8%7D&file=Gantt%20Chart.xlsx&fromShare=true&action=default&mobileredirect=true)
-- [Entity-Relationship Diagram (ERD)](https://lucid.app/lucidchart/9a68a5e4-805f-4e29-aa13-aa46d94d94ab/edit?viewport_loc=-383%2C-595%2C2994%2C1477%2C0_0&invitationId=inv_e5f0e3f7-03e3-4882-8cbc-7e4e31f5d868)
-- [UI/UX Design](https://www.figma.com/design/YhCYsIirxaR18FPDfc6e0b/eBook-System-UI%2FUX?node-id=0-1&t=dYsUffctSePePzPq-1)
+## Table of Contents
 
----
+- [Key Features](#key-features)
+- [Installation](#installation)
+- [Developers](#developers)
+- [Project Documents](#project-documents)
+
+<br>
 
 ## Key Features
 
-- **User Authentication**  
-  Secure registration, login system, and password recovery for account security.
+1. **User Authentication**  
+   - Secure Registration
+   - Login System
+   - Password Recovery for Account Security.
 
-- **Library Management**  
-  Easily add and remove books from your personal library.
+2. **Library Management**  
+   - Add books from personal library
+   - Remove books form personal library
 
-- **Book Creation**  
-  Create and publish your own books for others to read and enjoy.
+3. **Book Creation**  
+   - Create and Publish your own books.
 
-- **Commenting**  
-  Leave comments on specific sections of a book to engage in discussions with other readers.
+4. **Commenting**  
+   - Leave comments on specific sections of a book
 
-- **Bookmarking**  
-  Save your reading progress by bookmarking chapters or entire books.
+5. **Bookmarking**  
+   - Save your reading progress by bookmarking chapters or entire books.
 
-- **Follow/Unfollow**  
-  Follow other users to stay updated on their new books and activities. Unfollow users at any time.
+6. **Follow/Unfollow**  
+   - Follow other users to stay updated on their new books and activities.
+   - Unfollow users at any time.
 
----
+<br>
 
-## Project Members
+## Installation
 
-- **Cabana, Danisse D.** – Team Leader, Designer, Developer
-- **Garcia, Gianne Andrea** – Designer, Developer
-- **Francisco, Ezzel Jan** – Designer, Developer
+#### Clone the Repository
 
----
-
-## Installation Guide
-
-### 1. Clone the Repository
-
-Clone the repository to your local machine using Git:
+- Clone the repository to your local machine using Git:
 
 ```bash
 git clone https://github.com/PagePulse.git
 cd PagePulse
 ```
 
-Use pip to install the required dependencies listed in the requirements.txt file:
+#### Installing the Dependencies and Setting up the Database
+
+- Use pip to install the required dependencies listed in the requirements.txt file:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Before running the application, set up the database by running the following migrations:
+- Before running the application, set up the database by running the following migrations:
 
 ```bash
 python manage.py makemigrations
@@ -70,12 +74,36 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-To access the admin panel, you need to create a superuser. Run the following command and follow the prompts to create an admin user:
+#### Accessing the Admin Panel
+
+- To access the admin panel, you need to create a superuser. Run the following command and follow the prompts to create an admin user:
 ```bash
 python manage.py createsuperuser
 ```
 
-To start the application, run the development server:
+#### Running the Application
+
+- To start the application, run the development server:
 ```bash
 python manage.py runserver
 ```
+
+<br>
+
+## Developers
+
+  <a href="#developers">
+    <a href="https://github.com/cabadany"><img width="64" title="Cabana, Danisse" src="https://avatars.githubusercontent.com/u/170840848" alt="cabadany" /></a>
+    <a href="https://github.com/gianneA"><img width="64" title="Garcia, Gianne Andrea" src="https://avatars.githubusercontent.com/u/182353906" alt="gianneA" /></a>
+    <a href="https://github.com/ezzeljan"><img width="64" title="Francisco, Ezzel Jan" src="https://avatars.githubusercontent.com/u/168334933" alt="ezzeljan" /></a>
+  </a>
+
+
+<br>
+
+## Project Documents
+
+- [Functional Requirements](https://docs.google.com/document/d/1kCOF8eaMmoPbc_Flg5Wyz1586ZgGdN8v/edit?usp=drive_link&ouid=106838395546630797936&rtpof=true&sd=true)
+- [Gantt Chart](https://cebuinstituteoftechnology-my.sharepoint.com/:x:/r/personal/danisse_cabana_cit_edu/_layouts/15/Doc.aspx?sourcedoc=%7B24263AC0-B7D5-42D5-BA7F-000ED30C46B8%7D&file=Gantt%20Chart.xlsx&fromShare=true&action=default&mobileredirect=true)
+- [Entity-Relationship Diagram (ERD)](https://lucid.app/lucidchart/9a68a5e4-805f-4e29-aa13-aa46d94d94ab/edit?viewport_loc=-383%2C-595%2C2994%2C1477%2C0_0&invitationId=inv_e5f0e3f7-03e3-4882-8cbc-7e4e31f5d868)
+- [UI/UX Design](https://www.figma.com/design/YhCYsIirxaR18FPDfc6e0b/eBook-System-UI%2FUX?node-id=0-1&t=dYsUffctSePePzPq-1)
