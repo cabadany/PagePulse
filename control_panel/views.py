@@ -238,5 +238,7 @@ def admin_settings(request):
     return render(request, 'control_panel/settings.html', {'form': form, 'site_name': settings.site_name, 'admin_email': settings.admin_email, 'contact_info': settings.contact_info, 'theme': settings.theme})
 
 def admin_logout(request):
-    logout(request)
-    return redirect('control_panel/admin_logout.html')
+    if request.method == 'POST':  # If the user clicks the "Log Out" button
+        logout(request)  # Log the user out
+        return redirect('admin_login')  # Redirect to the admin login page
+    return render(request, 'control_panel/admin_logout.html')

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Logout</title>
+    {% load static %}
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F1F3F8;
+        }
+
+        .logout-container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px 60px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logout-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-container img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .logout-container h1 {
+            font-size: 26px;
+            color: #4F4F4F;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .logout-container p {
+            font-size: 16px;
+            color: #7A7A7A;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background-color: #FF6F61; /* Accent color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #D35E4C;
+        }
+
+        .cancel-btn {
+            background-color: #ddd;
+            color: #333;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .cancel-btn:hover {
+            background-color: #bbb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logout-container {
+                width: 90%;
+                padding: 30px 40px;
+            }
+        }
+
+        /* Alignment for Logo */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* Add space between text and buttons */
+        .logout-container h2 {
+            margin-top: 20px;
+            color: #4F4F4F;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logout-container">
+        <div class="logo-container">
+            <img src="{% static 'Images/IM2 Logo.png' %}" alt="Page Pulse Logo">
+        </div>
+        
+        <h1>Are you sure you want to log out?</h1>
+        <p>If you're ready to leave, click "Log Out". Otherwise, you can cancel and return to the dashboard.</p>
+        
+        <!-- Log Out Form -->
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Log Out</button>
+        </form>
+
+        <!-- Cancel Button -->
+        <a href="{% url 'admin_dashboard' %}">
+            <button class="cancel-btn">Cancel</button>
+        </a>
+    </div>
+
+</body>
+</html>

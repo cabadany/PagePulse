@@ -22,5 +22,5 @@ urlpatterns = [
 
     path('settings/', views.admin_settings, name='admin_settings'),
 
-    path('logout/', views.admin_logout, name='admin_logout'),
+    path('control_panel/logout/', views.admin_logout, name='admin_logout'),
 ]
