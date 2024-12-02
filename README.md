@@ -65,10 +65,8 @@ pip install -r requirements.txt
 Before running the application, set up the database by running the following migrations:
 
 ```bash
-# Make migrations for the application
 python manage.py makemigrations
 
-# Apply the migrations to set up the database
 python manage.py migrate
 ```
 
