@@ -35,15 +35,11 @@
 3. **Book Creation**  
    - Create and Publish your own books.
 
-4. **Commenting**  
-   - Leave comments on specific sections of a book
+4. **Homepage**
+   - Can view the books that are available in the app.
 
-5. **Bookmarking**  
-   - Save your reading progress by bookmarking chapters or entire books.
-
-6. **Follow/Unfollow**  
-   - Follow other users to stay updated on their new books and activities.
-   - Unfollow users at any time.
+5. **Forgot Password**
+   - User can change their password if they somehow forgot it.
 
 <br>
 
