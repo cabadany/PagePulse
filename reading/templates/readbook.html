@@ -364,6 +364,23 @@
         .bookmark-btn:hover {
             background-color: #0056b3;
         }
+        .progress-bar-container {
+    width: 50%; /* Set the width to 50% or any other value to adjust the bar size */
+    background-color: #ccc;
+    border-radius: 8px;
+    height: 20px; /* Retain the height */
+    margin-top: 10px;
+    margin-left: auto; /* Center the progress bar */
+    margin-right: auto;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #FF6F61;
+    width: 0%; /* Start with 0% width */
+    border-radius: 8px;
+}
+
 
     </style>
 </head>
@@ -424,6 +441,11 @@
     <div class="content-container">
         <p>{{ chapter.content }}</p>
     </div>
+<!-- Progress Bar -->
+<div class="progress-bar-container">
+    <div id="progress-bar" class="progress-bar"></div>
+</div>
+<span id="progress-percentage">{{ reading_progress.progress_percentage }}</span>
 
     <button id="bookmark-btn" class="bookmark-btn">Bookmark This</button>
 
@@ -451,6 +473,23 @@
     </div>
 
     <script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+    const currentPage = {{ reading_progress.current_page }};
+    const totalPages = {{ book.total_pages }};
+    
+    // Calculate the progress percentage
+    const progressPercentage = (currentPage / totalPages) * 100;
+    
+    // Update the progress bar width
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.style.width = `${progressPercentage}%`;
+    
+    // Update the progress percentage text
+    const progressText = document.getElementById("progress-percentage");
+    progressText.textContent = `${Math.round(progressPercentage)}%`;
+});
+
         document.addEventListener("DOMContentLoaded", function () {
             const savedPosition = {{ saved_position }};
             console.log("Restoring position:", savedPosition);

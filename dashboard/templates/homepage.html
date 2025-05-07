@@ -21,6 +21,8 @@
         h1 {
             color: #4F4F4F;
         }
+
+        
         .header-container {
             display: flex;
             align-items: center;
@@ -229,6 +231,8 @@
         .for-you {
             padding: 20px;
         } 
+
+        
         .book-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -433,6 +437,14 @@
             text-decoration: none;
         }
 
+        .no-recommendations {
+    text-align: center;
+    font-size: 18px;
+    color: #FF6F61;  /* Red or an attention-grabbing color */
+    font-weight: bold;
+    margin-top: 20px;
+}
+
     </style>
 </head>
 <body>
@@ -515,10 +527,25 @@
                     <p>{{ book.category }}</p>
                 </div>
             </li>
-               
             {% endfor %}
         </div>
     </section>
+ <!-- Recommended Books Section -->
+ <section class="for-you">
+    <h2>Recommended for You</h2>
+    <div class="book-grid">
+        {% for book in recommended_books %}
+            <div class="book-item">
+                <img src="{{ book.book_image.url }}" alt="{{ book.title }}" style="width: 100%; border-radius: 5px;">
+                <p><strong style="color: black;">{{ book.title }}</strong></p>
+                <p>{{ book.author }}</p>
+                <p>{{ book.genre }}</p>
+            </div>
+        {% empty %}
+            <p class="no-recommendations">No recommendations available.</p>
+        {% endfor %}
+    </div>
+</section>
     
 
 <div id="bookModal" class="modal">

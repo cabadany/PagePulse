@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'dashboard',
     'forgot_password',
     'book',
-]
+    'reading',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,6 +77,28 @@ TEMPLATES = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',  # Set to INFO to capture logs
+            'propagate': True,
+        },
+        'login_registration': {  # Log specifically for your app
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 
 WSGI_APPLICATION = 'PagePulse.wsgi.application'
 

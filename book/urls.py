@@ -12,6 +12,7 @@ urlpatterns = [
     path('my-stories/content-box/<int:book_id>/', views.content_box, name='new_chapter'),
     path('book/<int:book_id>/chapter/<int:chapter_id>/', views.chapter_detail, name='chapter_detail'),
     path('save_bookmark/', views.save_bookmark, name='save_bookmark'),
+    path('update-progress/<int:book_id>/', views.update_progress, name='update_progress'),
 ]
 
 if settings.DEBUG:

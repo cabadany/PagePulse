@@ -116,3 +116,22 @@ def chapter_view(request, book_id, chapter_id):
         'saved_position': saved_position,
         'book': chapter.book
     })
+
+def update_progress(request, book_id):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        current_page = data.get('current_page')
+        
+        # Get the bookmark for the user and the specific book
+        bookmark = get_object_or_404(Bookmark, user=request.user, book_id=book_id)
+        
+        # Update the position of the bookmark
+        bookmark.position = current_page
+        bookmark.save()
+
+        # Calculate the progress percentage
+        total_pages = bookmark.book.total_pages
+        progress_percentage = (current_page / total_pages) * 100
+
+        # Return the updated progress percentage
+        return JsonResponse({'progress': progress_percentage})

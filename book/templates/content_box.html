@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>New Chapter</title>
     <style>
         body {
@@ -14,11 +14,13 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .form-container {
-            width: 600px;
-            padding: 30px;
+        .page-wrapper {
+            max-width: 600px;
+            width: 100%;
             background-color: #FAF9F6;
         }
 
@@ -29,6 +31,29 @@
             margin-bottom: 20px;
         }
 
+        h2 {
+            color: #FF6F61;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #ccc;
+            border-radius: 8px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #FF6F61;
+            width: 0%;
+            border-radius: 8px;
+            transition: width 0.3s ease;
+        }
+
         label {
             font-weight: bold;
             font-size: 14px;
@@ -37,7 +62,9 @@
             color: #666;
         }
 
-        input[type="text"], textarea {
+        input[type="text"],
+        input[type="number"],
+        textarea {
             font-family: Arial, sans-serif;
             width: 100%;
             padding: 10px;
@@ -58,7 +85,7 @@
             font-size: 16px;
             background: transparent;
             color: #FF6F61;
-            border: 2px solid #FF6F61; 
+            border: 2px solid #FF6F61;
             padding: 10px 15px;
             border-radius: 8px;
             cursor: pointer;
@@ -66,11 +93,15 @@
             margin-top: 20px;
             transition: background-color 0.3s, color 0.3s;
         }
-        .button:hover {
-            background-color: #FF6F61; 
-            color: #FFFFFF; 
+
+        .button:hover,
+        .button:focus {
+            background-color: #FF6F61;
+            color: #FFFFFF;
             border-color: #FF6F61;
+            outline: none;
         }
+
         .back-link {
             display: block;
             text-align: center;
@@ -80,8 +111,10 @@
             text-decoration: none;
         }
 
-        .back-link:hover {
+        .back-link:hover,
+        .back-link:focus {
             text-decoration: underline;
+            outline: none;
         }
 
         .back-link::before {
@@ -94,30 +127,130 @@
             text-align: center;
             margin-top: 10px;
         }
+
+        .input-page {
+            width: 60px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 400px) {
+            body {
+                padding: 10px;
+            }
+            .page-wrapper {
+                width: 100%;
+                padding: 15px;
+            }
+            .input-page {
+                width: 50px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>New Chapter for {{ book.title }}</h1>
+    <div class="page-wrapper">
+        <h2>Reading Progress</h2>
+        <!-- Progress Bar -->
+        <div class="progress-bar-container" aria-label="Reading progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        </div>
+        <div style="text-align:center; font-weight: bold;">
+            <span id="progress-percentage">{{ reading_progress.progress_percentage }}%</span>
+        </div>
 
-        {% if error_message %}
-            <p class="error-message">{{ error_message }}</p>
-        {% endif %}
+        <div>
+            <label for="current-page">Current Page:</label>
+            <input
+                type="number"
+                id="current-page"
+                class="input-page"
+                min="1"
+                max="{{ book.total_pages }}"
+                value="{{ reading_progress.current_page }}"
+                onchange="onPageChange(this.value)"
+                aria-label="Current page number"
+            />
+        </div>
 
-        <form method="post" id="new-chapter-form">
-            {% csrf_token %}
-            <input type="hidden" name="book_id" value="{{ book.id }}">
+        <div class="form-container" style="margin-top: 25px;">
+            <h1>New Chapter for {{ book.title }}</h1>
 
-            <label for="id_title">Chapter Title</label>
-            <input type="text" id="id_title" name="title" placeholder="Enter chapter title" required>
+            {% if error_message %}
+            <p class="error-message" role="alert">{{ error_message }}</p>
+            {% endif %}
 
-            <label for="id_content">Content</label>
-            <textarea id="id_content" name="content" placeholder="Write the chapter content here..." required></textarea>
+            <form method="post" id="new-chapter-form">
+                {% csrf_token %}
+                <input type="hidden" name="book_id" value="{{ book.id }}" />
 
-            <button type="submit" class="button">Save Chapter</button>
-        </form>
+                <label for="id_title">Chapter Title</label>
+                <input
+                    type="text"
+                    id="id_title"
+                    name="title"
+                    placeholder="Enter chapter title"
+                    required
+                    aria-required="true"
+                />
 
-        <a href="{% url 'homepage' %}" class="back-link">Back to Homepage</a>  
+                <label for="id_content">Content</label>
+                <textarea
+                    id="id_content"
+                    name="content"
+                    placeholder="Write the chapter content here..."
+                    required
+                    aria-required="true"
+                ></textarea>
+
+                <button type="submit" class="button">Save Chapter</button>
+            </form>
+
+            <a href="{% url 'homepage' %}" class="back-link">Back to Homepage</a>
+        </div>
     </div>
+
+    <script>
+        // Function to update progress bar
+        function updateProgressBar(currentPage, totalPages) {
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercentage = (currentPage / totalPages) * 100;
+            const clampedProgress = Math.min(Math.max(progressPercentage, 0), 100);
+
+            // Update the progress bar width and percentage text
+            progressBar.style.width = clampedProgress + '%';
+            progressBar.setAttribute('aria-valuenow', Math.round(clampedProgress));
+            document.getElementById('progress-percentage').textContent = Math.round(clampedProgress) + '%';
+        }
+
+        // Initialize current page and total pages from template variables
+        let currentPage = {{ reading_progress.current_page|default:0 }};
+        let totalPages = {{ book.total_pages|default:1 }};
+
+        // Safety checks for currentPage and totalPages
+        if (currentPage < 0) currentPage = 0;
+        if (totalPages <= 0) totalPages = 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        // Update progress bar initially
+        updateProgressBar(currentPage, totalPages);
+
+        // Handle page change from user input
+        function onPageChange(newPage) {
+            let pageNum = Number(newPage);
+            if (isNaN(pageNum)) {
+                pageNum = 1;
+            }
+            pageNum = Math.min(Math.max(pageNum, 1), totalPages); // Clamp value
+            currentPage = pageNum;
+            const currentPageInput = document.getElementById('current-page');
+            if (currentPageInput.value != currentPage) {
+                currentPageInput.value = currentPage; // Update input field
+            }
+            updateProgressBar(currentPage, totalPages); // Update the progress bar
+        }
+    </script>
 </body>
 </html>
+
